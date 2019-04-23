@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Visualisation
 {
-    public partial class Form1 : Form
+    public partial class FormSort : Form
     {
-        public Form1()
+        public FormSort()
         {
             InitializeComponent();
         }

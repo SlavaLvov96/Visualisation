@@ -1,6 +1,6 @@
 ﻿namespace Visualisation
 {
-    partial class Form1
+    partial class FormSort
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormSort));
             this.comboBoxSort = new System.Windows.Forms.ComboBox();
             this.comboBoxSearch = new System.Windows.Forms.ComboBox();
             this.comboBoxGraph = new System.Windows.Forms.ComboBox();

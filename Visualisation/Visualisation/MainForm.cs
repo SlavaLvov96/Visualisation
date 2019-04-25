@@ -25,7 +25,8 @@ namespace Visualisation
 
         private void buttonSearch_Click(object sender, EventArgs e)
         {
-
+            FormSearch formSearch = new FormSearch();
+            formSearch.Show();
         }
 
         private void buttonGraph_Click(object sender, EventArgs e)

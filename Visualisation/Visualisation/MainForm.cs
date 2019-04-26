@@ -31,7 +31,8 @@ namespace Visualisation
 
         private void buttonGraph_Click(object sender, EventArgs e)
         {
-
+            FormGraph formGraph = new FormGraph();
+            formGraph.Show();
         }
     }
 }

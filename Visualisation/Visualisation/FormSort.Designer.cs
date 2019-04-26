@@ -181,7 +181,7 @@
             this.richTextBox.TabIndex = 13;
             this.richTextBox.Text = "";
             // 
-            // Form1
+            // FormSort
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -199,7 +199,7 @@
             this.Controls.Add(this.comboBoxGraph);
             this.Controls.Add(this.comboBoxSearch);
             this.Controls.Add(this.comboBoxSort);
-            this.Name = "Form1";
+            this.Name = "FormSort";
             this.Text = "Visualization";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);

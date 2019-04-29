@@ -139,6 +139,7 @@
             this.b_prev.Size = new System.Drawing.Size(57, 40);
             this.b_prev.TabIndex = 9;
             this.b_prev.UseVisualStyleBackColor = true;
+            this.b_prev.Click += new System.EventHandler(this.prev_click);
             // 
             // b_start_pause
             // 
@@ -157,6 +158,7 @@
             this.b_next.Size = new System.Drawing.Size(57, 40);
             this.b_next.TabIndex = 9;
             this.b_next.UseVisualStyleBackColor = true;
+            this.b_next.Click += new System.EventHandler(this.next_click);
             // 
             // pb_animation
             // 
@@ -208,6 +210,7 @@
             this.toolStripMenuItem1.Size = new System.Drawing.Size(207, 32);
             this.toolStripMenuItem1.Text = "АВЛ-деревья";
             this.toolStripMenuItem1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.avl_click);
             // 
             // бинарныйПоискToolStripMenuItem
             // 
@@ -218,6 +221,7 @@
             this.бинарныйПоискToolStripMenuItem.Size = new System.Drawing.Size(207, 32);
             this.бинарныйПоискToolStripMenuItem.Text = "Бинарный поиск";
             this.бинарныйПоискToolStripMenuItem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.бинарныйПоискToolStripMenuItem.Click += new System.EventHandler(this.binary_click);
             // 
             // интерполяционныйПоискToolStripMenuItem
             // 
@@ -228,6 +232,7 @@
             this.интерполяционныйПоискToolStripMenuItem.Size = new System.Drawing.Size(207, 32);
             this.интерполяционныйПоискToolStripMenuItem.Text = "Интерполяционный поиск";
             this.интерполяционныйПоискToolStripMenuItem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.интерполяционныйПоискToolStripMenuItem.Click += new System.EventHandler(this.interpolation_click);
             // 
             // линейныйПоискToolStripMenuItem
             // 
@@ -238,6 +243,7 @@
             this.линейныйПоискToolStripMenuItem.Size = new System.Drawing.Size(207, 32);
             this.линейныйПоискToolStripMenuItem.Text = "Линейный поиск";
             this.линейныйПоискToolStripMenuItem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.линейныйПоискToolStripMenuItem.Click += new System.EventHandler(this.linear_click);
             // 
             // цифровойПоискToolStripMenuItem
             // 
@@ -248,6 +254,7 @@
             this.цифровойПоискToolStripMenuItem.Size = new System.Drawing.Size(207, 32);
             this.цифровойПоискToolStripMenuItem.Text = "Цифровой поиск";
             this.цифровойПоискToolStripMenuItem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.цифровойПоискToolStripMenuItem.Click += new System.EventHandler(this.numeral_click);
             // 
             // FormSearch
             // 

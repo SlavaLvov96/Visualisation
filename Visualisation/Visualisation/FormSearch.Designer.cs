@@ -32,12 +32,10 @@
             this.rtb_pseudocode = new System.Windows.Forms.RichTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tb_search_value = new System.Windows.Forms.TextBox();
-            this.tb_add = new System.Windows.Forms.TextBox();
-            this.tb_delete = new System.Windows.Forms.TextBox();
             this.b_search = new System.Windows.Forms.Button();
             this.b_add = new System.Windows.Forms.Button();
             this.b_delete = new System.Windows.Forms.Button();
-            this.b_rotation = new System.Windows.Forms.Button();
+            this.b_random = new System.Windows.Forms.Button();
             this.b_prev = new System.Windows.Forms.Button();
             this.b_start_pause = new System.Windows.Forms.Button();
             this.b_next = new System.Windows.Forms.Button();
@@ -50,6 +48,8 @@
             this.интерполяционныйПоискToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.линейныйПоискToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.цифровойПоискToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tb_add = new System.Windows.Forms.TextBox();
+            this.tb_delete = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pb_animation)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -79,22 +79,6 @@
             this.tb_search_value.TabIndex = 2;
             this.tb_search_value.Text = "Значение для поиска...";
             // 
-            // tb_add
-            // 
-            this.tb_add.Location = new System.Drawing.Point(972, 384);
-            this.tb_add.Name = "tb_add";
-            this.tb_add.Size = new System.Drawing.Size(171, 22);
-            this.tb_add.TabIndex = 3;
-            this.tb_add.Text = "Добавить вершину...";
-            // 
-            // tb_delete
-            // 
-            this.tb_delete.Location = new System.Drawing.Point(972, 413);
-            this.tb_delete.Name = "tb_delete";
-            this.tb_delete.Size = new System.Drawing.Size(171, 22);
-            this.tb_delete.TabIndex = 4;
-            this.tb_delete.Text = "Удалить вершину...";
-            // 
             // b_search
             // 
             this.b_search.Location = new System.Drawing.Point(1160, 475);
@@ -106,30 +90,33 @@
             // 
             // b_add
             // 
-            this.b_add.Location = new System.Drawing.Point(1160, 384);
+            this.b_add.Location = new System.Drawing.Point(1123, 384);
             this.b_add.Name = "b_add";
-            this.b_add.Size = new System.Drawing.Size(150, 23);
+            this.b_add.Size = new System.Drawing.Size(190, 28);
             this.b_add.TabIndex = 6;
-            this.b_add.Text = "Добавить";
+            this.b_add.Text = "Добавить вершину";
             this.b_add.UseVisualStyleBackColor = true;
+            this.b_add.Click += new System.EventHandler(this.b_add_Click);
             // 
             // b_delete
             // 
-            this.b_delete.Location = new System.Drawing.Point(1160, 413);
+            this.b_delete.Location = new System.Drawing.Point(1123, 413);
             this.b_delete.Name = "b_delete";
-            this.b_delete.Size = new System.Drawing.Size(150, 23);
+            this.b_delete.Size = new System.Drawing.Size(190, 28);
             this.b_delete.TabIndex = 7;
-            this.b_delete.Text = "Удалить";
+            this.b_delete.Text = "Удалить вершину";
             this.b_delete.UseVisualStyleBackColor = true;
+            this.b_delete.Click += new System.EventHandler(this.b_delete_Click);
             // 
-            // b_rotation
+            // b_random
             // 
-            this.b_rotation.Location = new System.Drawing.Point(972, 441);
-            this.b_rotation.Name = "b_rotation";
-            this.b_rotation.Size = new System.Drawing.Size(341, 28);
-            this.b_rotation.TabIndex = 8;
-            this.b_rotation.Text = "Вращение";
-            this.b_rotation.UseVisualStyleBackColor = true;
+            this.b_random.Location = new System.Drawing.Point(972, 441);
+            this.b_random.Name = "b_random";
+            this.b_random.Size = new System.Drawing.Size(341, 28);
+            this.b_random.TabIndex = 8;
+            this.b_random.Text = "Случайное дерево";
+            this.b_random.UseVisualStyleBackColor = true;
+            this.b_random.Click += new System.EventHandler(this.b_random_click);
             // 
             // b_prev
             // 
@@ -256,23 +243,37 @@
             this.цифровойПоискToolStripMenuItem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.цифровойПоискToolStripMenuItem.Click += new System.EventHandler(this.numeral_click);
             // 
+            // tb_add
+            // 
+            this.tb_add.Location = new System.Drawing.Point(973, 385);
+            this.tb_add.Name = "tb_add";
+            this.tb_add.Size = new System.Drawing.Size(144, 22);
+            this.tb_add.TabIndex = 14;
+            // 
+            // tb_delete
+            // 
+            this.tb_delete.Location = new System.Drawing.Point(973, 415);
+            this.tb_delete.Name = "tb_delete";
+            this.tb_delete.Size = new System.Drawing.Size(144, 22);
+            this.tb_delete.TabIndex = 15;
+            // 
             // FormSearch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1325, 549);
+            this.Controls.Add(this.tb_delete);
+            this.Controls.Add(this.tb_add);
             this.Controls.Add(this.tb_result);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.pb_animation);
             this.Controls.Add(this.b_next);
             this.Controls.Add(this.b_start_pause);
             this.Controls.Add(this.b_prev);
-            this.Controls.Add(this.b_rotation);
+            this.Controls.Add(this.b_random);
             this.Controls.Add(this.b_delete);
             this.Controls.Add(this.b_add);
             this.Controls.Add(this.b_search);
-            this.Controls.Add(this.tb_delete);
-            this.Controls.Add(this.tb_add);
             this.Controls.Add(this.tb_search_value);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.rtb_pseudocode);
@@ -280,6 +281,7 @@
             this.Name = "FormSearch";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormSearch";
+            this.Load += new System.EventHandler(this.FormSearch_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pb_animation)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -293,12 +295,10 @@
         private System.Windows.Forms.RichTextBox rtb_pseudocode;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox tb_search_value;
-        private System.Windows.Forms.TextBox tb_add;
-        private System.Windows.Forms.TextBox tb_delete;
         private System.Windows.Forms.Button b_search;
         private System.Windows.Forms.Button b_add;
         private System.Windows.Forms.Button b_delete;
-        private System.Windows.Forms.Button b_rotation;
+        private System.Windows.Forms.Button b_random;
         private System.Windows.Forms.Button b_prev;
         private System.Windows.Forms.Button b_start_pause;
         private System.Windows.Forms.Button b_next;
@@ -311,5 +311,7 @@
         private System.Windows.Forms.ToolStripMenuItem интерполяционныйПоискToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem линейныйПоискToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem цифровойПоискToolStripMenuItem;
+        private System.Windows.Forms.TextBox tb_add;
+        private System.Windows.Forms.TextBox tb_delete;
     }
 }

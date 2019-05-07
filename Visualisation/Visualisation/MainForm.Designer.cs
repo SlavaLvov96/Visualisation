@@ -72,6 +72,7 @@
             this.Controls.Add(this.buttonSearch);
             this.Controls.Add(this.buttonSort);
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MainForm";
             this.ResumeLayout(false);
 

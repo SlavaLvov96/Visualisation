@@ -32,25 +32,34 @@
             this.buttonPrev = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.buttonNext = new System.Windows.Forms.Button();
-            this.rtb_pseudocode = new System.Windows.Forms.RichTextBox();
-            this.pb_animation = new System.Windows.Forms.PictureBox();
+            this.sheet = new System.Windows.Forms.PictureBox();
             this.tb_result = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.comboBoxGraph = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.listBoxMatrix = new System.Windows.Forms.ListBox();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.cycleButton = new System.Windows.Forms.Button();
+            this.chainButton = new System.Windows.Forms.Button();
+            this.buttonInc = new System.Windows.Forms.Button();
+            this.buttonAdj = new System.Windows.Forms.Button();
+            this.deleteALLButton = new System.Windows.Forms.Button();
+            this.deleteButton = new System.Windows.Forms.Button();
+            this.drawEdgeButton = new System.Windows.Forms.Button();
+            this.drawVertexButton = new System.Windows.Forms.Button();
+            this.selectButton = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.groupBox7 = new System.Windows.Forms.GroupBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pb_animation)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sheet)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.groupBox6.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            this.groupBox5.SuspendLayout();
-            this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonPrev
@@ -83,25 +92,16 @@
             this.buttonNext.TabIndex = 9;
             this.buttonNext.UseVisualStyleBackColor = true;
             // 
-            // rtb_pseudocode
+            // sheet
             // 
-            this.rtb_pseudocode.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtb_pseudocode.Location = new System.Drawing.Point(3, 16);
-            this.rtb_pseudocode.Margin = new System.Windows.Forms.Padding(2);
-            this.rtb_pseudocode.Name = "rtb_pseudocode";
-            this.rtb_pseudocode.Size = new System.Drawing.Size(249, 237);
-            this.rtb_pseudocode.TabIndex = 10;
-            this.rtb_pseudocode.Text = "";
-            // 
-            // pb_animation
-            // 
-            this.pb_animation.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pb_animation.Location = new System.Drawing.Point(3, 16);
-            this.pb_animation.Margin = new System.Windows.Forms.Padding(2);
-            this.pb_animation.Name = "pb_animation";
-            this.pb_animation.Size = new System.Drawing.Size(574, 312);
-            this.pb_animation.TabIndex = 11;
-            this.pb_animation.TabStop = false;
+            this.sheet.Dock = System.Windows.Forms.DockStyle.Top;
+            this.sheet.Location = new System.Drawing.Point(3, 16);
+            this.sheet.Margin = new System.Windows.Forms.Padding(2);
+            this.sheet.Name = "sheet";
+            this.sheet.Size = new System.Drawing.Size(574, 312);
+            this.sheet.TabIndex = 11;
+            this.sheet.TabStop = false;
+            this.sheet.MouseClick += new System.Windows.Forms.MouseEventHandler(this.sheet_MouseClick);
             // 
             // tb_result
             // 
@@ -154,8 +154,58 @@
             this.groupBox1.TabIndex = 16;
             this.groupBox1.TabStop = false;
             // 
+            // groupBox7
+            // 
+            this.groupBox7.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.groupBox7.Location = new System.Drawing.Point(3, 311);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(255, 51);
+            this.groupBox7.TabIndex = 13;
+            this.groupBox7.TabStop = false;
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.listBoxMatrix);
+            this.groupBox6.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox6.Location = new System.Drawing.Point(3, 16);
+            this.groupBox6.MaximumSize = new System.Drawing.Size(257, 600);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(255, 299);
+            this.groupBox6.TabIndex = 12;
+            this.groupBox6.TabStop = false;
+            // 
+            // listBoxMatrix
+            // 
+            this.listBoxMatrix.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listBoxMatrix.FormattingEnabled = true;
+            this.listBoxMatrix.Location = new System.Drawing.Point(3, 16);
+            this.listBoxMatrix.Name = "listBoxMatrix";
+            this.listBoxMatrix.Size = new System.Drawing.Size(249, 280);
+            this.listBoxMatrix.TabIndex = 0;
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.buttonNext);
+            this.groupBox5.Controls.Add(this.buttonPrev);
+            this.groupBox5.Controls.Add(this.button2);
+            this.groupBox5.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.groupBox5.Location = new System.Drawing.Point(3, 362);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(255, 81);
+            this.groupBox5.TabIndex = 11;
+            this.groupBox5.TabStop = false;
+            // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.cycleButton);
+            this.groupBox2.Controls.Add(this.chainButton);
+            this.groupBox2.Controls.Add(this.buttonInc);
+            this.groupBox2.Controls.Add(this.buttonAdj);
+            this.groupBox2.Controls.Add(this.deleteALLButton);
+            this.groupBox2.Controls.Add(this.deleteButton);
+            this.groupBox2.Controls.Add(this.drawEdgeButton);
+            this.groupBox2.Controls.Add(this.drawVertexButton);
+            this.groupBox2.Controls.Add(this.selectButton);
             this.groupBox2.Controls.Add(this.comboBoxGraph);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupBox2.Location = new System.Drawing.Point(0, 0);
@@ -163,6 +213,96 @@
             this.groupBox2.Size = new System.Drawing.Size(153, 446);
             this.groupBox2.TabIndex = 17;
             this.groupBox2.TabStop = false;
+            // 
+            // cycleButton
+            // 
+            this.cycleButton.Location = new System.Drawing.Point(81, 371);
+            this.cycleButton.Name = "cycleButton";
+            this.cycleButton.Size = new System.Drawing.Size(69, 69);
+            this.cycleButton.TabIndex = 24;
+            this.cycleButton.Text = "поиск элементарных циклов";
+            this.cycleButton.UseVisualStyleBackColor = true;
+            this.cycleButton.Click += new System.EventHandler(this.cycleButton_Click_1);
+            // 
+            // chainButton
+            // 
+            this.chainButton.Location = new System.Drawing.Point(6, 371);
+            this.chainButton.Name = "chainButton";
+            this.chainButton.Size = new System.Drawing.Size(69, 69);
+            this.chainButton.TabIndex = 23;
+            this.chainButton.Text = "поиск элементарных цепей";
+            this.chainButton.UseVisualStyleBackColor = true;
+            this.chainButton.Click += new System.EventHandler(this.chainButton_Click);
+            // 
+            // buttonInc
+            // 
+            this.buttonInc.Location = new System.Drawing.Point(81, 298);
+            this.buttonInc.Name = "buttonInc";
+            this.buttonInc.Size = new System.Drawing.Size(69, 69);
+            this.buttonInc.TabIndex = 22;
+            this.buttonInc.Text = "матрица инцидентности";
+            this.buttonInc.UseVisualStyleBackColor = true;
+            this.buttonInc.Click += new System.EventHandler(this.buttonInc_Click_1);
+            // 
+            // buttonAdj
+            // 
+            this.buttonAdj.Location = new System.Drawing.Point(6, 298);
+            this.buttonAdj.Name = "buttonAdj";
+            this.buttonAdj.Size = new System.Drawing.Size(69, 69);
+            this.buttonAdj.TabIndex = 21;
+            this.buttonAdj.Text = "матрица смежности";
+            this.buttonAdj.UseVisualStyleBackColor = true;
+            this.buttonAdj.Click += new System.EventHandler(this.buttonAdj_Click_1);
+            // 
+            // deleteALLButton
+            // 
+            this.deleteALLButton.Location = new System.Drawing.Point(6, 247);
+            this.deleteALLButton.Name = "deleteALLButton";
+            this.deleteALLButton.Size = new System.Drawing.Size(141, 45);
+            this.deleteALLButton.TabIndex = 20;
+            this.deleteALLButton.Text = "Отчистить";
+            this.deleteALLButton.UseVisualStyleBackColor = true;
+            this.deleteALLButton.Click += new System.EventHandler(this.deleteALLButton_Click_1);
+            // 
+            // deleteButton
+            // 
+            this.deleteButton.Location = new System.Drawing.Point(6, 196);
+            this.deleteButton.Name = "deleteButton";
+            this.deleteButton.Size = new System.Drawing.Size(141, 45);
+            this.deleteButton.TabIndex = 19;
+            this.deleteButton.Text = "Удалить";
+            this.deleteButton.UseVisualStyleBackColor = true;
+            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click_1);
+            // 
+            // drawEdgeButton
+            // 
+            this.drawEdgeButton.Location = new System.Drawing.Point(6, 145);
+            this.drawEdgeButton.Name = "drawEdgeButton";
+            this.drawEdgeButton.Size = new System.Drawing.Size(141, 45);
+            this.drawEdgeButton.TabIndex = 18;
+            this.drawEdgeButton.Text = "Связь";
+            this.drawEdgeButton.UseVisualStyleBackColor = true;
+            this.drawEdgeButton.Click += new System.EventHandler(this.drawEdgeButton_Click_1);
+            // 
+            // drawVertexButton
+            // 
+            this.drawVertexButton.Location = new System.Drawing.Point(6, 94);
+            this.drawVertexButton.Name = "drawVertexButton";
+            this.drawVertexButton.Size = new System.Drawing.Size(141, 45);
+            this.drawVertexButton.TabIndex = 17;
+            this.drawVertexButton.Text = "Вершина";
+            this.drawVertexButton.UseVisualStyleBackColor = true;
+            this.drawVertexButton.Click += new System.EventHandler(this.drawVertexButton_Click_1);
+            // 
+            // selectButton
+            // 
+            this.selectButton.Location = new System.Drawing.Point(6, 43);
+            this.selectButton.Name = "selectButton";
+            this.selectButton.Size = new System.Drawing.Size(141, 45);
+            this.selectButton.TabIndex = 16;
+            this.selectButton.Text = "Выделение";
+            this.selectButton.UseVisualStyleBackColor = true;
+            this.selectButton.Click += new System.EventHandler(this.selectButton_Click_1);
             // 
             // groupBox3
             // 
@@ -177,45 +317,13 @@
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.pb_animation);
+            this.groupBox4.Controls.Add(this.sheet);
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox4.Location = new System.Drawing.Point(153, 0);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(580, 333);
             this.groupBox4.TabIndex = 19;
             this.groupBox4.TabStop = false;
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.buttonNext);
-            this.groupBox5.Controls.Add(this.buttonPrev);
-            this.groupBox5.Controls.Add(this.button2);
-            this.groupBox5.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox5.Location = new System.Drawing.Point(3, 362);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(255, 81);
-            this.groupBox5.TabIndex = 11;
-            this.groupBox5.TabStop = false;
-            // 
-            // groupBox6
-            // 
-            this.groupBox6.Controls.Add(this.rtb_pseudocode);
-            this.groupBox6.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox6.Location = new System.Drawing.Point(3, 16);
-            this.groupBox6.MaximumSize = new System.Drawing.Size(257, 600);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(255, 256);
-            this.groupBox6.TabIndex = 12;
-            this.groupBox6.TabStop = false;
-            // 
-            // groupBox7
-            // 
-            this.groupBox7.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox7.Location = new System.Drawing.Point(3, 311);
-            this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(255, 51);
-            this.groupBox7.TabIndex = 13;
-            this.groupBox7.TabStop = false;
             // 
             // FormGraph
             // 
@@ -231,14 +339,14 @@
             this.Name = "FormGraph";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormGraph";
-            ((System.ComponentModel.ISupportInitialize)(this.pb_animation)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sheet)).EndInit();
             this.groupBox1.ResumeLayout(false);
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox6.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -248,8 +356,7 @@
         private System.Windows.Forms.Button buttonPrev;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button buttonNext;
-        private System.Windows.Forms.RichTextBox rtb_pseudocode;
-        private System.Windows.Forms.PictureBox pb_animation;
+        private System.Windows.Forms.PictureBox sheet;
         private System.Windows.Forms.TextBox tb_result;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox comboBoxGraph;
@@ -260,5 +367,15 @@
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.ListBox listBoxMatrix;
+        private System.Windows.Forms.Button cycleButton;
+        private System.Windows.Forms.Button chainButton;
+        private System.Windows.Forms.Button buttonInc;
+        private System.Windows.Forms.Button buttonAdj;
+        private System.Windows.Forms.Button deleteALLButton;
+        private System.Windows.Forms.Button deleteButton;
+        private System.Windows.Forms.Button drawEdgeButton;
+        private System.Windows.Forms.Button drawVertexButton;
+        private System.Windows.Forms.Button selectButton;
     }
 }

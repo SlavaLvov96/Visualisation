@@ -91,7 +91,7 @@ namespace Visualisation
         {
             pictGraphics.Clear(pb_animation.BackColor); // очищаем картинку
             pb_animation.Invalidate(); // инициируем отрисовку на картинке
-            tb_result.Text = "Дерево удалено";
+            rtb_result.AppendText("Дерево удалено\n");
         }
 
         private void b_random_click(object sender, EventArgs e)
@@ -101,7 +101,7 @@ namespace Visualisation
             Tree = new BinaryTree<int>(A, A.Length); // строим дерево
 
             RefreshTree();
-            tb_result.Text = "Построено дерево из случайных вершин";
+            rtb_result.AppendText("Построено дерево из случайных вершин\n");
         }
 
         private void b_add_Click(object sender, EventArgs e)
@@ -116,7 +116,7 @@ namespace Visualisation
             }
 
             RefreshTree();
-            tb_result.Text = "Добавлена вершина " + tb_add.Text.ToString();
+            rtb_result.AppendText(  "Добавлена вершина " + tb_add.Text.ToString()+"\n");
         }
 
         private void b_delete_Click(object sender, EventArgs e)
@@ -128,7 +128,7 @@ namespace Visualisation
             }
 
             RefreshTree();
-            tb_result.Text = "Удалена вершина" + tb_delete.Text.ToString();
+            rtb_result.AppendText("Удалена вершина" + tb_delete.Text.ToString()+"\n");
         }
 
         // выбор файла с помощью стандартного диалога
@@ -168,27 +168,68 @@ namespace Visualisation
 
         private void avl_click(object sender, EventArgs e)
         {
-           ClearTree();
-        }
+           //ClearTree();
+           rtb_pseudocode.Text = "Node search(x : Node, k : T):\n" +
+                "   if x == null or k == x.key\n" +
+                "      return x\n" +
+                "   if k < x.key\n" +
+                "      return search(x.left, k)\n" +
+                "   else\n" +
+                "                return search(x.right, k)";
+                }
 
         private void binary_click(object sender, EventArgs e)
         {
-            ClearTree();
-        }
+            //ClearTree();
+            rtb_pseudocode.Text = "Node search(x : Node, k : T):\n" +
+                "   if x == null or k == x.key\n" +
+                "      return x\n" +
+                "   if k < x.key\n" +
+                "      return search(x.left, k)\n" +
+                "   else\n" +
+                "                return search(x.right, k)";
+    }
 
         private void interpolation_click(object sender, EventArgs e)
         {
-            ClearTree();
+            //ClearTree();
+            rtb_pseudocode.Text = "int InterpolSearch(int A[], int key)\n " +
+                "{\n    " +
+                "   int mid, left = 0, right = N - 1;\n     " +
+                "   while (A[left] <= key && A[right] >= key)\n" +
+                "   {\n  " +
+                "       mid = left + ((key - A[left]) * (right - left)) / (A[right] - A[left]);\n" +
+                "       if (A[mid] < key) left = mid + 1;\n" +
+                "       else if (A[mid] > key) right = mid - 1;\n" +
+                "       else return mid;\n" +
+                "   }\n" +
+                "   if (A[left] == key) return left;\n" +
+                "   else return -1;\n}";
         }
 
         private void linear_click(object sender, EventArgs e)
         {
-            ClearTree();
+            //ClearTree();
+            rtb_pseudocode.Text="int LineSearch(int A[], int key)\n" +
+                "{\n    " +
+                "   for (i = 0; i < N; i++)\n       " +
+                "   if (A[i] == key) return i;\n    " +
+                "   return -1;\n" +
+                "}";
         }
 
         private void numeral_click(object sender, EventArgs e)
         {
-            ClearTree();
+            //ClearTree();
+            rtb_pseudocode.Text= "Item searchR(link h, Key v, int d)\n" +
+                "      {\n" +
+                "                if (h == 0) return nullItem;\n" +
+                "                if (v == h->item.key()) return h->item;\n" +
+                "                if (digit(v, d) == 0)\n" +
+                "                    return searchR(h->l, v, d + 1);\n" +
+                "                else\n" +
+                "                    return searchR(h->r, v, d + 1);\n" +
+                "            }";
         }
 
         private void prev_click(object sender, EventArgs e)

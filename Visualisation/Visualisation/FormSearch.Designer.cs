@@ -41,7 +41,6 @@
             this.b_next = new System.Windows.Forms.Button();
             this.pb_animation = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.tb_result = new System.Windows.Forms.TextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.бинарныйПоискToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -50,6 +49,7 @@
             this.цифровойПоискToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tb_add = new System.Windows.Forms.TextBox();
             this.tb_delete = new System.Windows.Forms.TextBox();
+            this.rtb_result = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pb_animation)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -164,14 +164,6 @@
             this.label2.TabIndex = 11;
             this.label2.Text = "Результат";
             // 
-            // tb_result
-            // 
-            this.tb_result.Location = new System.Drawing.Point(210, 441);
-            this.tb_result.Multiline = true;
-            this.tb_result.Name = "tb_result";
-            this.tb_result.Size = new System.Drawing.Size(756, 102);
-            this.tb_result.TabIndex = 12;
-            // 
             // menuStrip1
             // 
             this.menuStrip1.Dock = System.Windows.Forms.DockStyle.Left;
@@ -206,7 +198,7 @@
             this.бинарныйПоискToolStripMenuItem.Name = "бинарныйПоискToolStripMenuItem";
             this.бинарныйПоискToolStripMenuItem.Padding = new System.Windows.Forms.Padding(4);
             this.бинарныйПоискToolStripMenuItem.Size = new System.Drawing.Size(207, 32);
-            this.бинарныйПоискToolStripMenuItem.Text = "Бинарный поиск";
+            this.бинарныйПоискToolStripMenuItem.Text = "Бинарное дерево поиска";
             this.бинарныйПоискToolStripMenuItem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.бинарныйПоискToolStripMenuItem.Click += new System.EventHandler(this.binary_click);
             // 
@@ -257,14 +249,22 @@
             this.tb_delete.Size = new System.Drawing.Size(144, 22);
             this.tb_delete.TabIndex = 15;
             // 
+            // rtb_result
+            // 
+            this.rtb_result.Location = new System.Drawing.Point(210, 438);
+            this.rtb_result.Name = "rtb_result";
+            this.rtb_result.Size = new System.Drawing.Size(756, 105);
+            this.rtb_result.TabIndex = 16;
+            this.rtb_result.Text = "";
+            // 
             // FormSearch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1325, 549);
+            this.Controls.Add(this.rtb_result);
             this.Controls.Add(this.tb_delete);
             this.Controls.Add(this.tb_add);
-            this.Controls.Add(this.tb_result);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.pb_animation);
             this.Controls.Add(this.b_next);
@@ -304,7 +304,6 @@
         private System.Windows.Forms.Button b_next;
         private System.Windows.Forms.PictureBox pb_animation;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox tb_result;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem бинарныйПоискToolStripMenuItem;
@@ -313,5 +312,6 @@
         private System.Windows.Forms.ToolStripMenuItem цифровойПоискToolStripMenuItem;
         private System.Windows.Forms.TextBox tb_add;
         private System.Windows.Forms.TextBox tb_delete;
+        private System.Windows.Forms.RichTextBox rtb_result;
     }
 }

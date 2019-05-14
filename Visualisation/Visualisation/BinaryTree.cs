@@ -7,7 +7,8 @@ using System.Drawing;
 
 namespace Visualisation
 {
-    class BinaryTreeNode<Data>// шаблон класса УЗЕЛ ДЕРЕВА
+    // класс УЗЕЛ ДЕРЕВА
+    class BinaryTreeNode<Data>
     {
         public Data data; // полезные данные
         public BinaryTreeNode<Data> left, right; // ссылки на дочерние узлы
@@ -34,7 +35,8 @@ namespace Visualisation
             this.root = null;
         }
 
-        private void QuickSort(Data[] A, int low, int high) // "быстрая сортировка"
+        // быстрая сортировка
+        private void QuickSort(Data[] A, int low, int high) 
         {
             int i = low, j = high;
             Data x = A[(low + high) / 2];
@@ -53,11 +55,12 @@ namespace Visualisation
             }
             while (i < j);
 
+            // сортировка в зависимости больше значение или меньше
             if (low < j) QuickSort(A, low, j);
             if (i < high) QuickSort(A, i, high);
         }
 
-        // следующая функция вставки формирует идеально сбалансированное дерево
+        // Формирование идеально сбалансированного дерева
         void IBTInsert(Data[] A, int low, int high)
         {
             if (low > high) return; // граничное условие - для пустого подмассива
@@ -70,50 +73,54 @@ namespace Visualisation
         // конструктор на основе массива
         public BinaryTree(Data[] recordsArray, int newRecords)
         {
-            if (newRecords == 0) // если массив пустой
+            // если массив пустой
+            if (newRecords == 0) 
             {
                 this.root = null;
                 return;
             }
 
-            // если более одной записи - требуется сортировка
+            // если более одной записи, выполняется сортировка
             if (newRecords > 1) QuickSort(recordsArray, 0, newRecords - 1);
 
-            // строим по отсортированному массиву сбалансированное дерево
+            // формируем сбалансированное дерево
             IBTInsert(recordsArray, 0, newRecords - 1);
         }
 
-        // вставка
+        // добавление вершины дерева
         public bool Insert(Data NewItem) 
         {
-            if (root == null) // если дерево пустое
+            // если дерево пустое
+            if (root == null) 
             {
                 root = new BinaryTreeNode<Data>(NewItem);
                 return true;
             }
 
-            // для непустого дерева
-
+            // если дерево не пустое
             BinaryTreeNode<Data> current = root;
             while (true)
             {
-                // если такой элемент уже есть в дереве, вставка неуспешна
+                // если такая вершина уже есть в дереве, добавление неуспешно
                 if (current.data.CompareTo(NewItem) == 0) return false;
 
-                // если элемент в узле cur больше элемента NewItem
+                // если вершина больше новой 
                 if (current.data.CompareTo(NewItem) > 0)
                 {
-                    if (current.left == null) // если у cur нет левого потомка
+                    // если у вершины нет левого потомка
+                    if (current.left == null) 
                     {
-                        // вставляем влево и завершаем вставку
+                        // добавляем вершину влево и завершаем добавление
                         current.left = new BinaryTreeNode<Data>(NewItem);
                         break;
                     }
 
-                    current = current.left; // если у cur есть левый потомок, идём к нему
+                    // если у вершины есть левый потомок, идём к нему
+                    current = current.left; 
                 }
 
-                else // если элемент в узле cur меньше элемента NewItem
+                // если вершина меньше новой
+                else 
                 {
                     // действуем аналогично предыдущей ситуации, но в правом поддереве
                     if (current.right == null)
@@ -122,95 +129,104 @@ namespace Visualisation
                         break;
                     }
 
+                    // если у вершины есть правый потомок, идём к нему
                     current = current.right;
                 }
             }
             
+            // добавление произошло
             return true;
         }
  
-        // визуализация поддерева с корнем root
+        // рисование поддерева с корнем root
         private void DrawTree(Graphics graphics, BinaryTreeNode<Data> root,
-        int LevelH, int radius, int left, int right, int top, Color NodesColor,
+        int Level, int radius, int left, int right, int top, Color NodesColor,
         Color LeavesColor, Font NodesLabel)
         {
-            // levelH - высота области под один уровень, radius - радиус круга, который показывает узел,
-            // NodesColor - цвет внутренныз узлов, LeavesColor - цвет листьев,
-            // NodesLabel - шрифт для показа элементов, G - объект, куда выводим
+            // level - высота области под один уровень, radius - радиус круга, который показывает узел,
+            // NodesColor - цвет внутренних узлов, LeavesColor - цвет листьев,
+            // NodesLabel - шрифт для показа элементов, graphics - объект, куда выводим
 
-            
             // координаты центра круга, обозначающего узел дерева
-            int x_center = (left + right) / 2, y_center = top + LevelH / 2;
+            int x_center = (left + right) / 2, y_center = top + Level / 2;
 
             // кисть для закраски круга, цвет зависит от того, root - лист или нет
             Brush ForEllipse = new SolidBrush((root.IsLeaf() == true) ? LeavesColor : NodesColor);
 
+            // кисть для рамки круга
             Pen ForEllipseFind = new Pen(Color.Black, 4);
-            // рисуем узел-кружок
+            
+            // рисуем рамку вершины
             graphics.DrawEllipse(ForEllipseFind,
            new Rectangle(x_center - radius, y_center - radius, 3 * radius, 3 * radius));
+
+            // заполняем вершину
             graphics.FillEllipse(ForEllipse,
             new Rectangle(x_center - radius, y_center - radius, 3 * radius, 3 * radius));
-
-            
-            // показываем элемент узла
+                        
+            // заполняем значение вершины
             graphics.DrawString(root.data.ToString(), NodesLabel, Brushes.Black,
             new Rectangle(x_center , y_center - radius /2, 2 * radius, 2*radius));
 
+            // определяем координаты вершин
             int d = (int)(Math.Sqrt(1) * ((double)radius));
-            int rchild_left, rchild_top = top + LevelH, rchild_right;
-            int x_center_child, y_center_child = rchild_top + LevelH / 2;
+            int rchild_left, rchild_top = top + Level, rchild_right;
+            int x_center_child, y_center_child = rchild_top + Level / 2;
 
-            if (root.left != null) // если есть левое поддерево
+            // если есть левое поддерево
+            if (root.left != null) 
             {
                 // координаты области построения
                 rchild_left = left;
                 rchild_right = (left + right) / 2;
                 x_center_child = (rchild_left + rchild_right) / 2;
 
-                // рисуем соединительную линию между узлом и левым сыном
+                // рисуем соединительную линию между вершиной и левым потомком
                 graphics.DrawLine(new Pen(Color.Black), x_center_child, y_center_child - d, x_center - d, y_center + d);
 
-                // рекурсивный вызов для левого сына
-                DrawTree(graphics, root.left, LevelH, radius, rchild_left, rchild_right,
+                // рекурсивный вызов для левого потомка
+                DrawTree(graphics, root.left, Level, radius, rchild_left, rchild_right,
                 rchild_top, NodesColor, LeavesColor, NodesLabel);
             }
 
-            if (root.right != null) // если есть правое поддерево (аналогично левому)
+            // если есть правое поддерево (аналогично левому)
+            if (root.right != null) 
             {
                 rchild_left = (left + right) / 2;
                 rchild_right = right;
                 x_center_child = (rchild_left + rchild_right) / 2;
                 graphics.DrawLine(new Pen(Color.Black), x_center + d, y_center + d, x_center_child, y_center_child - d);
-                DrawTree(graphics, root.right, LevelH, radius, rchild_left, rchild_right,
+                DrawTree(graphics, root.right, Level, radius, rchild_left, rchild_right,
                 rchild_top, NodesColor, LeavesColor, NodesLabel);
             }
         }
   
-        // количество уровней в поддереве с корнем root
+        // вычисляем количество уровней в поддереве
         private int LevelsCount(BinaryTreeNode<Data> root)
         {
             int level_left_sub = 0, level_right_sub = 0;
 
-            // если левое поддерево непустое, считаем его число уровней
+            // если левое поддерево непустое, считаем количество уровней
             if (root.left != null) level_left_sub = LevelsCount(root.left);
 
-            // если правое поддерево непустое, считаем его число уровней
+            // если правое поддерево непустое, считаем количество уровней
             if (root.right != null) level_right_sub = LevelsCount(root.right);
 
-            // число уровней дерева = 1 + число уровней самого высокого поддерева
-
+            // количество уровней дерева = 1 + количество уровней самого высокого поддерева
             // если левое поддерево выше правого
             if (level_left_sub >= level_right_sub)
                 return level_left_sub + 1;
-            return level_right_sub + 1; // если правое поддерево выше левого
+
+            // если правое поддерево выше левого
+            return level_right_sub + 1; 
         }
 
-        // визуализация дерева - главная функция
+        // рисуем дерево - главная функция
         public void DrawTree(Graphics graphics, int radius, int width, int height,
         Color NodesColor, Color LeavesColor, Font NodesLabel)
         {
-            if (this.root == null) // для пустого дерева
+            // для пустого дерева
+            if (this.root == null) 
             {
                 graphics.DrawString("Дерево пустое ", NodesLabel, Brushes.Black,
                 (float)0.0, (float)0.0);
@@ -218,13 +234,12 @@ namespace Visualisation
             }
 
             // для непустого дерева
-
             int countLevels = LevelsCount(this.root); // вычисляем количество уровней
             DrawTree(graphics, this.root, height / countLevels, radius, 0, width, 0,
-            NodesColor, LeavesColor, NodesLabel); // визуализируем дерево
+            NodesColor, LeavesColor, NodesLabel); // рисуем дерево
         }
 
-        // поиск родителя для узла Item
+        // поиск родителя для вершины
         private BinaryTreeNode<Data> FindParent(Data item)
         {
             if (this.root.data.CompareTo(item) == 0) return null;
@@ -245,16 +260,16 @@ namespace Visualisation
                     current = current.right;
                 }
             }
-
             return current;
         }
 
+        // поиск в бинарном дереве
         public bool binFind(Data FindItem)
         {
             BinaryTreeNode<Data> nodeFindItem = root;
             BinaryTreeNode<Data> parent = null;
 
-            // спуск с поиском удаляемого узла
+            // спуск по дереву с поиском вершины
             while ((nodeFindItem != null) && (FindItem.CompareTo(nodeFindItem.data) != 0))
             {
                 parent = nodeFindItem;
@@ -263,39 +278,37 @@ namespace Visualisation
                 else nodeFindItem = nodeFindItem.right;
             }
 
-            // если запрашиваемый элемент отсутствует
+            // если запрашиваемая вершина отсутствует
             if (nodeFindItem == null) return false;
 
-            // если удаляемый узел - корень, и он единственный
+            // если вершина - корень, и он единственный
             if (nodeFindItem == root && root.IsLeaf() == true)
             {
-                //root = null;
-                return true;
+               return true;
             }
 
-            // если удаляемый узел является листовым
+            // если вершина является листом
             if (nodeFindItem.left == null && nodeFindItem.right == null)
             {
-                // если он - левый ребёнок своего родителя
+                // если вершина - левый потомок
                 if (nodeFindItem.data.CompareTo(parent.data) < 0)
-                    //parent.left = null;
                     return true;
 
-                else //parent.right = null; // если он - правый ребёнок своего родителя
-                return true;
+                // если он - правый ребёнок своего родителя
+                else return true;
             }
 
+            // завершаем поиск
             return true;
-
         }
    
-        // удаление элемента ToRemove
+        // удаление вершины 
         public bool Remove(Data ToRemove) 
         {
             BinaryTreeNode<Data> nodeToRemove = root;
             BinaryTreeNode<Data> parent = null;
 
-            // спуск с поиском удаляемого узла
+            // спуск с поиском удаляемой вершины
             while ((nodeToRemove != null) && (ToRemove.CompareTo(nodeToRemove.data) != 0))
             {
                 parent = nodeToRemove;
@@ -304,84 +317,91 @@ namespace Visualisation
                 else nodeToRemove = nodeToRemove.right;
             }
 
-            // если запрашиваемый элемент отсутствует
+            // если запрашиваемая вершина отсутствует
             if (nodeToRemove == null) return false;
 
-            // если удаляемый узел - корень, и он единственный
+            // если удаляемая вершина - корень, и он единственный
             if (nodeToRemove == root && root.IsLeaf() == true)
             {
                 root = null;
                 return true;
             }
 
-            // если удаляемый узел является листовым
+            // если удаляемая вершина является листом
             if (nodeToRemove.left == null && nodeToRemove.right == null)
             {
-                // если он - левый ребёнок своего родителя
+                // если вершина - левый потомок
                 if (nodeToRemove.data.CompareTo(parent.data) < 0)
                     parent.left = null;
 
-                else parent.right = null; // если он - правый ребёнок своего родителя
+                // если вершина - правый потомок
+                else parent.right = null; 
                 return true;
             }
 
-            // если у удаляемого узла есть только правое поддерево
+            // если у удаляемой вершины есть только правое поддерево
             if (nodeToRemove.left == null && nodeToRemove.right != null)
             {
-                // если удаляемый узел - корень
+                // если удаляемая вершина - корень
                 if (nodeToRemove == root) root = root.right;
-                else // если удаляемый узел - не корень
-                {
 
-                    // если удаляемый узел - левый ребёнок своего родителя
+                // если удаляемая вершина - не корень
+                else 
+                {
+                    // если удаляемая вершина - левый потомок
                     if (nodeToRemove.data.CompareTo(parent.data) < 0)
                         parent.left = nodeToRemove.right;
 
-                    // если он правый ребёнок своего родителя
+                    // если вершина правый потомок
                     else parent.right = nodeToRemove.right;
                 }
                 return true;
             }
 
-            // если у удаляемого узла есть только левое поддерево
+            // если у удаляемой вершины есть только левое поддерево
             if (nodeToRemove.left != null && nodeToRemove.right == null)
             {
-                // если удаляемый узел - корень
+                // если удаляемая вершина - корень
                 if (nodeToRemove == root) root = root.left;
-                else // если удаляемый узел - не корень
+
+                // если удаляемая вершина - не корень
+                else 
                 {
-                    // если удаляемый узел - левый ребёнок своего родителя
+                    // если удаляемая вершина - левый потомок
                     if (nodeToRemove.data.CompareTo(parent.data) < 0)
                         parent.left = nodeToRemove.left;
 
-                    // если удаляемый узел - правый ребёнок своего родителя
+                    // если удаляемая вершина - правый потомок
                     else parent.right = nodeToRemove.left;
                 }
                 return true;
             }
 
-            // если у удаляемого узла есть оба поддерева
-            // ищем наибольший элемент в левом поддереве удаляемого узла
+            // если у удаляемой вершины есть оба поддерева
+            // ищем наибольшую вершину в левом поддереве удаляемой вершины
             BinaryTreeNode<Data> biggestItem = nodeToRemove.left;
             while (biggestItem.right != null)
                 biggestItem = biggestItem.right;
-            // ищем родителя наибольшего элемента в левом поддереве
+
+            // ищем родителя наибольшей вершины в левом поддереве
             BinaryTreeNode<Data> biggestItem_parent = FindParent(biggestItem.data);
-            if (nodeToRemove.left != biggestItem) // если этот родитель - не сам удаляемый узел
+
+            // если этот родитель - не удаляемая вершина
+            if (nodeToRemove.left != biggestItem) 
             {
-                // если у наибольшего элемента есть левое поддерево
+                // если у наибольшей вершины есть левое поддерево
                 if (biggestItem.left != null) biggestItem_parent.right = biggestItem.left;
-                else biggestItem_parent.right = null; // если у него нет левого поддерева
+
+                // если у нее нет левого поддерева
+                else biggestItem_parent.right = null; 
             }
 
-            // если этот родитель - сам удаляемый узел
+            // если этот родитель - удаляемая вершина
             else nodeToRemove.left = biggestItem.left;
 
-            // заменяем элемент удаляемого узла на наибольший элемент в левом поддереве
+            // заменяем вершину удаляемой вершины на наибольшую вершину в левом поддереве
             nodeToRemove.data = biggestItem.data;
             return true;
         }
-
-        
     }
 }

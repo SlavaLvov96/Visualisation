@@ -13,17 +13,20 @@ namespace Visualisation
 {
     public partial class FormSearch : Form
     {
-
+        // определяем дерево
         BinaryTree<int> Tree = new BinaryTree<int>();
 
-        Graphics pictGraphics; // для доступа к поверхности pictureBox
+        // для доступа к поверхности pictureBox
+        Graphics pictGraphics; 
 
-        // шрифт для показа содержимого узлов
+        // шрифт для показа содержимого вершин
         Font NodesFont = new Font(FontFamily.GenericSansSerif, (float)10.0, FontStyle.Regular);
 
-        Color NodesColor = Color.FromArgb(120, 219, 226); // цвет внутренных узлов
-        Color LeavesColor = Color.FromArgb(100, 149, 237); // цвет листьев
+        // цвет внутренних и внешних вершин
+        Color NodesColor = Color.FromArgb(120, 219, 226); 
+        Color LeavesColor = Color.FromArgb(100, 149, 237); 
 
+        // инициализируем форму
         public FormSearch()
         {
             InitializeComponent();
@@ -32,22 +35,22 @@ namespace Visualisation
         // при загрузке формы
         private void FormSearch_Load(object sender, EventArgs e)
         {
-
             // кнопки "развернуть" и "свернуть" будут недоступны
             this.MinimizeBox = false;
             this.MaximizeBox = false;
 
-            int pb_width = pb_animation.Width, pb_height = pb_animation.Height; // размеры pictureBox
+            // размеры pictureBox
+            int pb_width = pb_animation.Width, pb_height = pb_animation.Height; 
 
-            // следующий код даёт доступ к рисованию на картинке
+            // доступ к рисованию на картинке
             pb_animation.Image = (Image)new Bitmap(pb_width, pb_height);
             pictGraphics = Graphics.FromImage(pb_animation.Image);
 
-            RefreshTree(); // обновляем картинку
-
+            // обновляем картинку
+            RefreshTree(); 
         }
 
-        // содержится ли элемент item среди первых n элементов массива ?
+        // содержится ли вершина среди первых n элементов массива ?
         bool ContainsInArray(int[] array, int n, int item)
         {
             for (int i = 0; i < n; i++)
@@ -59,25 +62,27 @@ namespace Visualisation
         // размер массива случайный от nmin до nmax
         int[] GetRandItems(int nmin, int nmax, int xmin, int xmax)
         {
-            // DateTime.Now.Millisecond - для инициализации случайного датчика
             Random random = new Random(DateTime.Now.Millisecond);
 
-            int n = random.Next(nmin, nmax + 1); // получаем случайный размер
+            // получаем случайный размер
+            int n = random.Next(nmin, nmax + 1); 
             int[] array = new int[n];
 
             for (int i = 0; i < n; i++)
             {
-                int newDigit = random.Next(xmin, xmax + 1); // генерируем новое случайное число
+                // генерируем новое случайное число
+                int newDigit = random.Next(xmin, xmax + 1); 
 
                 // если оно уже есть среди ранее сгенерированных случайных чисел
                 if (ContainsInArray(array, i, newDigit) == true) i--;
-                else array[i] = newDigit; // если оно НОВОЕ
-            }
 
+                // если оно НОВОЕ
+                else array[i] = newDigit; 
+            }
             return array;
         }
 
-        // обновление картинки
+        // обновляем изображение
         void RefreshTree()
         {
             pictGraphics.Clear(pb_animation.BackColor); // очищаем картинку
@@ -87,7 +92,7 @@ namespace Visualisation
             rtb_result.AppendText("Дерево обновлено.\n");
         }
 
-
+        // очищаем изображение
         void ClearTree()
         {
             pictGraphics.Clear(pb_animation.BackColor); // очищаем картинку
@@ -101,43 +106,48 @@ namespace Visualisation
             int[] A = GetRandItems(3, 15, 1, 99);
             Tree = new BinaryTree<int>(A, A.Length); // строим дерево
 
+            // обновляем изображение
             RefreshTree();
             rtb_result.AppendText("Построено дерево из случайных вершин.\n");
         }
 
+        // добавление вершины
         private void b_add_Click(object sender, EventArgs e)
         {
-            //tb_add.Text
-
-            // Insert возвращает false, если была попытка вставки существующего элемента
+            // Insert возвращает false, если была попытка вставки существующей вершины
             if (Tree.Insert(Convert.ToInt32(tb_add.Text)) == false)
             {
-                MessageBox.Show("Элемент " + tb_add.Text.ToString() + " уже имеется");
+                MessageBox.Show("Вершина " + tb_add.Text.ToString() + " уже есть.");
                 return;
             }
 
+            // иначе - обновляем изображение
             RefreshTree();
             rtb_result.AppendText("Добавлена вершина " + tb_add.Text.ToString() + ".\n");
         }
 
+        // удаление вершины
         private void b_delete_Click(object sender, EventArgs e)
         {
+            // Remove возвращает false, если была попытка удаления несуществующей вершины
             if (Tree.Remove(Convert.ToInt32(tb_delete.Text)) == false)
             {
-                MessageBox.Show("Элемент " + tb_delete.ToString() + " отсутствует.");
+                MessageBox.Show("Вершина " + tb_delete.ToString() + " отсутствует.");
                 return;
             }
 
+            // иначе - обновляем изображение
             RefreshTree();
             rtb_result.AppendText("Удалена вершина " + tb_delete.Text.ToString() + ".\n");
         }
-
-       
+        
+        // поиск вершины
         private void b_search_Click(object sender, EventArgs e)
         {
             var select = (Button)sender;
             switch (select.Name)
             {
+                // поиск в авл-дереве
                 case "avl_menu":
                     rtb_result.AppendText("Поиск в АВЛ дереве.\n");
 
@@ -151,6 +161,7 @@ namespace Visualisation
                     avlTreeSearch();
                     break;
 
+                // поиск в бинарном дереве
                 case "binary_tree_menu":
                     rtb_result.AppendText("Поиск в бинарном дереве.\n");
                     rtb_pseudocode.Text = "Node search(x : Node, k : T):\n" +
@@ -164,6 +175,7 @@ namespace Visualisation
                     binaryTreeSearch();
                     break;
 
+                // интерполяционный поиск
                 case "interpolation_menu":
                     rtb_result.AppendText("Интерполяционный поиск.\n");
                     rtb_pseudocode.Text = "int InterpolSearch(int A[], int key)\n " +
@@ -181,6 +193,7 @@ namespace Visualisation
                     interpolationTreeSearch();
                     break;
 
+                //линейный поиск
                 case "linear_menu":
                     rtb_result.AppendText("Линейный поиск.\n");
                     rtb_pseudocode.Text = "int LineSearch(int A[], int key)\n" +
@@ -192,6 +205,7 @@ namespace Visualisation
                     linearTreeSearch();
                     break;
 
+                // цифровой поиск
                 case "digital_menu":
                     rtb_result.AppendText("Поиск в цифровом дереве.\n");
                     rtb_pseudocode.Text = "Item searchR(link h, Key v, int d)\n" +
@@ -206,6 +220,7 @@ namespace Visualisation
                     digitalTreeSearch();
                     break;
 
+                // поиск по умолчанию
                 default:
                     rtb_result.AppendText("Поиск по умолчанию.\n");
                     binaryTreeSearch();
@@ -213,57 +228,62 @@ namespace Visualisation
             }
         }
 
-
-
+        // поиск в бинарном дереве
         void binaryTreeSearch()
         {
             timer1.Enabled = true;
 
+            // если вершина отсутствует
             if (Tree.binFind(Convert.ToInt32(tb_search_value.Text)) == false)
             {
                 rtb_result.AppendText("Вершина " + tb_search_value.Text.ToString() + " отсутствует.\n");
                 return;
             }
 
+            // иначе - обновить изображение
             RefreshTree();
             rtb_result.AppendText("Найдена вершина " + tb_search_value.Text.ToString() + ".\n");
         }
 
+        // поиск в авл-дереве
         void avlTreeSearch()
         {
 
         }
 
+        // интерполяционный поиск
         void interpolationTreeSearch()
         {
 
         }
 
+        // линейный поиск
         void linearTreeSearch()
         {
 
         }
 
+        // цифровой поиск
         void digitalTreeSearch()
         {
 
         }
 
+        // предыдущий шаг
         private void prev_click(object sender, EventArgs e)
         {
 
         }
 
+        //следующий шаг
         private void next_click(object sender, EventArgs e)
         {
 
         }
 
+        // таймер
         private void timer1_Tick(object sender, EventArgs e)
         {
-
-            // При достижении определенного значения
-            // останавливаем таймер, и выполняем дальнейшие действия
             if (Tree.binFind(Convert.ToInt32(tb_search_value.Text)) == true)
             {
                 NodesColor = Color.Red; // цвет внутренных узлов
@@ -274,7 +294,6 @@ namespace Visualisation
             RefreshTree();
         }
     }
-
 }
 
 

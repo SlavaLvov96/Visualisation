@@ -89,7 +89,6 @@ namespace Visualisation
             Tree.DrawTree(pictGraphics, 14, pb_animation.Width, pb_animation.Height,
             NodesColor, LeavesColor, NodesFont); // показываем дерево
             pb_animation.Invalidate(); // инициируем отрисовку на картинке
-            rtb_result.AppendText("Дерево обновлено.\n");
         }
 
         // очищаем изображение

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormSearch));
             this.rtb_pseudocode = new System.Windows.Forms.RichTextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -41,17 +42,16 @@
             this.b_next = new System.Windows.Forms.Button();
             this.pb_animation = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.бинарныйПоискToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.интерполяционныйПоискToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.линейныйПоискToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.цифровойПоискToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tb_add = new System.Windows.Forms.TextBox();
             this.tb_delete = new System.Windows.Forms.TextBox();
             this.rtb_result = new System.Windows.Forms.RichTextBox();
+            this.avl_menu = new System.Windows.Forms.Button();
+            this.binary_tree_menu = new System.Windows.Forms.Button();
+            this.interpolation_menu = new System.Windows.Forms.Button();
+            this.linear_menu = new System.Windows.Forms.Button();
+            this.digital_menu = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pb_animation)).BeginInit();
-            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // rtb_pseudocode
@@ -75,18 +75,18 @@
             // 
             this.tb_search_value.Location = new System.Drawing.Point(972, 475);
             this.tb_search_value.Name = "tb_search_value";
-            this.tb_search_value.Size = new System.Drawing.Size(171, 22);
+            this.tb_search_value.Size = new System.Drawing.Size(144, 22);
             this.tb_search_value.TabIndex = 2;
-            this.tb_search_value.Text = "Значение для поиска...";
             // 
             // b_search
             // 
-            this.b_search.Location = new System.Drawing.Point(1160, 475);
+            this.b_search.Location = new System.Drawing.Point(1123, 475);
             this.b_search.Name = "b_search";
-            this.b_search.Size = new System.Drawing.Size(150, 23);
+            this.b_search.Size = new System.Drawing.Size(190, 28);
             this.b_search.TabIndex = 5;
             this.b_search.Text = "Поиск / Старт";
             this.b_search.UseVisualStyleBackColor = true;
+            this.b_search.Click += new System.EventHandler(this.b_search_Click);
             // 
             // b_add
             // 
@@ -164,77 +164,6 @@
             this.label2.TabIndex = 11;
             this.label2.Text = "Результат";
             // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(19, 19);
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1,
-            this.бинарныйПоискToolStripMenuItem,
-            this.интерполяционныйПоискToolStripMenuItem,
-            this.линейныйПоискToolStripMenuItem,
-            this.цифровойПоискToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(220, 549);
-            this.menuStrip1.TabIndex = 13;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripMenuItem1.Font = new System.Drawing.Font("Segoe UI Semibold", 8.765218F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Padding = new System.Windows.Forms.Padding(4);
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(207, 32);
-            this.toolStripMenuItem1.Text = "АВЛ-деревья";
-            this.toolStripMenuItem1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.toolStripMenuItem1.Click += new System.EventHandler(this.avl_click);
-            // 
-            // бинарныйПоискToolStripMenuItem
-            // 
-            this.бинарныйПоискToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.бинарныйПоискToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI Semibold", 8.765218F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.бинарныйПоискToolStripMenuItem.Name = "бинарныйПоискToolStripMenuItem";
-            this.бинарныйПоискToolStripMenuItem.Padding = new System.Windows.Forms.Padding(4);
-            this.бинарныйПоискToolStripMenuItem.Size = new System.Drawing.Size(207, 32);
-            this.бинарныйПоискToolStripMenuItem.Text = "Бинарное дерево поиска";
-            this.бинарныйПоискToolStripMenuItem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.бинарныйПоискToolStripMenuItem.Click += new System.EventHandler(this.binary_click);
-            // 
-            // интерполяционныйПоискToolStripMenuItem
-            // 
-            this.интерполяционныйПоискToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.интерполяционныйПоискToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI Semibold", 8.765218F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.интерполяционныйПоискToolStripMenuItem.Name = "интерполяционныйПоискToolStripMenuItem";
-            this.интерполяционныйПоискToolStripMenuItem.Padding = new System.Windows.Forms.Padding(4);
-            this.интерполяционныйПоискToolStripMenuItem.Size = new System.Drawing.Size(207, 32);
-            this.интерполяционныйПоискToolStripMenuItem.Text = "Интерполяционный поиск";
-            this.интерполяционныйПоискToolStripMenuItem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.интерполяционныйПоискToolStripMenuItem.Click += new System.EventHandler(this.interpolation_click);
-            // 
-            // линейныйПоискToolStripMenuItem
-            // 
-            this.линейныйПоискToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.линейныйПоискToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI Semibold", 8.765218F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.линейныйПоискToolStripMenuItem.Name = "линейныйПоискToolStripMenuItem";
-            this.линейныйПоискToolStripMenuItem.Padding = new System.Windows.Forms.Padding(4);
-            this.линейныйПоискToolStripMenuItem.Size = new System.Drawing.Size(207, 32);
-            this.линейныйПоискToolStripMenuItem.Text = "Линейный поиск";
-            this.линейныйПоискToolStripMenuItem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.линейныйПоискToolStripMenuItem.Click += new System.EventHandler(this.linear_click);
-            // 
-            // цифровойПоискToolStripMenuItem
-            // 
-            this.цифровойПоискToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.цифровойПоискToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI Semibold", 8.765218F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.цифровойПоискToolStripMenuItem.Name = "цифровойПоискToolStripMenuItem";
-            this.цифровойПоискToolStripMenuItem.Padding = new System.Windows.Forms.Padding(4);
-            this.цифровойПоискToolStripMenuItem.Size = new System.Drawing.Size(207, 32);
-            this.цифровойПоискToolStripMenuItem.Text = "Цифровой поиск";
-            this.цифровойПоискToolStripMenuItem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.цифровойПоискToolStripMenuItem.Click += new System.EventHandler(this.numeral_click);
-            // 
             // tb_add
             // 
             this.tb_add.Location = new System.Drawing.Point(973, 385);
@@ -257,11 +186,70 @@
             this.rtb_result.TabIndex = 16;
             this.rtb_result.Text = "";
             // 
+            // avl_menu
+            // 
+            this.avl_menu.Location = new System.Drawing.Point(13, 13);
+            this.avl_menu.Name = "avl_menu";
+            this.avl_menu.Size = new System.Drawing.Size(191, 39);
+            this.avl_menu.TabIndex = 17;
+            this.avl_menu.Text = "АВЛ-деревья";
+            this.avl_menu.UseVisualStyleBackColor = true;
+            this.avl_menu.Click += new System.EventHandler(this.b_search_Click);
+            // 
+            // binary_tree_menu
+            // 
+            this.binary_tree_menu.Location = new System.Drawing.Point(13, 58);
+            this.binary_tree_menu.Name = "binary_tree_menu";
+            this.binary_tree_menu.Size = new System.Drawing.Size(191, 39);
+            this.binary_tree_menu.TabIndex = 17;
+            this.binary_tree_menu.Text = "Бинарное дерево поиска\r\n";
+            this.binary_tree_menu.UseVisualStyleBackColor = true;
+            this.binary_tree_menu.Click += new System.EventHandler(this.b_search_Click);
+            // 
+            // interpolation_menu
+            // 
+            this.interpolation_menu.Location = new System.Drawing.Point(13, 103);
+            this.interpolation_menu.Name = "interpolation_menu";
+            this.interpolation_menu.Size = new System.Drawing.Size(191, 39);
+            this.interpolation_menu.TabIndex = 17;
+            this.interpolation_menu.Text = "Интерполяционный поиск";
+            this.interpolation_menu.UseVisualStyleBackColor = true;
+            this.interpolation_menu.Click += new System.EventHandler(this.b_search_Click);
+            // 
+            // linear_menu
+            // 
+            this.linear_menu.Location = new System.Drawing.Point(12, 148);
+            this.linear_menu.Name = "linear_menu";
+            this.linear_menu.Size = new System.Drawing.Size(191, 39);
+            this.linear_menu.TabIndex = 17;
+            this.linear_menu.Text = "Линейный поиск";
+            this.linear_menu.UseVisualStyleBackColor = true;
+            this.linear_menu.Click += new System.EventHandler(this.b_search_Click);
+            // 
+            // digital_menu
+            // 
+            this.digital_menu.Location = new System.Drawing.Point(13, 193);
+            this.digital_menu.Name = "digital_menu";
+            this.digital_menu.Size = new System.Drawing.Size(191, 39);
+            this.digital_menu.TabIndex = 17;
+            this.digital_menu.Text = "Цифровой поиск";
+            this.digital_menu.UseVisualStyleBackColor = true;
+            this.digital_menu.Click += new System.EventHandler(this.b_search_Click);
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // FormSearch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1325, 549);
+            this.Controls.Add(this.digital_menu);
+            this.Controls.Add(this.linear_menu);
+            this.Controls.Add(this.interpolation_menu);
+            this.Controls.Add(this.binary_tree_menu);
+            this.Controls.Add(this.avl_menu);
             this.Controls.Add(this.rtb_result);
             this.Controls.Add(this.tb_delete);
             this.Controls.Add(this.tb_add);
@@ -277,14 +265,11 @@
             this.Controls.Add(this.tb_search_value);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.rtb_pseudocode);
-            this.Controls.Add(this.menuStrip1);
             this.Name = "FormSearch";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormSearch";
             this.Load += new System.EventHandler(this.FormSearch_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pb_animation)).EndInit();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -304,14 +289,14 @@
         private System.Windows.Forms.Button b_next;
         private System.Windows.Forms.PictureBox pb_animation;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem бинарныйПоискToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem интерполяционныйПоискToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem линейныйПоискToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem цифровойПоискToolStripMenuItem;
         private System.Windows.Forms.TextBox tb_add;
         private System.Windows.Forms.TextBox tb_delete;
         private System.Windows.Forms.RichTextBox rtb_result;
+        private System.Windows.Forms.Button avl_menu;
+        private System.Windows.Forms.Button binary_tree_menu;
+        private System.Windows.Forms.Button interpolation_menu;
+        private System.Windows.Forms.Button linear_menu;
+        private System.Windows.Forms.Button digital_menu;
+        private System.Windows.Forms.Timer timer1;
     }
 }

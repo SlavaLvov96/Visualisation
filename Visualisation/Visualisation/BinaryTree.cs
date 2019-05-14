@@ -145,10 +145,14 @@ namespace Visualisation
             // кисть для закраски круга, цвет зависит от того, root - лист или нет
             Brush ForEllipse = new SolidBrush((root.IsLeaf() == true) ? LeavesColor : NodesColor);
 
+            Pen ForEllipseFind = new Pen(Color.Black, 4);
             // рисуем узел-кружок
+            graphics.DrawEllipse(ForEllipseFind,
+           new Rectangle(x_center - radius, y_center - radius, 3 * radius, 3 * radius));
             graphics.FillEllipse(ForEllipse,
             new Rectangle(x_center - radius, y_center - radius, 3 * radius, 3 * radius));
 
+            
             // показываем элемент узла
             graphics.DrawString(root.data.ToString(), NodesLabel, Brushes.Black,
             new Rectangle(x_center , y_center - radius /2, 2 * radius, 2*radius));
@@ -245,6 +249,46 @@ namespace Visualisation
             return current;
         }
 
+        public bool binFind(Data FindItem)
+        {
+            BinaryTreeNode<Data> nodeFindItem = root;
+            BinaryTreeNode<Data> parent = null;
+
+            // спуск с поиском удаляемого узла
+            while ((nodeFindItem != null) && (FindItem.CompareTo(nodeFindItem.data) != 0))
+            {
+                parent = nodeFindItem;
+                if (FindItem.CompareTo(nodeFindItem.data) < 0)
+                    nodeFindItem = nodeFindItem.left;
+                else nodeFindItem = nodeFindItem.right;
+            }
+
+            // если запрашиваемый элемент отсутствует
+            if (nodeFindItem == null) return false;
+
+            // если удаляемый узел - корень, и он единственный
+            if (nodeFindItem == root && root.IsLeaf() == true)
+            {
+                //root = null;
+                return true;
+            }
+
+            // если удаляемый узел является листовым
+            if (nodeFindItem.left == null && nodeFindItem.right == null)
+            {
+                // если он - левый ребёнок своего родителя
+                if (nodeFindItem.data.CompareTo(parent.data) < 0)
+                    //parent.left = null;
+                    return true;
+
+                else //parent.right = null; // если он - правый ребёнок своего родителя
+                return true;
+            }
+
+            return true;
+
+        }
+   
         // удаление элемента ToRemove
         public bool Remove(Data ToRemove) 
         {
@@ -337,5 +381,7 @@ namespace Visualisation
             nodeToRemove.data = biggestItem.data;
             return true;
         }
+
+        
     }
 }

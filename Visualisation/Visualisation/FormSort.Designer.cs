@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormSort));
-            this.buttonStart = new System.Windows.Forms.Button();
+            this.buttonInit = new System.Windows.Forms.Button();
             this.buttonPrev = new System.Windows.Forms.Button();
             this.buttonStartPause = new System.Windows.Forms.Button();
             this.buttonNext = new System.Windows.Forms.Button();
@@ -45,19 +45,20 @@
             this.buttonHeapsort = new System.Windows.Forms.Button();
             this.buttonShell = new System.Windows.Forms.Button();
             this.buttonTimsort = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.panelDraw = new System.Windows.Forms.Panel();
+            this.buttonClear = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // buttonStart
+            // buttonInit
             // 
-            this.buttonStart.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonStart.Location = new System.Drawing.Point(729, 338);
-            this.buttonStart.Name = "buttonStart";
-            this.buttonStart.Size = new System.Drawing.Size(75, 23);
-            this.buttonStart.TabIndex = 4;
-            this.buttonStart.Text = "Initialization";
-            this.buttonStart.UseVisualStyleBackColor = true;
-            this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
+            this.buttonInit.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonInit.Location = new System.Drawing.Point(729, 338);
+            this.buttonInit.Name = "buttonInit";
+            this.buttonInit.Size = new System.Drawing.Size(75, 23);
+            this.buttonInit.TabIndex = 7;
+            this.buttonInit.Text = "Initialization";
+            this.buttonInit.UseVisualStyleBackColor = true;
+            this.buttonInit.Click += new System.EventHandler(this.buttonInit_Click);
             // 
             // buttonPrev
             // 
@@ -78,6 +79,7 @@
             this.buttonStartPause.Size = new System.Drawing.Size(50, 50);
             this.buttonStartPause.TabIndex = 7;
             this.buttonStartPause.UseVisualStyleBackColor = true;
+            this.buttonStartPause.Click += new System.EventHandler(this.buttonStartPause_Click);
             // 
             // buttonNext
             // 
@@ -134,7 +136,7 @@
             this.buttonBubble.Location = new System.Drawing.Point(0, 3);
             this.buttonBubble.Name = "buttonBubble";
             this.buttonBubble.Size = new System.Drawing.Size(124, 23);
-            this.buttonBubble.TabIndex = 14;
+            this.buttonBubble.TabIndex = 0;
             this.buttonBubble.Text = "Пузырьковая";
             this.buttonBubble.UseVisualStyleBackColor = true;
             this.buttonBubble.Click += new System.EventHandler(this.buttonBubble_Click);
@@ -144,7 +146,7 @@
             this.buttonQuick.Location = new System.Drawing.Point(0, 32);
             this.buttonQuick.Name = "buttonQuick";
             this.buttonQuick.Size = new System.Drawing.Size(124, 23);
-            this.buttonQuick.TabIndex = 15;
+            this.buttonQuick.TabIndex = 1;
             this.buttonQuick.Text = "Быстрая";
             this.buttonQuick.UseVisualStyleBackColor = true;
             this.buttonQuick.Click += new System.EventHandler(this.buttonQuick_Click);
@@ -154,7 +156,7 @@
             this.buttonInsert.Location = new System.Drawing.Point(0, 119);
             this.buttonInsert.Name = "buttonInsert";
             this.buttonInsert.Size = new System.Drawing.Size(124, 23);
-            this.buttonInsert.TabIndex = 16;
+            this.buttonInsert.TabIndex = 4;
             this.buttonInsert.Text = "Вставками";
             this.buttonInsert.UseVisualStyleBackColor = true;
             this.buttonInsert.Click += new System.EventHandler(this.buttonInsert_Click);
@@ -164,7 +166,7 @@
             this.buttonSelection.Location = new System.Drawing.Point(0, 61);
             this.buttonSelection.Name = "buttonSelection";
             this.buttonSelection.Size = new System.Drawing.Size(124, 23);
-            this.buttonSelection.TabIndex = 17;
+            this.buttonSelection.TabIndex = 2;
             this.buttonSelection.Text = "Выбором";
             this.buttonSelection.UseVisualStyleBackColor = true;
             this.buttonSelection.Click += new System.EventHandler(this.buttonSelection_Click);
@@ -174,7 +176,7 @@
             this.buttonHeapsort.Location = new System.Drawing.Point(0, 90);
             this.buttonHeapsort.Name = "buttonHeapsort";
             this.buttonHeapsort.Size = new System.Drawing.Size(124, 23);
-            this.buttonHeapsort.TabIndex = 18;
+            this.buttonHeapsort.TabIndex = 3;
             this.buttonHeapsort.Text = "Пирамидальная";
             this.buttonHeapsort.UseVisualStyleBackColor = true;
             this.buttonHeapsort.Click += new System.EventHandler(this.buttonHeapsort_Click);
@@ -184,7 +186,7 @@
             this.buttonShell.Location = new System.Drawing.Point(0, 148);
             this.buttonShell.Name = "buttonShell";
             this.buttonShell.Size = new System.Drawing.Size(124, 23);
-            this.buttonShell.TabIndex = 19;
+            this.buttonShell.TabIndex = 5;
             this.buttonShell.Text = "Шелла";
             this.buttonShell.UseVisualStyleBackColor = true;
             this.buttonShell.Click += new System.EventHandler(this.buttonShell_Click);
@@ -194,24 +196,37 @@
             this.buttonTimsort.Location = new System.Drawing.Point(0, 177);
             this.buttonTimsort.Name = "buttonTimsort";
             this.buttonTimsort.Size = new System.Drawing.Size(124, 23);
-            this.buttonTimsort.TabIndex = 20;
+            this.buttonTimsort.TabIndex = 6;
             this.buttonTimsort.Text = "TimSort";
             this.buttonTimsort.UseVisualStyleBackColor = true;
             this.buttonTimsort.Click += new System.EventHandler(this.buttonTimsort_Click);
             // 
-            // panel1
+            // panelDraw
             // 
-            this.panel1.Location = new System.Drawing.Point(130, 3);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(593, 445);
-            this.panel1.TabIndex = 21;
+            this.panelDraw.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.panelDraw.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.panelDraw.Location = new System.Drawing.Point(130, 3);
+            this.panelDraw.Name = "panelDraw";
+            this.panelDraw.Size = new System.Drawing.Size(593, 491);
+            this.panelDraw.TabIndex = 21;
+            // 
+            // buttonClear
+            // 
+            this.buttonClear.Location = new System.Drawing.Point(817, 338);
+            this.buttonClear.Name = "buttonClear";
+            this.buttonClear.Size = new System.Drawing.Size(75, 23);
+            this.buttonClear.TabIndex = 22;
+            this.buttonClear.Text = "Очистить";
+            this.buttonClear.UseVisualStyleBackColor = true;
+            this.buttonClear.Click += new System.EventHandler(this.buttonClear_Click);
             // 
             // FormSort
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1011, 501);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.buttonClear);
+            this.Controls.Add(this.panelDraw);
             this.Controls.Add(this.buttonTimsort);
             this.Controls.Add(this.buttonShell);
             this.Controls.Add(this.buttonHeapsort);
@@ -227,7 +242,7 @@
             this.Controls.Add(this.buttonNext);
             this.Controls.Add(this.buttonStartPause);
             this.Controls.Add(this.buttonPrev);
-            this.Controls.Add(this.buttonStart);
+            this.Controls.Add(this.buttonInit);
             this.Name = "FormSort";
             this.Text = "Sorting algorithms";
             this.ResumeLayout(false);
@@ -236,7 +251,7 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button buttonStart;
+        private System.Windows.Forms.Button buttonInit;
         private System.Windows.Forms.Button buttonPrev;
         private System.Windows.Forms.Button buttonStartPause;
         private System.Windows.Forms.Button buttonNext;
@@ -252,7 +267,8 @@
         private System.Windows.Forms.Button buttonHeapsort;
         private System.Windows.Forms.Button buttonShell;
         private System.Windows.Forms.Button buttonTimsort;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panelDraw;
+        private System.Windows.Forms.Button buttonClear;
     }
 }
 

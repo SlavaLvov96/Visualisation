@@ -53,8 +53,10 @@
             this.selectButton = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.sheet)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.groupBox7.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -94,11 +96,11 @@
             // 
             // sheet
             // 
-            this.sheet.Dock = System.Windows.Forms.DockStyle.Top;
+            this.sheet.Dock = System.Windows.Forms.DockStyle.Fill;
             this.sheet.Location = new System.Drawing.Point(3, 16);
             this.sheet.Margin = new System.Windows.Forms.Padding(2);
             this.sheet.Name = "sheet";
-            this.sheet.Size = new System.Drawing.Size(574, 312);
+            this.sheet.Size = new System.Drawing.Size(574, 314);
             this.sheet.TabIndex = 11;
             this.sheet.TabStop = false;
             this.sheet.MouseClick += new System.Windows.Forms.MouseEventHandler(this.sheet_MouseClick);
@@ -156,6 +158,7 @@
             // 
             // groupBox7
             // 
+            this.groupBox7.Controls.Add(this.button1);
             this.groupBox7.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.groupBox7.Location = new System.Drawing.Point(3, 311);
             this.groupBox7.Name = "groupBox7";
@@ -325,10 +328,21 @@
             this.groupBox4.TabIndex = 19;
             this.groupBox4.TabStop = false;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(6, 19);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // FormGraph
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Honeydew;
             this.ClientSize = new System.Drawing.Size(994, 446);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
@@ -341,6 +355,7 @@
             this.Text = "FormGraph";
             ((System.ComponentModel.ISupportInitialize)(this.sheet)).EndInit();
             this.groupBox1.ResumeLayout(false);
+            this.groupBox7.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
@@ -377,5 +392,6 @@
         private System.Windows.Forms.Button drawEdgeButton;
         private System.Windows.Forms.Button drawVertexButton;
         private System.Windows.Forms.Button selectButton;
+        private System.Windows.Forms.Button button1;
     }
 }

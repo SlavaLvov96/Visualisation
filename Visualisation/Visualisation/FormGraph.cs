@@ -13,13 +13,14 @@ namespace Visualisation
     {
         public partial class FormGraph : Form
         {
-            DrawGraph G;
-            List<Vertex> V;
-            List<Edge> E;
-            int[,] AMatrix; //матрица смежности
-            int[,] IMatrix; //матрица инцидентности
+            DrawGraph G;    // инициализация Графа
+            List<Vertex> V; // множество Вершин
+            List<Edge> E;   // множество Ребер
 
-            int selected1; //выбранные вершины, для соединения линиями
+            int[,] AMatrix; // матрица смежности
+            int[,] IMatrix; // матрица инцидентности
+
+            int selected1;  //выбранные вершины, для соединения линиями
             int selected2;
 
             public FormGraph()
@@ -31,6 +32,7 @@ namespace Visualisation
                 sheet.Image = G.GetBitmap();
             }
 
+        //класс Вершины
         class Vertex
         {
             public int x, y;
@@ -42,6 +44,7 @@ namespace Visualisation
             }
         }
 
+        // класс Ребра 
         class Edge
         {
             public int v1, v2;
@@ -85,11 +88,13 @@ namespace Visualisation
                 return bitmap;
             }
 
+            //отчистка области рисования
             public void clearSheet()
             {
                 gr.Clear(Color.White);
             }
 
+            //функция отрисовки Вершин
             public void drawVertex(int x, int y, string number)
             {
                 gr.FillEllipse(Brushes.White, (x - R), (y - R), 2 * R, 2 * R);
@@ -98,13 +103,16 @@ namespace Visualisation
                 gr.DrawString(number, fo, br, point);
             }
 
+            //функция отрисовки окружности 
             public void drawSelectedVertex(int x, int y)
             {
                 gr.DrawEllipse(redPen, (x - R), (y - R), 2 * R, 2 * R);
             }
 
+            //функция отрисовки Ребер
             public void drawEdge(Vertex V1, Vertex V2, Edge E, int numberE)
             {
+                //отрисовка Ребра около одной Вершины
                 if (E.v1 == E.v2)
                 {
                     gr.DrawArc(darkGoldPen, (V1.x - 2 * R), (V1.y - 2 * R), 2 * R, 2 * R, 90, 270);
@@ -112,6 +120,7 @@ namespace Visualisation
                     gr.DrawString(((char)('a' + numberE)).ToString(), fo, br, point);
                     drawVertex(V1.x, V1.y, (E.v1 + 1).ToString());
                 }
+                //отрисовка Ребра между двумя Вершинами
                 else
                 {
                     gr.DrawLine(darkGoldPen, V1.x, V1.y, V2.x, V2.y);
@@ -122,6 +131,7 @@ namespace Visualisation
                 }
             }
 
+            //перерисовка всего Графа
             public void drawALLGraph(List<Vertex> V, List<Edge> E)
             {
                 //рисуем ребра
@@ -567,6 +577,61 @@ namespace Visualisation
                 }
             }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            /*
+            string str = "";
+            for (int i = 0; i < V.Count; i++)
+            {
+                str += i + "-ая вершина: " + V[i].x.ToString() + " " + V[i].y.ToString() + Environment.NewLine;
+            }
+            for (int i = 0; i < E.Count; i++)
+            {
+                str += (i+1) + "-ое ребро: " + (E[i].v1 + 1).ToString() + " " + (E[i].v2 + 1).ToString() + Environment.NewLine;
+            }
 
+                tb_result.Text = str;*/
+
+            
+            V.Clear();
+            E.Clear();
+            G.clearSheet();
+
+            V.Add(new Vertex(30, 30));
+            sheet.Image = G.GetBitmap();
+            V.Add(new Vertex(30, 200));
+            sheet.Image = G.GetBitmap();
+            V.Add(new Vertex(200, 30));
+            sheet.Image = G.GetBitmap();
+            V.Add(new Vertex(200, 200));
+            sheet.Image = G.GetBitmap();
+            V.Add(new Vertex(115, 115));
+            sheet.Image = G.GetBitmap();
+
+            E.Add(new Edge(0, 1));
+            E.Add(new Edge(0, 2));
+            E.Add(new Edge(2, 3));
+            E.Add(new Edge(1, 3));
+            E.Add(new Edge(0, 4));
+            E.Add(new Edge(2, 4));
+            E.Add(new Edge(1, 4));
+            E.Add(new Edge(3, 4));
+
+            G.drawALLGraph(V, E);
+        }
+        /*
+        private void graph_from_file(int vertexCount)
+        {
+            StreamReader objReader = new StreamReader("graph.txt");
+            string sLine = "";
+
+            while (sLine != null)
+            {
+                sLine = objReader.ReadLine();
+                if (sLine != null)
+                    if (sLine == vertexCount)
+            }
+            objReader.Close();
+        }*/
     }
 }

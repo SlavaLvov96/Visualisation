@@ -131,7 +131,7 @@ namespace Visualisation
             // Remove возвращает false, если была попытка удаления несуществующей вершины
             if (Tree.Remove(Convert.ToInt32(tb_delete.Text)) == false)
             {
-                MessageBox.Show("Вершина " + tb_delete.ToString() + " отсутствует.");
+                MessageBox.Show("Вершина " + tb_delete.Text.ToString() + " отсутствует.");
                 return;
             }
 

@@ -11,6 +11,7 @@ using System.Media;
 using System.Windows.Forms;
 using System.Threading;
 using System.Windows.Threading;
+using System.Windows.Documents;
 
 namespace Visualisation
 {
@@ -50,29 +51,81 @@ namespace Visualisation
             buttonShell.Enabled = true;
             buttonTimsort.Enabled = true;
 
-           // BubbleSort(numbers);
+            richTextBox.Text = "for i=0 to N-1 step 1\n" +
+                "      for j=i+1 to N-1 step 1\n" +
+                "      if A[j]<A[i] then\n" +
+                "          swap A[i],A[j]\n";
+
+            
+            // BubbleSort(numbers);
+        }
+
+        // Изменение цвета текста одной строки псевдокода
+        void ChangeColorLine(int line)
+        {
+            int start = richTextBox.GetFirstCharIndexFromLine(line);
+            int length;
+
+            if (line + 1 >= richTextBox.Lines.Length)
+                length = richTextBox.TextLength - start;
+            else
+                length = richTextBox.GetFirstCharIndexFromLine(line + 1) - start;
+
+            richTextBox.Select(start, length);
+            richTextBox.SelectionColor = Color.Red;
+        }
+
+        // Изменение цвета текста предыдущей строки псевдокода
+        void ChangeColorPredLine(int line)
+        {
+            int start = richTextBox.GetFirstCharIndexFromLine(line);
+            int length;
+
+            if (line + 1 >= richTextBox.Lines.Length)
+                length = richTextBox.TextLength - start;
+            else
+                length = richTextBox.GetFirstCharIndexFromLine(line + 1) - start;
+
+            richTextBox.Select(start, length);
+            richTextBox.SelectionColor = Color.Black;
         }
 
         private int[] BubbleSort(int[] input)
         {
             int temp;
+            
+            ChangeColorLine(0);
+            Thread.Sleep(300);
             for (int i = 0; i < input.Length; i++)
             {
+                ChangeColorPredLine(0);
+                ChangeColorLine(1);
+                Thread.Sleep(300);
                 for (int j = i + 1; j < input.Length; j++)
                 {
                     SetOrangeColor(i, j);
+                    ChangeColorPredLine(1);
+                    ChangeColorLine(2);
+                    Thread.Sleep(300);
                     if (input[j] < input[i])
                     {
                         temp = input[j];
                         input[j] = input[i];
                         input[i] = temp;
+                        ChangeColorPredLine(2);
+                        ChangeColorLine(3);
+                        Thread.Sleep(300);
                         SwapRectangles(i, j);
+                        ChangeColorPredLine(3);
                     }
+                    ChangeColorPredLine(2);
                     Thread.Sleep(300);
                    // SetRedColor(i, j);
                 }
+                ChangeColorPredLine(1);
                 SetGrayColor(i);
             }
+            ChangeColorPredLine(0);
             return input;
         }
         // Быстрая сортировка

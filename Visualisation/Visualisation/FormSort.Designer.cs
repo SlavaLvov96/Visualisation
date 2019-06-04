@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormSort));
             this.buttonInit = new System.Windows.Forms.Button();
             this.buttonPrev = new System.Windows.Forms.Button();
@@ -47,6 +48,7 @@
             this.buttonTimsort = new System.Windows.Forms.Button();
             this.panelDraw = new System.Windows.Forms.Panel();
             this.buttonClear = new System.Windows.Forms.Button();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.SuspendLayout();
             // 
             // buttonInit
@@ -125,6 +127,7 @@
             // 
             // richTextBox
             // 
+            this.richTextBox.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.richTextBox.Location = new System.Drawing.Point(727, 3);
             this.richTextBox.Name = "richTextBox";
             this.richTextBox.Size = new System.Drawing.Size(257, 290);
@@ -220,6 +223,11 @@
             this.buttonClear.UseVisualStyleBackColor = true;
             this.buttonClear.Click += new System.EventHandler(this.buttonClear_Click);
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
             // FormSort
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -269,6 +277,7 @@
         private System.Windows.Forms.Button buttonTimsort;
         private System.Windows.Forms.Panel panelDraw;
         private System.Windows.Forms.Button buttonClear;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
     }
 }
 

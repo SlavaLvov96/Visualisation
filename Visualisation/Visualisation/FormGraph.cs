@@ -271,7 +271,7 @@ namespace Visualisation
         //поиск элементарных циклов
         private void cycleButton_Click_1(object sender, EventArgs e)
         {
-            listBoxMatrix.Items.Clear();
+            listBox2.Items.Clear();
             //1-white 2-black
             int[] color = new int[V.Count];
             for (int i = 0; i < V.Count; i++)
@@ -306,11 +306,11 @@ namespace Visualisation
                                 selected1 = i;
                                 sheet.Image = G.GetBitmap();
                                 createAdjAndOut();
-                                listBoxMatrix.Items.Clear();
+                                listBox2.Items.Clear();
                                 int degree = 0;
                                 for (int j = 0; j < V.Count; j++)
                                     degree += AMatrix[selected1, j];
-                                listBoxMatrix.Items.Add("Степень вершины №" + (selected1 + 1) + " равна " + degree);
+                                listBox2.Items.Add("Степень вершины №" + (selected1 + 1) + " равна " + degree);
                                 break;
                             }
                         }
@@ -437,17 +437,17 @@ namespace Visualisation
             {
                 AMatrix = new int[V.Count, V.Count];
                 G.fillAdjacencyMatrix(V.Count, E, AMatrix);
-                listBoxMatrix.Items.Clear();
+                listBox2.Items.Clear();
                 string sOut = "    ";
                 for (int i = 0; i < V.Count; i++)
                     sOut += (i + 1) + " ";
-                listBoxMatrix.Items.Add(sOut);
+                listBox2.Items.Add(sOut);
                 for (int i = 0; i < V.Count; i++)
                 {
                     sOut = (i + 1) + " | ";
                     for (int j = 0; j < V.Count; j++)
                         sOut += AMatrix[i, j] + " ";
-                    listBoxMatrix.Items.Add(sOut);
+                    listBox2.Items.Add(sOut);
                 }
             }
 
@@ -458,27 +458,27 @@ namespace Visualisation
                 {
                     IMatrix = new int[V.Count, E.Count];
                     G.fillIncidenceMatrix(V.Count, E, IMatrix);
-                    listBoxMatrix.Items.Clear();
+                    listBox2.Items.Clear();
                     string sOut = "    ";
                     for (int i = 0; i < E.Count; i++)
                         sOut += (char)('a' + i) + " ";
-                    listBoxMatrix.Items.Add(sOut);
+                    listBox2.Items.Add(sOut);
                     for (int i = 0; i < V.Count; i++)
                     {
                         sOut = (i + 1) + " | ";
                         for (int j = 0; j < E.Count; j++)
                             sOut += IMatrix[i, j] + " ";
-                        listBoxMatrix.Items.Add(sOut);
+                        listBox2.Items.Add(sOut);
                     }
                 }
                 else
-                    listBoxMatrix.Items.Clear();
+                    listBox2.Items.Clear();
             }
 
             //поиск элементарных цепей
             private void chainButton_Click(object sender, EventArgs e)
             {
-                listBoxMatrix.Items.Clear();
+                listBox2.Items.Clear();
                 //1-white 2-black
                 int[] color = new int[V.Count];
                 for (int i = 0; i < V.Count - 1; i++)
@@ -498,7 +498,7 @@ namespace Visualisation
                     color[u] = 2;
                 else
                 {
-                    listBoxMatrix.Items.Add(s);
+                    listBox2.Items.Add(s);
                     return;
                 }
                 for (int w = 0; w < E.Count; w++)
@@ -539,8 +539,8 @@ namespace Visualisation
                         for (int i = 1; i < cycle.Count; i++)
                             s += "-" + cycle[i].ToString();
                         bool flag = false; //есть ли палиндром для этого цикла графа в листбоксе?
-                        for (int i = 0; i < listBoxMatrix.Items.Count; i++)
-                            if (listBoxMatrix.Items[i].ToString() == s)
+                        for (int i = 0; i < listBox2.Items.Count; i++)
+                            if (listBox2.Items[i].ToString() == s)
                             {
                                 flag = true;
                                 break;
@@ -551,7 +551,7 @@ namespace Visualisation
                             s = cycle[0].ToString();
                             for (int i = 1; i < cycle.Count; i++)
                                 s += "-" + cycle[i].ToString();
-                            listBoxMatrix.Items.Add(s);
+                            listBox2.Items.Add(s);
                         }
                         return;
                     }
@@ -597,25 +597,154 @@ namespace Visualisation
             E.Clear();
             G.clearSheet();
 
-            V.Add(new Vertex(30, 30));
-            sheet.Image = G.GetBitmap();
-            V.Add(new Vertex(30, 200));
-            sheet.Image = G.GetBitmap();
-            V.Add(new Vertex(200, 30));
-            sheet.Image = G.GetBitmap();
-            V.Add(new Vertex(200, 200));
-            sheet.Image = G.GetBitmap();
-            V.Add(new Vertex(115, 115));
-            sheet.Image = G.GetBitmap();
 
-            E.Add(new Edge(0, 1));
-            E.Add(new Edge(0, 2));
-            E.Add(new Edge(2, 3));
-            E.Add(new Edge(1, 3));
-            E.Add(new Edge(0, 4));
-            E.Add(new Edge(2, 4));
-            E.Add(new Edge(1, 4));
-            E.Add(new Edge(3, 4));
+            if (comboBoxNum.SelectedItem.ToString() == "5")
+            {
+                V.Add(new Vertex(70, 50));//0
+                sheet.Image = G.GetBitmap();
+                V.Add(new Vertex(70, 270));//1
+                sheet.Image = G.GetBitmap();
+                V.Add(new Vertex(500, 50));//2
+                sheet.Image = G.GetBitmap();
+                V.Add(new Vertex(500, 270));//3
+                sheet.Image = G.GetBitmap();
+                V.Add(new Vertex(285, 160));//4
+                sheet.Image = G.GetBitmap();
+
+                E.Add(new Edge(0, 1));
+                E.Add(new Edge(0, 2));
+                E.Add(new Edge(2, 3));
+                E.Add(new Edge(1, 3));
+                E.Add(new Edge(0, 4));
+                E.Add(new Edge(2, 4));
+                E.Add(new Edge(1, 4));
+                E.Add(new Edge(3, 4));
+            }
+            if (comboBoxNum.SelectedItem.ToString() == "6")
+            {
+                V.Add(new Vertex(50, 160));//0
+                sheet.Image = G.GetBitmap();
+                V.Add(new Vertex(200, 50));//1
+                sheet.Image = G.GetBitmap();
+                V.Add(new Vertex(200, 270));//2
+                sheet.Image = G.GetBitmap();
+                V.Add(new Vertex(370, 50));//3
+                sheet.Image = G.GetBitmap();
+                V.Add(new Vertex(370, 270));//4
+                sheet.Image = G.GetBitmap();
+                V.Add(new Vertex(520, 160));//5
+                sheet.Image = G.GetBitmap();
+
+                E.Add(new Edge(0, 1));
+                E.Add(new Edge(0, 2));
+                E.Add(new Edge(2, 3));
+                E.Add(new Edge(1, 3));
+                E.Add(new Edge(0, 4));
+                E.Add(new Edge(2, 4));
+                E.Add(new Edge(1, 5));
+                E.Add(new Edge(3, 5));
+                E.Add(new Edge(4, 5));
+            }
+            if (comboBoxNum.SelectedItem.ToString() == "7")
+            {
+                V.Add(new Vertex(50, 160));//0
+                sheet.Image = G.GetBitmap();
+                V.Add(new Vertex(200, 50));//1
+                sheet.Image = G.GetBitmap();
+                V.Add(new Vertex(200, 270));//2
+                sheet.Image = G.GetBitmap();
+                V.Add(new Vertex(285, 160));//3
+                sheet.Image = G.GetBitmap();
+                V.Add(new Vertex(370, 50));//4
+                sheet.Image = G.GetBitmap();
+                V.Add(new Vertex(370, 270));//5
+                sheet.Image = G.GetBitmap();
+                V.Add(new Vertex(520, 160));//6
+                sheet.Image = G.GetBitmap();
+
+                E.Add(new Edge(0, 1));
+                E.Add(new Edge(0, 2));
+                E.Add(new Edge(2, 3));
+                E.Add(new Edge(1, 3));
+                E.Add(new Edge(0, 3));
+                E.Add(new Edge(1, 4));
+                E.Add(new Edge(2, 5));
+                E.Add(new Edge(3, 4));
+                E.Add(new Edge(3, 5));
+                E.Add(new Edge(3, 6));
+                E.Add(new Edge(4, 6));
+                E.Add(new Edge(5, 6));
+            }
+            if (comboBoxNum.SelectedItem.ToString() == "8")
+            {
+                V.Add(new Vertex(50, 110));//0
+                sheet.Image = G.GetBitmap();
+                V.Add(new Vertex(50, 210));//1
+                sheet.Image = G.GetBitmap();
+                V.Add(new Vertex(200, 50));//2
+                sheet.Image = G.GetBitmap();
+                V.Add(new Vertex(200, 270));//3
+                sheet.Image = G.GetBitmap();
+                V.Add(new Vertex(370, 50));//4
+                sheet.Image = G.GetBitmap();
+                V.Add(new Vertex(370, 270));//5
+                sheet.Image = G.GetBitmap();
+                V.Add(new Vertex(520, 110));//6
+                sheet.Image = G.GetBitmap();
+                V.Add(new Vertex(520, 210));//7
+                sheet.Image = G.GetBitmap();
+
+                E.Add(new Edge(0, 1));
+                E.Add(new Edge(0, 2));
+                E.Add(new Edge(2, 3));
+                E.Add(new Edge(1, 3));
+                E.Add(new Edge(2, 4));
+                E.Add(new Edge(3, 5));
+                E.Add(new Edge(4, 5));
+                E.Add(new Edge(0, 6));
+                E.Add(new Edge(4, 6));
+                E.Add(new Edge(6, 7));
+                E.Add(new Edge(1, 7));
+                E.Add(new Edge(5, 7));
+            }
+            if (comboBoxNum.SelectedItem.ToString() == "9")
+            {
+                V.Add(new Vertex(50, 110));//0
+                sheet.Image = G.GetBitmap();
+                V.Add(new Vertex(50, 210));//1
+                sheet.Image = G.GetBitmap();
+                V.Add(new Vertex(200, 50));//2
+                sheet.Image = G.GetBitmap();
+                V.Add(new Vertex(200, 270));//3
+                sheet.Image = G.GetBitmap();
+                V.Add(new Vertex(285, 160));//4
+                sheet.Image = G.GetBitmap();
+                V.Add(new Vertex(370, 50));//5
+                sheet.Image = G.GetBitmap();
+                V.Add(new Vertex(370, 270));//6
+                sheet.Image = G.GetBitmap();
+                V.Add(new Vertex(520, 110));//7
+                sheet.Image = G.GetBitmap();
+                V.Add(new Vertex(520, 210));//8
+                sheet.Image = G.GetBitmap();
+
+                E.Add(new Edge(0, 1));
+                E.Add(new Edge(0, 2));
+                E.Add(new Edge(2, 4));
+                E.Add(new Edge(1, 3));
+                E.Add(new Edge(1, 4));
+                E.Add(new Edge(0, 4));
+                E.Add(new Edge(2, 5));
+                E.Add(new Edge(5, 4));
+                E.Add(new Edge(4, 3));
+                E.Add(new Edge(3, 6));
+                E.Add(new Edge(4, 6));
+                E.Add(new Edge(5, 7));
+                E.Add(new Edge(4, 7));
+                E.Add(new Edge(7, 8));
+                E.Add(new Edge(4, 8));
+                E.Add(new Edge(6, 8));
+            }
 
             G.drawALLGraph(V, E);
         }

@@ -33,14 +33,15 @@
             this.button2 = new System.Windows.Forms.Button();
             this.buttonNext = new System.Windows.Forms.Button();
             this.sheet = new System.Windows.Forms.PictureBox();
-            this.tb_result = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.comboBoxGraph = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.listBoxMatrix = new System.Windows.Forms.ListBox();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.listBox2 = new System.Windows.Forms.ListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.cycleButton = new System.Windows.Forms.Button();
             this.chainButton = new System.Windows.Forms.Button();
@@ -53,7 +54,7 @@
             this.selectButton = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.comboBoxNum = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.sheet)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox7.SuspendLayout();
@@ -105,16 +106,6 @@
             this.sheet.TabStop = false;
             this.sheet.MouseClick += new System.Windows.Forms.MouseEventHandler(this.sheet_MouseClick);
             // 
-            // tb_result
-            // 
-            this.tb_result.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tb_result.Location = new System.Drawing.Point(3, 29);
-            this.tb_result.Margin = new System.Windows.Forms.Padding(2);
-            this.tb_result.Multiline = true;
-            this.tb_result.Name = "tb_result";
-            this.tb_result.Size = new System.Drawing.Size(574, 81);
-            this.tb_result.TabIndex = 13;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -158,6 +149,7 @@
             // 
             // groupBox7
             // 
+            this.groupBox7.Controls.Add(this.comboBoxNum);
             this.groupBox7.Controls.Add(this.button1);
             this.groupBox7.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.groupBox7.Location = new System.Drawing.Point(3, 311);
@@ -166,9 +158,19 @@
             this.groupBox7.TabIndex = 13;
             this.groupBox7.TabStop = false;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(6, 19);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(106, 23);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "Создать шаблон";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // groupBox6
             // 
-            this.groupBox6.Controls.Add(this.listBoxMatrix);
+            this.groupBox6.Controls.Add(this.listBox1);
             this.groupBox6.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox6.Location = new System.Drawing.Point(3, 16);
             this.groupBox6.MaximumSize = new System.Drawing.Size(257, 600);
@@ -177,14 +179,14 @@
             this.groupBox6.TabIndex = 12;
             this.groupBox6.TabStop = false;
             // 
-            // listBoxMatrix
+            // listBox1
             // 
-            this.listBoxMatrix.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listBoxMatrix.FormattingEnabled = true;
-            this.listBoxMatrix.Location = new System.Drawing.Point(3, 16);
-            this.listBoxMatrix.Name = "listBoxMatrix";
-            this.listBoxMatrix.Size = new System.Drawing.Size(249, 280);
-            this.listBoxMatrix.TabIndex = 0;
+            this.listBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Location = new System.Drawing.Point(3, 16);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(249, 280);
+            this.listBox1.TabIndex = 15;
             // 
             // groupBox5
             // 
@@ -197,6 +199,15 @@
             this.groupBox5.Size = new System.Drawing.Size(255, 81);
             this.groupBox5.TabIndex = 11;
             this.groupBox5.TabStop = false;
+            // 
+            // listBox2
+            // 
+            this.listBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.listBox2.FormattingEnabled = true;
+            this.listBox2.Location = new System.Drawing.Point(3, 28);
+            this.listBox2.Name = "listBox2";
+            this.listBox2.Size = new System.Drawing.Size(574, 82);
+            this.listBox2.TabIndex = 0;
             // 
             // groupBox2
             // 
@@ -309,8 +320,8 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.listBox2);
             this.groupBox3.Controls.Add(this.label2);
-            this.groupBox3.Controls.Add(this.tb_result);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.groupBox3.Location = new System.Drawing.Point(153, 333);
             this.groupBox3.Name = "groupBox3";
@@ -328,15 +339,21 @@
             this.groupBox4.TabIndex = 19;
             this.groupBox4.TabStop = false;
             // 
-            // button1
+            // comboBoxNum
             // 
-            this.button1.Location = new System.Drawing.Point(6, 19);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.comboBoxNum.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboBoxNum.FormattingEnabled = true;
+            this.comboBoxNum.Items.AddRange(new object[] {
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"});
+            this.comboBoxNum.Location = new System.Drawing.Point(118, 21);
+            this.comboBoxNum.Name = "comboBoxNum";
+            this.comboBoxNum.Size = new System.Drawing.Size(134, 21);
+            this.comboBoxNum.TabIndex = 16;
+            this.comboBoxNum.Text = "Кол-во вершин:";
             // 
             // FormGraph
             // 
@@ -372,7 +389,6 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button buttonNext;
         private System.Windows.Forms.PictureBox sheet;
-        private System.Windows.Forms.TextBox tb_result;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox comboBoxGraph;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -382,7 +398,7 @@
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.GroupBox groupBox7;
-        private System.Windows.Forms.ListBox listBoxMatrix;
+        private System.Windows.Forms.ListBox listBox2;
         private System.Windows.Forms.Button cycleButton;
         private System.Windows.Forms.Button chainButton;
         private System.Windows.Forms.Button buttonInc;
@@ -393,5 +409,7 @@
         private System.Windows.Forms.Button drawVertexButton;
         private System.Windows.Forms.Button selectButton;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ComboBox comboBoxNum;
     }
 }

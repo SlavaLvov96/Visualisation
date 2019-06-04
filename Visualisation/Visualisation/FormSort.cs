@@ -60,36 +60,6 @@ namespace Visualisation
             // BubbleSort(numbers);
         }
 
-        // Изменение цвета текста одной строки псевдокода
-        void ChangeColorLine(int line)
-        {
-            int start = richTextBox.GetFirstCharIndexFromLine(line);
-            int length;
-
-            if (line + 1 >= richTextBox.Lines.Length)
-                length = richTextBox.TextLength - start;
-            else
-                length = richTextBox.GetFirstCharIndexFromLine(line + 1) - start;
-
-            richTextBox.Select(start, length);
-            richTextBox.SelectionColor = Color.Red;
-        }
-
-        // Изменение цвета текста предыдущей строки псевдокода
-        void ChangeColorPredLine(int line)
-        {
-            int start = richTextBox.GetFirstCharIndexFromLine(line);
-            int length;
-
-            if (line + 1 >= richTextBox.Lines.Length)
-                length = richTextBox.TextLength - start;
-            else
-                length = richTextBox.GetFirstCharIndexFromLine(line + 1) - start;
-
-            richTextBox.Select(start, length);
-            richTextBox.SelectionColor = Color.Black;
-        }
-
         private int[] BubbleSort(int[] input)
         {
             int temp;
@@ -416,6 +386,42 @@ namespace Visualisation
             textBoxInText.Clear();
             panelDraw.Controls.Clear();
             panelDraw.Invalidate();
+        }
+
+        // Изменение цвета текста одной строки псевдокода
+        void ChangeColorLine(int line)
+        {
+            richTextBox.Invoke((MethodInvoker)delegate
+            {
+               int start = richTextBox.GetFirstCharIndexFromLine(line);
+               int length;
+
+               if (line + 1 >= richTextBox.Lines.Length)
+                   length = richTextBox.TextLength - start;
+               else
+                   length = richTextBox.GetFirstCharIndexFromLine(line + 1) - start;
+
+               richTextBox.Select(start, length);
+               richTextBox.SelectionColor = Color.Red;
+           });
+        }
+
+        // Изменение цвета текста предыдущей строки псевдокода
+        void ChangeColorPredLine(int line)
+        {
+            richTextBox.Invoke((MethodInvoker)delegate
+            {
+                int start = richTextBox.GetFirstCharIndexFromLine(line);
+                int length;
+
+                if (line + 1 >= richTextBox.Lines.Length)
+                    length = richTextBox.TextLength - start;
+                else
+                    length = richTextBox.GetFirstCharIndexFromLine(line + 1) - start;
+
+                richTextBox.Select(start, length);
+                richTextBox.SelectionColor = Color.Black;
+            });
         }
     }
 }

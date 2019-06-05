@@ -233,13 +233,24 @@ namespace Visualisation
                     top = MAX_HEIGHT - height;
                 }
                 int left = space * i;
-                Rectangle rectangle = new Rectangle();
+                Rectangle rectangle = new Rectangle();                
+    
                 graphics = panelDraw.CreateGraphics();
                 SolidBrush myBrush = new SolidBrush(Color.Red);
                 Pen pen = new Pen(Color.Black);
-                graphics.DrawRectangle(pen, left, top, width, height);
-                graphics.FillRectangle(myBrush, left, top, width, height);
-                rectangles[i] = rectangle;
+
+                Rectangle[] rects = {
+                    new Rectangle(left, top, width, height)
+                };
+                graphics.DrawRectangles(pen, rects);
+                graphics.FillRectangles(myBrush, rects);
+
+                string arr = numbers[i].ToString();
+                
+                Font drawFont = new Font("Consolas", 8);
+                graphics.DrawString(arr, drawFont, Brushes.Black, left, top);
+
+                rectangles[i] = rectangle;           
             }
         }
 
@@ -272,6 +283,8 @@ namespace Visualisation
             {
                 graphics.FillRectangle(Brushes.Orange, rectangles[index1]);
                 graphics.FillRectangle(Brushes.Orange, rectangles[index2]);
+
+                panelDraw.Update();
             });
         }
 

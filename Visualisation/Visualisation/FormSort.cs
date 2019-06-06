@@ -90,7 +90,7 @@ namespace Visualisation
                     }
                     ChangeColorPredLine(2);
                     Thread.Sleep(300);
-                   // SetRedColor(i, j);
+                    SetRedColor(i, j);
                 }
                 ChangeColorPredLine(1);
                 SetGrayColor(i);
@@ -219,7 +219,7 @@ namespace Visualisation
 
             for (int i = 0; i < array.Length; i++)
             {
-                int width = 25;
+                int width = 50;
                 int height = 0;
                 int top = 0;
                 if (array[i] < 0)
@@ -233,24 +233,23 @@ namespace Visualisation
                     top = MAX_HEIGHT - height;
                 }
                 int left = space * i;
-                Rectangle rectangle = new Rectangle();                
+               // Rectangle rectangle = new Rectangle();                
     
                 graphics = panelDraw.CreateGraphics();
                 SolidBrush myBrush = new SolidBrush(Color.Red);
                 Pen pen = new Pen(Color.Black);
 
-                Rectangle[] rects = {
-                    new Rectangle(left, top, width, height)
-                };
-                graphics.DrawRectangles(pen, rects);
-                graphics.FillRectangles(myBrush, rects);
+                Rectangle rectBas = new Rectangle(left, top, width, height);
+                graphics.DrawRectangle(pen, rectBas);
+                graphics.FillRectangle(myBrush, rectBas);
 
+                //Rectangle recText = new Rectangle(Brushes.Black, left, top);
                 string arr = numbers[i].ToString();
-                
-                Font drawFont = new Font("Consolas", 8);
+                Font drawFont = new Font("Consolas", width/3);
                 graphics.DrawString(arr, drawFont, Brushes.Black, left, top);
 
-                rectangles[i] = rectangle;           
+                rectangles[i] = rectBas;
+                //rectangles[i] = drawFont;
             }
         }
 
@@ -279,25 +278,36 @@ namespace Visualisation
 
         private void SetOrangeColor(int index1, int index2)
         {
+
             dispUI.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
             {
+           //richTextBox.Invoke((MethodInvoker)delegate
+            //{
+                //graphics.FillRectangle(Brushes.Aqua, 100, 150, 10, 10);
                 graphics.FillRectangle(Brushes.Orange, rectangles[index1]);
                 graphics.FillRectangle(Brushes.Orange, rectangles[index2]);
-
-                panelDraw.Update();
             });
+            //});
         }
 
         private void SwapRectangles(int index1, int index2)
         {
             dispUI.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
-            {
+            {/*
+                Rectangle temp = rectangles[index1];
+                rectangles[index1] = rectangles[index2];
+                rectangles[index2] = temp;*/
+
                 int leftFirst = (int)rectangles[index1].Left;
                 int leftSecond = (int)rectangles[index2].Left;
                 int topFirst = (int)rectangles[index1].Top;
                 int topSecond = (int)rectangles[index2].Top;
-                //rectangles[index1] = new Thickness(leftSecond, topFirst, 0, 0);
-                //rectangles[index2] = new Thickness(leftFirst, topSecond, 0, 0);
+
+                //rectangles = new Rectangle[](rec);
+                //Rectangle temp = rectangles[index1];
+                //rectangles[index1] = rectangles[index2];
+                //rectangles[index2] = temp;
+
             });
             Rectangle temp = rectangles[index1];
             rectangles[index1] = rectangles[index2];
@@ -404,8 +414,10 @@ namespace Visualisation
         // Изменение цвета текста одной строки псевдокода
         void ChangeColorLine(int line)
         {
-            richTextBox.Invoke((MethodInvoker)delegate
-            {
+            dispUI.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+            {/*
+                richTextBox.Invoke((MethodInvoker)delegate
+            {*/
                int start = richTextBox.GetFirstCharIndexFromLine(line);
                int length;
 
@@ -422,8 +434,10 @@ namespace Visualisation
         // Изменение цвета текста предыдущей строки псевдокода
         void ChangeColorPredLine(int line)
         {
-            richTextBox.Invoke((MethodInvoker)delegate
-            {
+            dispUI.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+            {/*
+                richTextBox.Invoke((MethodInvoker)delegate
+            {*/
                 int start = richTextBox.GetFirstCharIndexFromLine(line);
                 int length;
 

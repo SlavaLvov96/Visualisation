@@ -32,36 +32,12 @@ namespace Visualisation
                 sheet.Image = G.GetBitmap();
             }
 
-        //класс Вершины
-        class Vertex
-        {
-            public int x, y;
-
-            public Vertex(int x, int y)
-            {
-                this.x = x;
-                this.y = y;
-            }
-        }
-
-        // класс Ребра 
-        class Edge
-        {
-            public int v1, v2; 
-
-            public Edge(int v1, int v2)
-            {
-                this.v1 = v1;
-                this.v2 = v2;
-            }
-        }
-
         class DrawGraph
         {
             Bitmap bitmap;
             Pen blackPen;
             Pen redPen;
-            Pen darkGoldPen;
+            Pen greenPen;
             Graphics gr;
             Font fo;
             Brush br;
@@ -77,8 +53,8 @@ namespace Visualisation
                 blackPen.Width = 2;
                 redPen = new Pen(Color.Red);
                 redPen.Width = 2;
-                darkGoldPen = new Pen(Color.DarkGoldenrod);
-                darkGoldPen.Width = 2;
+                greenPen = new Pen(Color.Green);
+                greenPen.Width = 2;
                 fo = new Font("Arial", 15);
                 br = Brushes.Black;
             }
@@ -113,21 +89,21 @@ namespace Visualisation
             public void drawEdge(Vertex V1, Vertex V2, Edge E, int numberE)
             {
                 //отрисовка Ребра около одной Вершины
-                if (E.v1 == E.v2)
+                if (E.From == E.To)
                 {
-                    gr.DrawArc(darkGoldPen, (V1.x - 2 * R), (V1.y - 2 * R), 2 * R, 2 * R, 90, 270);
-                    point = new PointF(V1.x - (int)(2.75 * R), V1.y - (int)(2.75 * R));
-                    gr.DrawString(((char)('a' + numberE)).ToString(), fo, br, point);
-                    drawVertex(V1.x, V1.y, (E.v1 + 1).ToString());
+                    gr.DrawArc(blackPen, (V1.X - 2 * R), (V1.Y - 2 * R), 2 * R, 2 * R, 90, 270);
+                    point = new PointF(V1.X - (int)(2.75 * R), V1.Y - (int)(2.75 * R));
+                    gr.DrawString(((char)('a' + numberE) + " (" + E.Weight + ")").ToString(), fo, br, point);
+                    drawVertex(V1.X, V1.Y, (E.From + 1).ToString());
                 }
                 //отрисовка Ребра между двумя Вершинами
                 else
                 {
-                    gr.DrawLine(darkGoldPen, V1.x, V1.y, V2.x, V2.y);
-                    point = new PointF((V1.x + V2.x) / 2, (V1.y + V2.y) / 2);
-                    gr.DrawString(((char)('a' + numberE)).ToString(), fo, br, point);
-                    drawVertex(V1.x, V1.y, (E.v1 + 1).ToString());
-                    drawVertex(V2.x, V2.y, (E.v2 + 1).ToString());
+                    gr.DrawLine(blackPen, V1.X, V1.Y, V2.X, V2.Y);
+                    point = new PointF((V1.X + V2.X) / 2, (V1.Y + V2.Y) / 2);
+                    gr.DrawString(((char)('a' + numberE) + " (" + E.Weight + ")").ToString(), fo, br, point);
+                    drawVertex(V1.X, V1.Y, (E.From + 1).ToString());
+                    drawVertex(V2.X, V2.Y, (E.To + 1).ToString());
                 }
             }
 
@@ -137,23 +113,23 @@ namespace Visualisation
                 //рисуем ребра
                 for (int i = 0; i < E.Count; i++)
                 {
-                    if (E[i].v1 == E[i].v2)
+                    if (E[i].From == E[i].To)
                     {
-                        gr.DrawArc(darkGoldPen, (V[E[i].v1].x - 2 * R), (V[E[i].v1].y - 2 * R), 2 * R, 2 * R, 90, 270);
-                        point = new PointF(V[E[i].v1].x - (int)(2.75 * R), V[E[i].v1].y - (int)(2.75 * R));
-                        gr.DrawString(((char)('a' + i)).ToString(), fo, br, point);
+                        gr.DrawArc(blackPen, (V[E[i].From].X - 2 * R), (V[E[i].From].Y - 2 * R), 2 * R, 2 * R, 90, 270);
+                        point = new PointF(V[E[i].From].X - (int)(2.75 * R), V[E[i].From].Y - (int)(2.75 * R));
+                        gr.DrawString(((char)('a' + i) + " (" + E[i].Weight + ")").ToString(), fo, br, point);
                     }
                     else
                     {
-                        gr.DrawLine(darkGoldPen, V[E[i].v1].x, V[E[i].v1].y, V[E[i].v2].x, V[E[i].v2].y);
-                        point = new PointF((V[E[i].v1].x + V[E[i].v2].x) / 2, (V[E[i].v1].y + V[E[i].v2].y) / 2);
-                        gr.DrawString(((char)('a' + i)).ToString(), fo, br, point);
+                        gr.DrawLine(blackPen, V[E[i].From].X, V[E[i].From].Y, V[E[i].To].X, V[E[i].To].Y);
+                        point = new PointF((V[E[i].From].X + V[E[i].To].X) / 2, (V[E[i].From].Y + V[E[i].To].Y) / 2);
+                        gr.DrawString(((char)('a' + i) + " (" + E[i].Weight + ")").ToString(), fo, br, point);
                     }
                 }
                 //рисуем вершины
                 for (int i = 0; i < V.Count; i++)
                 {
-                    drawVertex(V[i].x, V[i].y, (i + 1).ToString());
+                    drawVertex(V[i].X, V[i].Y, (i + 1).ToString());
                 }
             }
 
@@ -165,8 +141,8 @@ namespace Visualisation
                         matrix[i, j] = 0;
                 for (int i = 0; i < E.Count; i++)
                 {
-                    matrix[E[i].v1, E[i].v2] = 1;
-                    matrix[E[i].v2, E[i].v1] = 1;
+                    matrix[E[i].From, E[i].To] = E[i].Weight;
+                    matrix[E[i].To, E[i].From] = E[i].Weight;
                 }
             }
 
@@ -178,8 +154,8 @@ namespace Visualisation
                         matrix[i, j] = 0;
                 for (int i = 0; i < E.Count; i++)
                 {
-                    matrix[E[i].v1, i] = 1;
-                    matrix[E[i].v2, i] = 1;
+                    matrix[E[i].From, i] = E[i].Weight;
+                    matrix[E[i].To, i] = E[i].Weight;
                 }
             }
 
@@ -291,7 +267,7 @@ namespace Visualisation
                 {
                     for (int i = 0; i < V.Count; i++)
                     {
-                        if (Math.Pow((V[i].x - e.X), 2) + Math.Pow((V[i].y - e.Y), 2) <= G.R * G.R)
+                        if (Math.Pow((V[i].X - e.X), 2) + Math.Pow((V[i].Y - e.Y), 2) <= G.R * G.R)
                         {
                             if (selected1 != -1)
                             {
@@ -302,7 +278,7 @@ namespace Visualisation
                             }
                             if (selected1 == -1)
                             {
-                                G.drawSelectedVertex(V[i].x, V[i].y);
+                                G.drawSelectedVertex(V[i].X, V[i].Y);
                                 selected1 = i;
                                 sheet.Image = G.GetBitmap();
                                 createAdjAndOut();
@@ -330,18 +306,18 @@ namespace Visualisation
                     {
                         for (int i = 0; i < V.Count; i++)
                         {
-                            if (Math.Pow((V[i].x - e.X), 2) + Math.Pow((V[i].y - e.Y), 2) <= G.R * G.R)
+                            if (Math.Pow((V[i].X - e.X), 2) + Math.Pow((V[i].Y - e.Y), 2) <= G.R * G.R)
                             {
                                 if (selected1 == -1)
                                 {
-                                    G.drawSelectedVertex(V[i].x, V[i].y);
+                                    G.drawSelectedVertex(V[i].X, V[i].Y);
                                     selected1 = i;
                                     sheet.Image = G.GetBitmap();
                                     break;
                                 }
                                 if (selected2 == -1)
                                 {
-                                    G.drawSelectedVertex(V[i].x, V[i].y);
+                                    G.drawSelectedVertex(V[i].X, V[i].Y);
                                     selected2 = i;
                                     E.Add(new Edge(selected1, selected2));
                                     G.drawEdge(V[selected1], V[selected2], E[E.Count - 1], E.Count - 1);
@@ -356,9 +332,9 @@ namespace Visualisation
                     if (e.Button == MouseButtons.Right)
                     {
                         if ((selected1 != -1) &&
-                            (Math.Pow((V[selected1].x - e.X), 2) + Math.Pow((V[selected1].y - e.Y), 2) <= G.R * G.R))
+                            (Math.Pow((V[selected1].X - e.X), 2) + Math.Pow((V[selected1].Y - e.Y), 2) <= G.R * G.R))
                         {
-                            G.drawVertex(V[selected1].x, V[selected1].y, (selected1 + 1).ToString());
+                            G.drawVertex(V[selected1].X, V[selected1].Y, (selected1 + 1).ToString());
                             selected1 = -1;
                             sheet.Image = G.GetBitmap();
                         }
@@ -371,19 +347,19 @@ namespace Visualisation
                                        //ищем, возможно была нажата вершина
                     for (int i = 0; i < V.Count; i++)
                     {
-                        if (Math.Pow((V[i].x - e.X), 2) + Math.Pow((V[i].y - e.Y), 2) <= G.R * G.R)
+                        if (Math.Pow((V[i].X - e.X), 2) + Math.Pow((V[i].Y - e.Y), 2) <= G.R * G.R)
                         {
                             for (int j = 0; j < E.Count; j++)
                             {
-                                if ((E[j].v1 == i) || (E[j].v2 == i))
+                                if ((E[j].From == i) || (E[j].To == i))
                                 {
                                     E.RemoveAt(j);
                                     j--;
                                 }
                                 else
                                 {
-                                    if (E[j].v1 > i) E[j].v1--;
-                                    if (E[j].v2 > i) E[j].v2--;
+                                    if (E[j].From > i) E[j].From--;
+                                    if (E[j].To > i) E[j].To--;
                                 }
                             }
                             V.RemoveAt(i);
@@ -396,10 +372,10 @@ namespace Visualisation
                     {
                         for (int i = 0; i < E.Count; i++)
                         {
-                            if (E[i].v1 == E[i].v2) //если это петля
+                            if (E[i].From == E[i].To) //если это петля
                             {
-                                if ((Math.Pow((V[E[i].v1].x - G.R - e.X), 2) + Math.Pow((V[E[i].v1].y - G.R - e.Y), 2) <= ((G.R + 2) * (G.R + 2))) &&
-                                    (Math.Pow((V[E[i].v1].x - G.R - e.X), 2) + Math.Pow((V[E[i].v1].y - G.R - e.Y), 2) >= ((G.R - 2) * (G.R - 2))))
+                                if ((Math.Pow((V[E[i].From].X - G.R - e.X), 2) + Math.Pow((V[E[i].From].Y - G.R - e.Y), 2) <= ((G.R + 2) * (G.R + 2))) &&
+                                    (Math.Pow((V[E[i].From].X - G.R - e.X), 2) + Math.Pow((V[E[i].From].Y - G.R - e.Y), 2) >= ((G.R - 2) * (G.R - 2))))
                                 {
                                     E.RemoveAt(i);
                                     flag = true;
@@ -408,11 +384,11 @@ namespace Visualisation
                             }
                             else //не петля
                             {
-                                if (((e.X - V[E[i].v1].x) * (V[E[i].v2].y - V[E[i].v1].y) / (V[E[i].v2].x - V[E[i].v1].x) + V[E[i].v1].y) <= (e.Y + 4) &&
-                                    ((e.X - V[E[i].v1].x) * (V[E[i].v2].y - V[E[i].v1].y) / (V[E[i].v2].x - V[E[i].v1].x) + V[E[i].v1].y) >= (e.Y - 4))
+                                if (((e.X - V[E[i].From].X) * (V[E[i].To].Y - V[E[i].From].Y) / (V[E[i].To].X - V[E[i].From].X) + V[E[i].From].Y) <= (e.Y + 4) &&
+                                    ((e.X - V[E[i].From].X) * (V[E[i].To].Y - V[E[i].From].Y) / (V[E[i].To].X - V[E[i].From].X) + V[E[i].From].Y) >= (e.Y - 4))
                                 {
-                                    if ((V[E[i].v1].x <= V[E[i].v2].x && V[E[i].v1].x <= e.X && e.X <= V[E[i].v2].x) ||
-                                        (V[E[i].v1].x >= V[E[i].v2].x && V[E[i].v1].x >= e.X && e.X >= V[E[i].v2].x))
+                                    if ((V[E[i].From].X <= V[E[i].To].X && V[E[i].From].X <= e.X && e.X <= V[E[i].To].X) ||
+                                        (V[E[i].From].X >= V[E[i].To].X && V[E[i].From].X >= e.X && e.X >= V[E[i].To].X))
                                     {
                                         E.RemoveAt(i);
                                         flag = true;
@@ -503,15 +479,15 @@ namespace Visualisation
                 }
                 for (int w = 0; w < E.Count; w++)
                 {
-                    if (color[E[w].v2] == 1 && E[w].v1 == u)
+                    if (color[E[w].To] == 1 && E[w].From == u)
                     {
-                        DFSchain(E[w].v2, endV, E, color, s + "-" + (E[w].v2 + 1).ToString());
-                        color[E[w].v2] = 1;
+                        DFSchain(E[w].To, endV, E, color, s + "-" + (E[w].To + 1).ToString());
+                        color[E[w].To] = 1;
                     }
-                    else if (color[E[w].v1] == 1 && E[w].v2 == u)
+                    else if (color[E[w].From] == 1 && E[w].To == u)
                     {
-                        DFSchain(E[w].v1, endV, E, color, s + "-" + (E[w].v1 + 1).ToString());
-                        color[E[w].v1] = 1;
+                        DFSchain(E[w].From, endV, E, color, s + "-" + (E[w].From + 1).ToString());
+                        color[E[w].From] = 1;
                     }
                 }
             }
@@ -560,19 +536,19 @@ namespace Visualisation
                 {
                     if (w == unavailableEdge)
                         continue;
-                    if (color[E[w].v2] == 1 && E[w].v1 == u)
+                    if (color[E[w].To] == 1 && E[w].From == u)
                     {
                         List<int> cycleNEW = new List<int>(cycle);
-                        cycleNEW.Add(E[w].v2 + 1);
-                        DFScycle(E[w].v2, endV, E, color, w, cycleNEW);
-                        color[E[w].v2] = 1;
+                        cycleNEW.Add(E[w].To + 1);
+                        DFScycle(E[w].To, endV, E, color, w, cycleNEW);
+                        color[E[w].To] = 1;
                     }
-                    else if (color[E[w].v1] == 1 && E[w].v2 == u)
+                    else if (color[E[w].From] == 1 && E[w].To == u)
                     {
                         List<int> cycleNEW = new List<int>(cycle);
-                        cycleNEW.Add(E[w].v1 + 1);
-                        DFScycle(E[w].v1, endV, E, color, w, cycleNEW);
-                        color[E[w].v1] = 1;
+                        cycleNEW.Add(E[w].From + 1);
+                        DFScycle(E[w].From, endV, E, color, w, cycleNEW);
+                        color[E[w].From] = 1;
                     }
                 }
             }
@@ -592,161 +568,170 @@ namespace Visualisation
 
                 tb_result.Text = str;*/
 
+            if (comboBoxNum.SelectedItem != null)
+            {
+                V.Clear();
+                E.Clear();
+                G.clearSheet();
+
+                switch (comboBoxNum.SelectedItem.ToString())
+                {
+                    case "5":
+                        {
+                            V.Add(new Vertex(70, 50));//0
+                            sheet.Image = G.GetBitmap();
+                            V.Add(new Vertex(70, 270));//1
+                            sheet.Image = G.GetBitmap();
+                            V.Add(new Vertex(500, 50));//2
+                            sheet.Image = G.GetBitmap();
+                            V.Add(new Vertex(500, 270));//3
+                            sheet.Image = G.GetBitmap();
+                            V.Add(new Vertex(285, 160));//4
+                            sheet.Image = G.GetBitmap();
+
+                            E.Add(new Edge(0, 1, 5));
+                            E.Add(new Edge(0, 2, 7));
+                            E.Add(new Edge(2, 3, 4));
+                            E.Add(new Edge(1, 3, 3));
+                            E.Add(new Edge(0, 4, 6));
+                            E.Add(new Edge(2, 4, 5));
+                            E.Add(new Edge(1, 4, 8));
+                            E.Add(new Edge(3, 4, 2));
+                        };
+                        break;
+                    case "6":
+                        {
+                            V.Add(new Vertex(50, 160));//0
+                            sheet.Image = G.GetBitmap();
+                            V.Add(new Vertex(200, 50));//1
+                            sheet.Image = G.GetBitmap();
+                            V.Add(new Vertex(200, 270));//2
+                            sheet.Image = G.GetBitmap();
+                            V.Add(new Vertex(370, 50));//3
+                            sheet.Image = G.GetBitmap();
+                            V.Add(new Vertex(370, 270));//4
+                            sheet.Image = G.GetBitmap();
+                            V.Add(new Vertex(520, 160));//5
+                            sheet.Image = G.GetBitmap();
+
+                            E.Add(new Edge(0, 1));
+                            E.Add(new Edge(0, 2));
+                            E.Add(new Edge(2, 3));
+                            E.Add(new Edge(1, 3));
+                            E.Add(new Edge(0, 4));
+                            E.Add(new Edge(2, 4));
+                            E.Add(new Edge(1, 5));
+                            E.Add(new Edge(3, 5));
+                            E.Add(new Edge(4, 5));
+                        };
+                        break;
+                    case "7":
+                        {
+                            V.Add(new Vertex(50, 160));//0
+                            sheet.Image = G.GetBitmap();
+                            V.Add(new Vertex(200, 50));//1
+                            sheet.Image = G.GetBitmap();
+                            V.Add(new Vertex(200, 270));//2
+                            sheet.Image = G.GetBitmap();
+                            V.Add(new Vertex(285, 160));//3
+                            sheet.Image = G.GetBitmap();
+                            V.Add(new Vertex(370, 50));//4
+                            sheet.Image = G.GetBitmap();
+                            V.Add(new Vertex(370, 270));//5
+                            sheet.Image = G.GetBitmap();
+                            V.Add(new Vertex(520, 160));//6
+                            sheet.Image = G.GetBitmap();
+
+                            E.Add(new Edge(0, 1));
+                            E.Add(new Edge(0, 2));
+                            E.Add(new Edge(2, 3));
+                            E.Add(new Edge(1, 3));
+                            E.Add(new Edge(0, 3));
+                            E.Add(new Edge(1, 4));
+                            E.Add(new Edge(2, 5));
+                            E.Add(new Edge(3, 4));
+                            E.Add(new Edge(3, 5));
+                            E.Add(new Edge(3, 6));
+                            E.Add(new Edge(4, 6));
+                            E.Add(new Edge(5, 6));
+                        };
+                        break;
+                    case "8":
+                        {
+                            V.Add(new Vertex(50, 110));//0
+                            sheet.Image = G.GetBitmap();
+                            V.Add(new Vertex(50, 210));//1
+                            sheet.Image = G.GetBitmap();
+                            V.Add(new Vertex(200, 50));//2
+                            sheet.Image = G.GetBitmap();
+                            V.Add(new Vertex(200, 270));//3
+                            sheet.Image = G.GetBitmap();
+                            V.Add(new Vertex(370, 50));//4
+                            sheet.Image = G.GetBitmap();
+                            V.Add(new Vertex(370, 270));//5
+                            sheet.Image = G.GetBitmap();
+                            V.Add(new Vertex(520, 110));//6
+                            sheet.Image = G.GetBitmap();
+                            V.Add(new Vertex(520, 210));//7
+                            sheet.Image = G.GetBitmap();
+
+                            E.Add(new Edge(0, 1));
+                            E.Add(new Edge(0, 2));
+                            E.Add(new Edge(2, 3));
+                            E.Add(new Edge(1, 3));
+                            E.Add(new Edge(2, 4));
+                            E.Add(new Edge(3, 5));
+                            E.Add(new Edge(4, 5));
+                            E.Add(new Edge(0, 6));
+                            E.Add(new Edge(4, 6));
+                            E.Add(new Edge(6, 7));
+                            E.Add(new Edge(1, 7));
+                            E.Add(new Edge(5, 7));
+                        };
+                        break;
+                    case "9":
+                        {
+                            V.Add(new Vertex(50, 110));//0
+                            sheet.Image = G.GetBitmap();
+                            V.Add(new Vertex(50, 210));//1
+                            sheet.Image = G.GetBitmap();
+                            V.Add(new Vertex(200, 50));//2
+                            sheet.Image = G.GetBitmap();
+                            V.Add(new Vertex(200, 270));//3
+                            sheet.Image = G.GetBitmap();
+                            V.Add(new Vertex(285, 160));//4
+                            sheet.Image = G.GetBitmap();
+                            V.Add(new Vertex(370, 50));//5
+                            sheet.Image = G.GetBitmap();
+                            V.Add(new Vertex(370, 270));//6
+                            sheet.Image = G.GetBitmap();
+                            V.Add(new Vertex(520, 110));//7
+                            sheet.Image = G.GetBitmap();
+                            V.Add(new Vertex(520, 210));//8
+                            sheet.Image = G.GetBitmap();
+
+                            E.Add(new Edge(0, 1));
+                            E.Add(new Edge(0, 2));
+                            E.Add(new Edge(2, 4));
+                            E.Add(new Edge(1, 3));
+                            E.Add(new Edge(1, 4));
+                            E.Add(new Edge(0, 4));
+                            E.Add(new Edge(2, 5));
+                            E.Add(new Edge(5, 4));
+                            E.Add(new Edge(4, 3));
+                            E.Add(new Edge(3, 6));
+                            E.Add(new Edge(4, 6));
+                            E.Add(new Edge(5, 7));
+                            E.Add(new Edge(4, 7));
+                            E.Add(new Edge(7, 8));
+                            E.Add(new Edge(4, 8));
+                            E.Add(new Edge(6, 8));
+                        };
+                        break;
+                }
+                G.drawALLGraph(V, E);
+            }
             
-            V.Clear();
-            E.Clear();
-            G.clearSheet();
-
-
-            if (comboBoxNum.SelectedItem.ToString() == "5")
-            {
-                V.Add(new Vertex(70, 50));//0
-                sheet.Image = G.GetBitmap();
-                V.Add(new Vertex(70, 270));//1
-                sheet.Image = G.GetBitmap();
-                V.Add(new Vertex(500, 50));//2
-                sheet.Image = G.GetBitmap();
-                V.Add(new Vertex(500, 270));//3
-                sheet.Image = G.GetBitmap();
-                V.Add(new Vertex(285, 160));//4
-                sheet.Image = G.GetBitmap();
-
-                E.Add(new Edge(0, 1));
-                E.Add(new Edge(0, 2));
-                E.Add(new Edge(2, 3));
-                E.Add(new Edge(1, 3));
-                E.Add(new Edge(0, 4));
-                E.Add(new Edge(2, 4));
-                E.Add(new Edge(1, 4));
-                E.Add(new Edge(3, 4));
-            }
-            if (comboBoxNum.SelectedItem.ToString() == "6")
-            {
-                V.Add(new Vertex(50, 160));//0
-                sheet.Image = G.GetBitmap();
-                V.Add(new Vertex(200, 50));//1
-                sheet.Image = G.GetBitmap();
-                V.Add(new Vertex(200, 270));//2
-                sheet.Image = G.GetBitmap();
-                V.Add(new Vertex(370, 50));//3
-                sheet.Image = G.GetBitmap();
-                V.Add(new Vertex(370, 270));//4
-                sheet.Image = G.GetBitmap();
-                V.Add(new Vertex(520, 160));//5
-                sheet.Image = G.GetBitmap();
-
-                E.Add(new Edge(0, 1));
-                E.Add(new Edge(0, 2));
-                E.Add(new Edge(2, 3));
-                E.Add(new Edge(1, 3));
-                E.Add(new Edge(0, 4));
-                E.Add(new Edge(2, 4));
-                E.Add(new Edge(1, 5));
-                E.Add(new Edge(3, 5));
-                E.Add(new Edge(4, 5));
-            }
-            if (comboBoxNum.SelectedItem.ToString() == "7")
-            {
-                V.Add(new Vertex(50, 160));//0
-                sheet.Image = G.GetBitmap();
-                V.Add(new Vertex(200, 50));//1
-                sheet.Image = G.GetBitmap();
-                V.Add(new Vertex(200, 270));//2
-                sheet.Image = G.GetBitmap();
-                V.Add(new Vertex(285, 160));//3
-                sheet.Image = G.GetBitmap();
-                V.Add(new Vertex(370, 50));//4
-                sheet.Image = G.GetBitmap();
-                V.Add(new Vertex(370, 270));//5
-                sheet.Image = G.GetBitmap();
-                V.Add(new Vertex(520, 160));//6
-                sheet.Image = G.GetBitmap();
-
-                E.Add(new Edge(0, 1));
-                E.Add(new Edge(0, 2));
-                E.Add(new Edge(2, 3));
-                E.Add(new Edge(1, 3));
-                E.Add(new Edge(0, 3));
-                E.Add(new Edge(1, 4));
-                E.Add(new Edge(2, 5));
-                E.Add(new Edge(3, 4));
-                E.Add(new Edge(3, 5));
-                E.Add(new Edge(3, 6));
-                E.Add(new Edge(4, 6));
-                E.Add(new Edge(5, 6));
-            }
-            if (comboBoxNum.SelectedItem.ToString() == "8")
-            {
-                V.Add(new Vertex(50, 110));//0
-                sheet.Image = G.GetBitmap();
-                V.Add(new Vertex(50, 210));//1
-                sheet.Image = G.GetBitmap();
-                V.Add(new Vertex(200, 50));//2
-                sheet.Image = G.GetBitmap();
-                V.Add(new Vertex(200, 270));//3
-                sheet.Image = G.GetBitmap();
-                V.Add(new Vertex(370, 50));//4
-                sheet.Image = G.GetBitmap();
-                V.Add(new Vertex(370, 270));//5
-                sheet.Image = G.GetBitmap();
-                V.Add(new Vertex(520, 110));//6
-                sheet.Image = G.GetBitmap();
-                V.Add(new Vertex(520, 210));//7
-                sheet.Image = G.GetBitmap();
-
-                E.Add(new Edge(0, 1));
-                E.Add(new Edge(0, 2));
-                E.Add(new Edge(2, 3));
-                E.Add(new Edge(1, 3));
-                E.Add(new Edge(2, 4));
-                E.Add(new Edge(3, 5));
-                E.Add(new Edge(4, 5));
-                E.Add(new Edge(0, 6));
-                E.Add(new Edge(4, 6));
-                E.Add(new Edge(6, 7));
-                E.Add(new Edge(1, 7));
-                E.Add(new Edge(5, 7));
-            }
-            if (comboBoxNum.SelectedItem.ToString() == "9")
-            {
-                V.Add(new Vertex(50, 110));//0
-                sheet.Image = G.GetBitmap();
-                V.Add(new Vertex(50, 210));//1
-                sheet.Image = G.GetBitmap();
-                V.Add(new Vertex(200, 50));//2
-                sheet.Image = G.GetBitmap();
-                V.Add(new Vertex(200, 270));//3
-                sheet.Image = G.GetBitmap();
-                V.Add(new Vertex(285, 160));//4
-                sheet.Image = G.GetBitmap();
-                V.Add(new Vertex(370, 50));//5
-                sheet.Image = G.GetBitmap();
-                V.Add(new Vertex(370, 270));//6
-                sheet.Image = G.GetBitmap();
-                V.Add(new Vertex(520, 110));//7
-                sheet.Image = G.GetBitmap();
-                V.Add(new Vertex(520, 210));//8
-                sheet.Image = G.GetBitmap();
-
-                E.Add(new Edge(0, 1));
-                E.Add(new Edge(0, 2));
-                E.Add(new Edge(2, 4));
-                E.Add(new Edge(1, 3));
-                E.Add(new Edge(1, 4));
-                E.Add(new Edge(0, 4));
-                E.Add(new Edge(2, 5));
-                E.Add(new Edge(5, 4));
-                E.Add(new Edge(4, 3));
-                E.Add(new Edge(3, 6));
-                E.Add(new Edge(4, 6));
-                E.Add(new Edge(5, 7));
-                E.Add(new Edge(4, 7));
-                E.Add(new Edge(7, 8));
-                E.Add(new Edge(4, 8));
-                E.Add(new Edge(6, 8));
-            }
-
-            G.drawALLGraph(V, E);
         }
         /*
         private void graph_from_file(int vertexCount)
@@ -762,5 +747,5 @@ namespace Visualisation
             }
             objReader.Close();
         }*/
-    }
+        }
 }

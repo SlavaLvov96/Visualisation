@@ -47,7 +47,7 @@ namespace Visualisation
         // класс Ребра 
         class Edge
         {
-            public int v1, v2;
+            public int v1, v2; 
 
             public Edge(int v1, int v2)
             {

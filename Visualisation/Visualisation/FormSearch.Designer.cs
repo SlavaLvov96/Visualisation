@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormSearch));
             this.rtb_pseudocode = new System.Windows.Forms.RichTextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -50,7 +49,6 @@
             this.interpolation_menu = new System.Windows.Forms.Button();
             this.linear_menu = new System.Windows.Forms.Button();
             this.digital_menu = new System.Windows.Forms.Button();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pb_animation)).BeginInit();
             this.SuspendLayout();
             // 
@@ -92,7 +90,6 @@
             this.b_search.TabIndex = 5;
             this.b_search.Text = "Поиск / Старт";
             this.b_search.UseVisualStyleBackColor = true;
-            this.b_search.Click += new System.EventHandler(this.b_search_Click);
             // 
             // b_add
             // 
@@ -149,6 +146,7 @@
             this.b_start_pause.Size = new System.Drawing.Size(57, 45);
             this.b_start_pause.TabIndex = 9;
             this.b_start_pause.UseVisualStyleBackColor = true;
+            this.b_start_pause.Click += new System.EventHandler(this.b_start_pause_Click);
             // 
             // b_next
             // 
@@ -217,7 +215,7 @@
             this.avl_menu.TabIndex = 17;
             this.avl_menu.Text = "АВЛ-деревья";
             this.avl_menu.UseVisualStyleBackColor = false;
-            this.avl_menu.Click += new System.EventHandler(this.b_search_Click);
+            this.avl_menu.Click += new System.EventHandler(this.avl_menu_Click);
             // 
             // binary_tree_menu
             // 
@@ -229,7 +227,7 @@
             this.binary_tree_menu.TabIndex = 17;
             this.binary_tree_menu.Text = "Бинарное дерево поиска\r\n";
             this.binary_tree_menu.UseVisualStyleBackColor = false;
-            this.binary_tree_menu.Click += new System.EventHandler(this.b_search_Click);
+            this.binary_tree_menu.Click += new System.EventHandler(this.binary_tree_menu_Click);
             // 
             // interpolation_menu
             // 
@@ -241,7 +239,7 @@
             this.interpolation_menu.TabIndex = 17;
             this.interpolation_menu.Text = "Интерполяционный поиск";
             this.interpolation_menu.UseVisualStyleBackColor = false;
-            this.interpolation_menu.Click += new System.EventHandler(this.b_search_Click);
+            this.interpolation_menu.Click += new System.EventHandler(this.interpolation_menu_Click);
             // 
             // linear_menu
             // 
@@ -253,7 +251,7 @@
             this.linear_menu.TabIndex = 17;
             this.linear_menu.Text = "Линейный поиск";
             this.linear_menu.UseVisualStyleBackColor = false;
-            this.linear_menu.Click += new System.EventHandler(this.b_search_Click);
+            this.linear_menu.Click += new System.EventHandler(this.linear_menu_Click);
             // 
             // digital_menu
             // 
@@ -264,11 +262,7 @@
             this.digital_menu.TabIndex = 17;
             this.digital_menu.Text = "Цифровой поиск";
             this.digital_menu.UseVisualStyleBackColor = true;
-            this.digital_menu.Click += new System.EventHandler(this.b_search_Click);
-            // 
-            // timer1
-            // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.digital_menu.Click += new System.EventHandler(this.digital_menu_Click);
             // 
             // FormSearch
             // 
@@ -331,6 +325,5 @@
         private System.Windows.Forms.Button interpolation_menu;
         private System.Windows.Forms.Button linear_menu;
         private System.Windows.Forms.Button digital_menu;
-        private System.Windows.Forms.Timer timer1;
     }
 }

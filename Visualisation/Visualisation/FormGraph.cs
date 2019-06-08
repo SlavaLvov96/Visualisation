@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Threading;
+using System.Windows.Threading;
 
 namespace Visualisation
     {
@@ -22,7 +24,8 @@ namespace Visualisation
 
             int selected1;  //выбранные вершины, для соединения линиями
             int selected2;
-
+            
+            // инициализация Графа
             public FormGraph()
             {
                 InitializeComponent();
@@ -31,7 +34,7 @@ namespace Visualisation
                 E = new List<Edge>();
                 sheet.Image = G.GetBitmap();
             }
-
+        // класс отрисовки графа в PictureBox
         class DrawGraph
         {
             Bitmap bitmap;
@@ -44,6 +47,7 @@ namespace Visualisation
             PointF point;
             public int R = 20; //радиус окружности вершины
 
+            // инициализация объектов рисования
             public DrawGraph(int width, int height)
             {
                 bitmap = new Bitmap(width, height);
@@ -158,8 +162,6 @@ namespace Visualisation
                     matrix[E[i].To, i] = E[i].Weight;
                 }
             }
-
-
         }
     
         //кнопка - выбрать вершину
@@ -242,22 +244,6 @@ namespace Visualisation
         private void buttonInc_Click_1(object sender, EventArgs e)
         {
             createIncAndOut();
-        }
-
-        //поиск элементарных циклов
-        private void cycleButton_Click_1(object sender, EventArgs e)
-        {
-            listBox2.Items.Clear();
-            //1-white 2-black
-            int[] color = new int[V.Count];
-            for (int i = 0; i < V.Count; i++)
-            {
-                for (int k = 0; k < V.Count; k++)
-                    color[k] = 1;
-                List<int> cycle = new List<int>();
-                cycle.Add(i + 1);
-                DFScycle(i, i, E, color, -1, cycle);
-            }
         }
 
         private void sheet_MouseClick(object sender, MouseEventArgs e)
@@ -451,6 +437,29 @@ namespace Visualisation
                     listBox2.Items.Clear();
             }
 
+            //поиск элементарных циклов
+            private void cycleButton_Click_1(object sender, EventArgs e)
+            {
+                listBox2.Items.Clear();
+            /*
+                //1-white 2-black
+                int[] color = new int[V.Count];
+                for (int i = 0; i < V.Count; i++)
+                {
+                    for (int k = 0; k < V.Count; k++)
+                        color[k] = 1;
+                    List<int> cycle = new List<int>();
+                    cycle.Add(i + 1);
+                    DFScycle(i, i, E, color, -1, cycle);
+                }
+                */
+
+                for (int i = 0; i < V.Count; i++)
+                {
+                    
+                }
+            }
+
             //поиск элементарных цепей
             private void chainButton_Click(object sender, EventArgs e)
             {
@@ -469,6 +478,7 @@ namespace Visualisation
             //обход в глубину. поиск элементарных цепей. (1-white 2-black)
             private void DFSchain(int u, int endV, List<Edge> E, int[] color, string s)
             {
+                Thread.Sleep(50);
                 //вершину не следует перекрашивать, если u == endV (возможно в нее есть несколько путей)
                 if (u != endV)
                     color[u] = 2;
@@ -493,8 +503,6 @@ namespace Visualisation
             }
 
             //поиск элементарных циклов
-
-
             //обход в глубину. поиск элементарных циклов. (1-white 2-black)
             //Вершину, для которой ищем цикл, перекрашивать в черный не будем. Поэтому, для избежания неправильной
             //работы программы, введем переменную unavailableEdge, в которой будет хранится номер ребра, исключаемый
@@ -552,6 +560,11 @@ namespace Visualisation
                     }
                 }
             }
+
+        public void Wave(int start, int finish)
+        {           
+
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {

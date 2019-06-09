@@ -117,7 +117,6 @@ namespace Visualisation
         {
             pictGraphics.Clear(pb_animation.BackColor); // очищаем картинку
             pb_animation.Invalidate(); // инициируем отрисовку на картинке
-            rtb_result.AppendText("Дерево удалено.\n");
         }
 
         // рисуем случайное дерево

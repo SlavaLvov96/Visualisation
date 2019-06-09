@@ -32,7 +32,6 @@
             this.rtb_pseudocode = new System.Windows.Forms.RichTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tb_search_value = new System.Windows.Forms.TextBox();
-            this.b_search = new System.Windows.Forms.Button();
             this.b_add = new System.Windows.Forms.Button();
             this.b_delete = new System.Windows.Forms.Button();
             this.b_random = new System.Windows.Forms.Button();
@@ -49,6 +48,7 @@
             this.interpolation_menu = new System.Windows.Forms.Button();
             this.linear_menu = new System.Windows.Forms.Button();
             this.digital_menu = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pb_animation)).BeginInit();
             this.SuspendLayout();
             // 
@@ -76,20 +76,10 @@
             // 
             this.tb_search_value.BackColor = System.Drawing.Color.SeaShell;
             this.tb_search_value.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tb_search_value.Location = new System.Drawing.Point(973, 534);
+            this.tb_search_value.Location = new System.Drawing.Point(12, 535);
             this.tb_search_value.Name = "tb_search_value";
-            this.tb_search_value.Size = new System.Drawing.Size(144, 25);
+            this.tb_search_value.Size = new System.Drawing.Size(191, 25);
             this.tb_search_value.TabIndex = 2;
-            // 
-            // b_search
-            // 
-            this.b_search.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.b_search.Location = new System.Drawing.Point(1123, 534);
-            this.b_search.Name = "b_search";
-            this.b_search.Size = new System.Drawing.Size(190, 31);
-            this.b_search.TabIndex = 5;
-            this.b_search.Text = "Поиск / Старт";
-            this.b_search.UseVisualStyleBackColor = true;
             // 
             // b_add
             // 
@@ -130,7 +120,7 @@
             // 
             this.b_prev.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.b_prev.Image = ((System.Drawing.Image)(resources.GetObject("b_prev.Image")));
-            this.b_prev.Location = new System.Drawing.Point(20, 566);
+            this.b_prev.Location = new System.Drawing.Point(12, 566);
             this.b_prev.Name = "b_prev";
             this.b_prev.Size = new System.Drawing.Size(57, 45);
             this.b_prev.TabIndex = 9;
@@ -141,9 +131,9 @@
             // 
             this.b_start_pause.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.b_start_pause.Image = ((System.Drawing.Image)(resources.GetObject("b_start_pause.Image")));
-            this.b_start_pause.Location = new System.Drawing.Point(83, 566);
+            this.b_start_pause.Location = new System.Drawing.Point(75, 566);
             this.b_start_pause.Name = "b_start_pause";
-            this.b_start_pause.Size = new System.Drawing.Size(57, 45);
+            this.b_start_pause.Size = new System.Drawing.Size(65, 45);
             this.b_start_pause.TabIndex = 9;
             this.b_start_pause.UseVisualStyleBackColor = true;
             this.b_start_pause.Click += new System.EventHandler(this.b_start_pause_Click);
@@ -264,6 +254,16 @@
             this.digital_menu.UseVisualStyleBackColor = true;
             this.digital_menu.Click += new System.EventHandler(this.digital_menu_Click);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Ink Free", 8.765217F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(12, 509);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(154, 18);
+            this.label3.TabIndex = 18;
+            this.label3.Text = "Значение для поиска:";
+            // 
             // FormSearch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
@@ -271,6 +271,7 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.LightCyan;
             this.ClientSize = new System.Drawing.Size(1325, 618);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.digital_menu);
             this.Controls.Add(this.linear_menu);
             this.Controls.Add(this.interpolation_menu);
@@ -287,7 +288,6 @@
             this.Controls.Add(this.b_random);
             this.Controls.Add(this.b_delete);
             this.Controls.Add(this.b_add);
-            this.Controls.Add(this.b_search);
             this.Controls.Add(this.tb_search_value);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.rtb_pseudocode);
@@ -308,7 +308,6 @@
         private System.Windows.Forms.RichTextBox rtb_pseudocode;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox tb_search_value;
-        private System.Windows.Forms.Button b_search;
         private System.Windows.Forms.Button b_add;
         private System.Windows.Forms.Button b_delete;
         private System.Windows.Forms.Button b_random;
@@ -325,5 +324,6 @@
         private System.Windows.Forms.Button interpolation_menu;
         private System.Windows.Forms.Button linear_menu;
         private System.Windows.Forms.Button digital_menu;
+        private System.Windows.Forms.Label label3;
     }
 }

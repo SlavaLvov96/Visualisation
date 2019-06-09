@@ -228,7 +228,7 @@ namespace Visualisation
             // для пустого дерева
             if (this.root == null) 
             {
-                graphics.DrawString("Нет изображения ", NodesLabel, Brushes.Black,
+                graphics.DrawString("Дерево пустое ", NodesLabel, Brushes.Black,
                 (float)0.0, (float)0.0);
                 return;
             }

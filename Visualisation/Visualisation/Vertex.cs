@@ -8,6 +8,8 @@ namespace Visualisation
 {
     class Vertex
     {
+        public int Number { get; set; }
+
         public int X { get; set; }
         
         public int Y { get; set; }
@@ -16,6 +18,7 @@ namespace Visualisation
         {
             X = x;
             Y = y;
+           
         }
     }
 }

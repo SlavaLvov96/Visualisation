@@ -37,9 +37,9 @@
             this.comboBoxGraph = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.comboBoxNum = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -54,7 +54,7 @@
             this.selectButton = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.comboBoxNum = new System.Windows.Forms.ComboBox();
+            this.richTextBox = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.sheet)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox7.SuspendLayout();
@@ -74,6 +74,7 @@
             this.buttonPrev.Size = new System.Drawing.Size(50, 50);
             this.buttonPrev.TabIndex = 7;
             this.buttonPrev.UseVisualStyleBackColor = true;
+            this.buttonPrev.Click += new System.EventHandler(this.buttonPrev_Click);
             // 
             // button2
             // 
@@ -84,6 +85,7 @@
             this.button2.Size = new System.Drawing.Size(50, 50);
             this.button2.TabIndex = 8;
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // buttonNext
             // 
@@ -94,6 +96,7 @@
             this.buttonNext.Size = new System.Drawing.Size(50, 50);
             this.buttonNext.TabIndex = 9;
             this.buttonNext.UseVisualStyleBackColor = true;
+            this.buttonNext.Click += new System.EventHandler(this.buttonNext_Click);
             // 
             // sheet
             // 
@@ -101,7 +104,7 @@
             this.sheet.Location = new System.Drawing.Point(3, 16);
             this.sheet.Margin = new System.Windows.Forms.Padding(2);
             this.sheet.Name = "sheet";
-            this.sheet.Size = new System.Drawing.Size(574, 314);
+            this.sheet.Size = new System.Drawing.Size(578, 315);
             this.sheet.TabIndex = 11;
             this.sheet.TabStop = false;
             this.sheet.MouseClick += new System.Windows.Forms.MouseEventHandler(this.sheet_MouseClick);
@@ -122,7 +125,8 @@
             this.comboBoxGraph.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxGraph.FormattingEnabled = true;
             this.comboBoxGraph.Items.AddRange(new object[] {
-            "Крускала и Дейкстры-Примы",
+            "Крускала",
+            "Дейкстры-Примы",
             "Поиск в глубину",
             "Поиск в ширину",
             "Минимальное остомное дерево",
@@ -134,6 +138,7 @@
             this.comboBoxGraph.Size = new System.Drawing.Size(147, 21);
             this.comboBoxGraph.TabIndex = 15;
             this.comboBoxGraph.Text = "Виды графов:";
+            this.comboBoxGraph.SelectedIndexChanged += new System.EventHandler(this.comboBoxGraph_SelectedIndexChanged);
             // 
             // groupBox1
             // 
@@ -141,9 +146,9 @@
             this.groupBox1.Controls.Add(this.groupBox6);
             this.groupBox1.Controls.Add(this.groupBox5);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.groupBox1.Location = new System.Drawing.Point(733, 0);
+            this.groupBox1.Location = new System.Drawing.Point(737, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(261, 446);
+            this.groupBox1.Size = new System.Drawing.Size(261, 447);
             this.groupBox1.TabIndex = 16;
             this.groupBox1.TabStop = false;
             // 
@@ -152,11 +157,27 @@
             this.groupBox7.Controls.Add(this.comboBoxNum);
             this.groupBox7.Controls.Add(this.button1);
             this.groupBox7.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox7.Location = new System.Drawing.Point(3, 311);
+            this.groupBox7.Location = new System.Drawing.Point(3, 312);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(255, 51);
             this.groupBox7.TabIndex = 13;
             this.groupBox7.TabStop = false;
+            // 
+            // comboBoxNum
+            // 
+            this.comboBoxNum.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboBoxNum.FormattingEnabled = true;
+            this.comboBoxNum.Items.AddRange(new object[] {
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"});
+            this.comboBoxNum.Location = new System.Drawing.Point(118, 21);
+            this.comboBoxNum.Name = "comboBoxNum";
+            this.comboBoxNum.Size = new System.Drawing.Size(134, 21);
+            this.comboBoxNum.TabIndex = 16;
+            this.comboBoxNum.Text = "Кол-во вершин:";
             // 
             // button1
             // 
@@ -170,7 +191,7 @@
             // 
             // groupBox6
             // 
-            this.groupBox6.Controls.Add(this.listBox1);
+            this.groupBox6.Controls.Add(this.richTextBox);
             this.groupBox6.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox6.Location = new System.Drawing.Point(3, 16);
             this.groupBox6.MaximumSize = new System.Drawing.Size(257, 600);
@@ -179,22 +200,13 @@
             this.groupBox6.TabIndex = 12;
             this.groupBox6.TabStop = false;
             // 
-            // listBox1
-            // 
-            this.listBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(3, 16);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(249, 280);
-            this.listBox1.TabIndex = 15;
-            // 
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.buttonNext);
             this.groupBox5.Controls.Add(this.buttonPrev);
             this.groupBox5.Controls.Add(this.button2);
             this.groupBox5.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox5.Location = new System.Drawing.Point(3, 362);
+            this.groupBox5.Location = new System.Drawing.Point(3, 363);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(255, 81);
             this.groupBox5.TabIndex = 11;
@@ -206,7 +218,7 @@
             this.listBox2.FormattingEnabled = true;
             this.listBox2.Location = new System.Drawing.Point(3, 28);
             this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(574, 82);
+            this.listBox2.Size = new System.Drawing.Size(578, 82);
             this.listBox2.TabIndex = 0;
             // 
             // groupBox2
@@ -224,7 +236,7 @@
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupBox2.Location = new System.Drawing.Point(0, 0);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(153, 446);
+            this.groupBox2.Size = new System.Drawing.Size(153, 447);
             this.groupBox2.TabIndex = 17;
             this.groupBox2.TabStop = false;
             // 
@@ -323,9 +335,9 @@
             this.groupBox3.Controls.Add(this.listBox2);
             this.groupBox3.Controls.Add(this.label2);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox3.Location = new System.Drawing.Point(153, 333);
+            this.groupBox3.Location = new System.Drawing.Point(153, 334);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(580, 113);
+            this.groupBox3.Size = new System.Drawing.Size(584, 113);
             this.groupBox3.TabIndex = 18;
             this.groupBox3.TabStop = false;
             // 
@@ -335,32 +347,26 @@
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox4.Location = new System.Drawing.Point(153, 0);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(580, 333);
+            this.groupBox4.Size = new System.Drawing.Size(584, 334);
             this.groupBox4.TabIndex = 19;
             this.groupBox4.TabStop = false;
             // 
-            // comboBoxNum
+            // richTextBox
             // 
-            this.comboBoxNum.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.comboBoxNum.FormattingEnabled = true;
-            this.comboBoxNum.Items.AddRange(new object[] {
-            "5",
-            "6",
-            "7",
-            "8",
-            "9"});
-            this.comboBoxNum.Location = new System.Drawing.Point(118, 21);
-            this.comboBoxNum.Name = "comboBoxNum";
-            this.comboBoxNum.Size = new System.Drawing.Size(134, 21);
-            this.comboBoxNum.TabIndex = 16;
-            this.comboBoxNum.Text = "Кол-во вершин:";
+            this.richTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBox.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.richTextBox.Location = new System.Drawing.Point(3, 16);
+            this.richTextBox.Name = "richTextBox";
+            this.richTextBox.Size = new System.Drawing.Size(249, 280);
+            this.richTextBox.TabIndex = 14;
+            this.richTextBox.Text = "";
             // 
             // FormGraph
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Honeydew;
-            this.ClientSize = new System.Drawing.Size(994, 446);
+            this.ClientSize = new System.Drawing.Size(998, 447);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -409,7 +415,7 @@
         private System.Windows.Forms.Button drawVertexButton;
         private System.Windows.Forms.Button selectButton;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.ComboBox comboBoxNum;
+        private System.Windows.Forms.RichTextBox richTextBox;
     }
 }

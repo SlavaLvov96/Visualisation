@@ -746,6 +746,70 @@ namespace Visualisation
             }
             
         }
+
+        private void comboBoxGraph_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            /*
+             *  Крускала
+                Дейкстры-Примы
+                Поиск в глубину
+                Поиск в ширину
+                Минимальное остомное дерево
+                Фундаментальные остовы циклов
+                Кратчайшие пути
+                Эйлеров цикл
+             */
+            switch (comboBoxGraph.Text)
+            {
+                case "Крускала":
+                    {
+                        richTextBox.Text = "for i=0 to N-1 step 1\n" +
+                 "      for j=i+1 to N-1 step 1\n" +
+                 "      if A[j]<A[i] then\n" +
+                 "          swap A[i],A[j]\n";
+                    };
+                    break;
+                case "Дейкстры-Примы":
+                    {
+
+                    };
+                    break;
+                case "Поиск в глубину":
+                    {
+
+                    };
+                    break;
+                case "Поиск в ширину":
+                    {
+                        richTextBox.Text = "for i=0 to N-1 step 1\n" +
+                "      for j=i+1 to N-1 step 1\n" +
+                "      if A[j]<A[i] then\n" +
+                "          swap A[i],A[j]\n";
+                    };
+                    break;
+                case "Минимальное остомное дерево":
+                    {
+
+                    };
+                    break;
+                case "Фундаментальные остовы циклов":
+                    {
+
+                    };
+                    break;
+                case "Кратчайшие пути":
+                    {
+
+                    };
+                    break;
+                case "Эйлеров цикл":
+                    {
+
+                    };
+                    break;
+            }
+        }
+
         /*
         private void graph_from_file(int vertexCount)
         {
@@ -760,5 +824,61 @@ namespace Visualisation
             }
             objReader.Close();
         }*/
+
+        // Изменение цвета текста одной строки псевдокода
+        void ChangeColorLine(int line)
+        {
+            //dispUI.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+            //{
+            //    richTextBox.Invoke((MethodInvoker)delegate
+            //{
+                int start = richTextBox.GetFirstCharIndexFromLine(line);
+                int length;
+
+                if (line + 1 >= richTextBox.Lines.Length)
+                    length = richTextBox.TextLength - start;
+                else
+                    length = richTextBox.GetFirstCharIndexFromLine(line + 1) - start;
+
+                richTextBox.Select(start, length);
+                richTextBox.SelectionColor = Color.Red;
+            //});
         }
+
+        // Изменение цвета текста предыдущей строки псевдокода
+        void ChangeColorPredLine(int line)
+        {
+            //dispUI.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+            //{
+                //richTextBox.Invoke((MethodInvoker)delegate
+            //{
+                int start = richTextBox.GetFirstCharIndexFromLine(line);
+                int length;
+
+                if (line + 1 >= richTextBox.Lines.Length)
+                    length = richTextBox.TextLength - start;
+                else
+                    length = richTextBox.GetFirstCharIndexFromLine(line + 1) - start;
+
+                richTextBox.Select(start, length);
+                richTextBox.SelectionColor = Color.Black;
+            //});
+        }
+        public int schetchik = 1;
+        private void buttonNext_Click(object sender, EventArgs e)
+        {
+            ChangeColorPredLine(schetchik-1);
+            ChangeColorLine(schetchik++);
+        }
+
+        private void buttonPrev_Click(object sender, EventArgs e)
+        {
+            ChangeColorPredLine(schetchik--);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+    }
 }

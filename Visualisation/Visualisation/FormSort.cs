@@ -32,6 +32,8 @@ namespace Visualisation
         private int MAX_HEIGHT = 491;
         private Rectangle[] rectangles;
         Graphics graphics;
+        private Color[] colors;
+       
 
         Dispatcher dispUI = Dispatcher.CurrentDispatcher;
 
@@ -73,10 +75,18 @@ namespace Visualisation
                 Thread.Sleep(300);
                 for (int j = i + 1; j < input.Length; j++)
                 {
-                    SetOrangeColor(i, j);
+                    //SetOrangeColor(i, j);
+                    for (int index = 0; index < colors.Length; index++)
+                    {
+                        if (colors[index] == Color.Orange)
+                        {
+                            colors[index] = Color.Red;
+                        }
+                    }
+
                     ChangeColorPredLine(1);
                     ChangeColorLine(2);
-                    Thread.Sleep(300);
+                    Thread.Sleep(30);
                     if (input[j] < input[i])
                     {
                         temp = input[j];
@@ -84,16 +94,20 @@ namespace Visualisation
                         input[i] = temp;
                         ChangeColorPredLine(2);
                         ChangeColorLine(3);
-                        Thread.Sleep(300);
+                        Thread.Sleep(30);
                         SwapRectangles(i, j);
+                        colors[i] = Color.Orange;
+                        colors[j] = Color.Orange;
+                        DrawAllRectangles(numbers, rectangles, colors);
                         ChangeColorPredLine(3);
                     }
                     ChangeColorPredLine(2);
                     Thread.Sleep(300);
-                    SetRedColor(i, j);
+                    //SetRedColor(i, j);
                 }
                 ChangeColorPredLine(1);
-                SetGrayColor(i);
+                //SetGrayColor(i);
+                colors[i] = Color.Gray;
             }
             ChangeColorPredLine(0);
             return input;
@@ -205,6 +219,11 @@ namespace Visualisation
 
         private void RectanglesInit(int[] array)
         {
+            colors = new Color[numbers.Length];
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                colors[i] = Color.Red;
+            }
             if (HasNegative(array))
                 MAX_HEIGHT = MAX_HEIGHT / 2;
 
@@ -235,22 +254,52 @@ namespace Visualisation
                 int left = space * i;
                // Rectangle rectangle = new Rectangle();                
     
-                graphics = panelDraw.CreateGraphics();
+               /* graphics = panelDraw.CreateGraphics();
                 SolidBrush myBrush = new SolidBrush(Color.Red);
-                Pen pen = new Pen(Color.Black);
+                Pen pen = new Pen(Color.Black);*/
 
                 Rectangle rectBas = new Rectangle(left, top, width, height);
-                graphics.DrawRectangle(pen, rectBas);
+                /*graphics.DrawRectangle(pen, rectBas);
                 graphics.FillRectangle(myBrush, rectBas);
 
-                //Rectangle recText = new Rectangle(Brushes.Black, left, top);
                 string arr = numbers[i].ToString();
                 Font drawFont = new Font("Consolas", width/3);
-                graphics.DrawString(arr, drawFont, Brushes.Black, left, top);
+                graphics.DrawString(arr, drawFont, Brushes.Black, left, top);*/
 
                 rectangles[i] = rectBas;
-                //rectangles[i] = drawFont;
+                DrawRectangle(rectangles[i], colors[i], numbers[i].ToString());
             }
+        }
+
+        private void DrawRectangle(Rectangle rectangle, Color color, string str)
+        {
+            graphics = panelDraw.CreateGraphics();
+            SolidBrush myBrush = new SolidBrush(color);
+            Pen pen = new Pen(Color.Black);
+
+            //Rectangle rectBas = new Rectangle(rectangle.Left, rectangle.Top, rectangle.Width, rectangle.Height);
+            graphics.DrawRectangle(pen, rectangle);
+            graphics.FillRectangle(myBrush, rectangle);
+
+            //string arr = numbers[index].ToString();
+            Font drawFont = new Font("Consolas", rectangle.Width / 3);
+            graphics.DrawString(str, drawFont, Brushes.Black, rectangle.Left, rectangle.Top);
+        }
+
+        private void DrawAllRectangles(int[] numbers, Rectangle[] rectangles,  Color[] colors)
+        {
+            richTextBox.Invoke((MethodInvoker)delegate
+            {
+                panelDraw.Controls.Clear();
+                panelDraw.Refresh();
+                panelDraw.Update();
+
+                for (int i = 0; i < numbers.Length; i++)
+                {
+                    DrawRectangle(rectangles[i], colors[i], numbers[i].ToString());
+                }
+                
+            });
         }
 
         private int GetMax(int[] array)
@@ -292,26 +341,35 @@ namespace Visualisation
 
         private void SwapRectangles(int index1, int index2)
         {
-            dispUI.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
-            {/*
-                Rectangle temp = rectangles[index1];
-                rectangles[index1] = rectangles[index2];
-                rectangles[index2] = temp;*/
+            /*Rectangle temp = new Rectangle();
+            temp.X = rectangles[index1].X;
+            temp.Y = rectangles[index1].Y;
+            rectangles[index2].X = temp.X;       
+            rectangles[index2].Y = temp.Y;*/
+            /*graphics.DrawRectangle(new Pen(Color.White), rectangles[index1]);
+            graphics.DrawRectangle(new Pen(Color.White), rectangles[index2]);
+            graphics.FillRectangle(Brushes.White, rectangles[index1]);
+            graphics.FillRectangle(Brushes.White, rectangles[index2]);*/
 
-                int leftFirst = (int)rectangles[index1].Left;
-                int leftSecond = (int)rectangles[index2].Left;
-                int topFirst = (int)rectangles[index1].Top;
-                int topSecond = (int)rectangles[index2].Top;
-
-                //rectangles = new Rectangle[](rec);
-                //Rectangle temp = rectangles[index1];
-                //rectangles[index1] = rectangles[index2];
-                //rectangles[index2] = temp;
-
-            });
-            Rectangle temp = rectangles[index1];
+            var temp = rectangles[index1];
             rectangles[index1] = rectangles[index2];
             rectangles[index2] = temp;
+
+            Rectangle temp1 = new Rectangle();
+            temp1.X = rectangles[index1].X;
+            //temp1.Y = rectangles[index1].Y;
+            rectangles[index1].X = rectangles[index2].X;
+            //rectangles[index1].Y = rectangles[index2].Y;
+            rectangles[index2].X = temp1.X;
+            //rectangles[index2].Y = temp1.Y;
+            /*
+
+            Thread.Sleep(1000);
+            graphics.DrawRectangle(new Pen(Color.Black), rectangles[index1]);
+            graphics.DrawRectangle(new Pen(Color.Black), rectangles[index2]);
+            graphics.FillRectangle(Brushes.Red, rectangles[index1]);
+            graphics.FillRectangle(Brushes.Red, rectangles[index2]);*/
+
         }
 
         private void SetGrayColor(int index1)
@@ -452,3 +510,4 @@ namespace Visualisation
         }
     }
 }
+            

@@ -87,13 +87,15 @@ namespace Visualisation
                     ChangeColorPredLine(1);
                     ChangeColorLine(2);
                     Thread.Sleep(30);
+                    
                     if (input[j] < input[i])
-                    {
+                    {                       
                         temp = input[j];
                         input[j] = input[i];
                         input[i] = temp;
                         ChangeColorPredLine(2);
                         ChangeColorLine(3);
+                        
                         Thread.Sleep(30);
                         SwapRectangles(i, j);
                         colors[i] = Color.Orange;
@@ -106,7 +108,7 @@ namespace Visualisation
                     //SetRedColor(i, j);
                 }
                 ChangeColorPredLine(1);
-                //SetGrayColor(i);
+                SetGrayColor(i);
                 colors[i] = Color.Gray;
             }
             ChangeColorPredLine(0);
@@ -118,8 +120,7 @@ namespace Visualisation
             int[] result = new int[array.Length];
             for (int i = 0; i < array.Length; i++)
             {
-                int j = i;
-                
+                int j = i;               
                 while (j > 0 && result[j - 1] > array[i])
                 {
                     for (int index = 0; index < colors.Length; index++)
@@ -129,13 +130,11 @@ namespace Visualisation
                             colors[index] = Color.Red;
                         }
                     }
-                    //SetOrangeColor(i, j - 1);
                     result[j] = result[j - 1];
                     SwapRectangles(j, j - 1);
                     colors[i] = Color.Orange;
                     colors[j - 1] = Color.Orange;
                     Thread.Sleep(300);
-                    //SetRedColor(i, j - 1);
                     DrawAllRectangles(numbers, rectangles, colors);
                     colors[i] = Color.Red;
                     colors[j - 1] = Color.Red;
@@ -244,6 +243,18 @@ namespace Visualisation
             buttonInsert.Enabled = false;
             buttonShaker.Enabled = true;
             buttonTimsort.Enabled = true;
+
+            richTextBox.Text = "for i==0 to N step 1\n" +
+                "begin\n" + 
+                "      while j>0 AND \n" + 
+                "      result[j-1]>array[i]\n" +
+                "      begin\n" +
+                "          result[j] == result[j-1]\n" +
+                "          Swap [j],[j - 1]\n" +
+                "          j--\n" +
+                "      end\n" +
+                "      result[j] == array[i]\n" + 
+                "end";
         }
 
         // Сортировка Шелла
@@ -322,7 +333,7 @@ namespace Visualisation
 
             for (int i = 0; i < array.Length; i++)
             {
-                int width = 50;
+                int width = 20;
                 int height = 0;
                 int top = 0;
                 if (array[i] < 0)
@@ -513,24 +524,12 @@ namespace Visualisation
 
             if (buttonBubble.Enabled == false)
                 sortType = BUBBLESORT;
-
-            if (buttonQuick.Enabled == false)
-                sortType = QUICKSORT;
-
-            if (buttonSelection.Enabled == false)
-                sortType = SELECTIONSORT;
-
-            if (buttonHeapsort.Enabled == false)
-                sortType = HEAPSORT;
-
+                       
             if (buttonInsert.Enabled == false)
                 sortType = INSERTSORT;
 
             if (buttonShaker.Enabled == false)
                 sortType = SHAKERSORT;
-
-            if (buttonTimsort.Enabled == false)
-                sortType = TIMSORT;
         }
 
         private void PrintArrayToTextField(int[] array)

@@ -40,15 +40,15 @@
             this.label2 = new System.Windows.Forms.Label();
             this.richTextBox = new System.Windows.Forms.RichTextBox();
             this.buttonBubble = new System.Windows.Forms.Button();
-            this.buttonQuick = new System.Windows.Forms.Button();
             this.buttonInsert = new System.Windows.Forms.Button();
-            this.buttonSelection = new System.Windows.Forms.Button();
-            this.buttonHeapsort = new System.Windows.Forms.Button();
             this.buttonShaker = new System.Windows.Forms.Button();
-            this.buttonTimsort = new System.Windows.Forms.Button();
             this.panelDraw = new System.Windows.Forms.Panel();
             this.buttonClear = new System.Windows.Forms.Button();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.buttonQuick = new System.Windows.Forms.Button();
+            this.buttonSelection = new System.Windows.Forms.Button();
+            this.buttonHeapsort = new System.Windows.Forms.Button();
+            this.buttonTimsort = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonInit
@@ -144,17 +144,6 @@
             this.buttonBubble.UseVisualStyleBackColor = true;
             this.buttonBubble.Click += new System.EventHandler(this.buttonBubble_Click);
             // 
-            // buttonQuick
-            // 
-            this.buttonQuick.Location = new System.Drawing.Point(0, 119);
-            this.buttonQuick.Name = "buttonQuick";
-            this.buttonQuick.Size = new System.Drawing.Size(124, 23);
-            this.buttonQuick.TabIndex = 1;
-            this.buttonQuick.Text = "Быстрая";
-            this.buttonQuick.UseVisualStyleBackColor = true;
-            this.buttonQuick.Visible = false;
-            this.buttonQuick.Click += new System.EventHandler(this.buttonQuick_Click);
-            // 
             // buttonInsert
             // 
             this.buttonInsert.Location = new System.Drawing.Point(0, 32);
@@ -165,28 +154,6 @@
             this.buttonInsert.UseVisualStyleBackColor = true;
             this.buttonInsert.Click += new System.EventHandler(this.buttonInsert_Click);
             // 
-            // buttonSelection
-            // 
-            this.buttonSelection.Location = new System.Drawing.Point(0, 148);
-            this.buttonSelection.Name = "buttonSelection";
-            this.buttonSelection.Size = new System.Drawing.Size(124, 23);
-            this.buttonSelection.TabIndex = 2;
-            this.buttonSelection.Text = "Выбором";
-            this.buttonSelection.UseVisualStyleBackColor = true;
-            this.buttonSelection.Visible = false;
-            this.buttonSelection.Click += new System.EventHandler(this.buttonSelection_Click);
-            // 
-            // buttonHeapsort
-            // 
-            this.buttonHeapsort.Location = new System.Drawing.Point(0, 177);
-            this.buttonHeapsort.Name = "buttonHeapsort";
-            this.buttonHeapsort.Size = new System.Drawing.Size(124, 23);
-            this.buttonHeapsort.TabIndex = 3;
-            this.buttonHeapsort.Text = "Пирамидальная";
-            this.buttonHeapsort.UseVisualStyleBackColor = true;
-            this.buttonHeapsort.Visible = false;
-            this.buttonHeapsort.Click += new System.EventHandler(this.buttonHeapsort_Click);
-            // 
             // buttonShaker
             // 
             this.buttonShaker.Location = new System.Drawing.Point(0, 61);
@@ -196,17 +163,6 @@
             this.buttonShaker.Text = "Перемешиванием";
             this.buttonShaker.UseVisualStyleBackColor = true;
             this.buttonShaker.Click += new System.EventHandler(this.buttonShaker_Click);
-            // 
-            // buttonTimsort
-            // 
-            this.buttonTimsort.Location = new System.Drawing.Point(0, 90);
-            this.buttonTimsort.Name = "buttonTimsort";
-            this.buttonTimsort.Size = new System.Drawing.Size(124, 23);
-            this.buttonTimsort.TabIndex = 6;
-            this.buttonTimsort.Text = "TimSort";
-            this.buttonTimsort.UseVisualStyleBackColor = true;
-            this.buttonTimsort.Visible = false;
-            this.buttonTimsort.Click += new System.EventHandler(this.buttonTimsort_Click);
             // 
             // panelDraw
             // 
@@ -231,6 +187,50 @@
             // 
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
+            // buttonQuick
+            // 
+            this.buttonQuick.Location = new System.Drawing.Point(0, 119);
+            this.buttonQuick.Name = "buttonQuick";
+            this.buttonQuick.Size = new System.Drawing.Size(124, 23);
+            this.buttonQuick.TabIndex = 1;
+            this.buttonQuick.Text = "Быстрая";
+            this.buttonQuick.UseVisualStyleBackColor = true;
+            this.buttonQuick.Visible = false;
+            this.buttonQuick.Click += new System.EventHandler(this.buttonQuick_Click);
+            // 
+            // buttonSelection
+            // 
+            this.buttonSelection.Location = new System.Drawing.Point(0, 148);
+            this.buttonSelection.Name = "buttonSelection";
+            this.buttonSelection.Size = new System.Drawing.Size(124, 23);
+            this.buttonSelection.TabIndex = 2;
+            this.buttonSelection.Text = "Выбором";
+            this.buttonSelection.UseVisualStyleBackColor = true;
+            this.buttonSelection.Visible = false;
+            this.buttonSelection.Click += new System.EventHandler(this.buttonSelection_Click);
+            // 
+            // buttonHeapsort
+            // 
+            this.buttonHeapsort.Location = new System.Drawing.Point(0, 177);
+            this.buttonHeapsort.Name = "buttonHeapsort";
+            this.buttonHeapsort.Size = new System.Drawing.Size(124, 23);
+            this.buttonHeapsort.TabIndex = 3;
+            this.buttonHeapsort.Text = "Пирамидальная";
+            this.buttonHeapsort.UseVisualStyleBackColor = true;
+            this.buttonHeapsort.Visible = false;
+            this.buttonHeapsort.Click += new System.EventHandler(this.buttonHeapsort_Click);
+            // 
+            // buttonTimsort
+            // 
+            this.buttonTimsort.Location = new System.Drawing.Point(0, 90);
+            this.buttonTimsort.Name = "buttonTimsort";
+            this.buttonTimsort.Size = new System.Drawing.Size(124, 23);
+            this.buttonTimsort.TabIndex = 6;
+            this.buttonTimsort.Text = "TimSort";
+            this.buttonTimsort.UseVisualStyleBackColor = true;
+            this.buttonTimsort.Visible = false;
+            this.buttonTimsort.Click += new System.EventHandler(this.buttonTimsort_Click);
             // 
             // FormSort
             // 
@@ -273,15 +273,15 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.RichTextBox richTextBox;
         private System.Windows.Forms.Button buttonBubble;
-        private System.Windows.Forms.Button buttonQuick;
         private System.Windows.Forms.Button buttonInsert;
-        private System.Windows.Forms.Button buttonSelection;
-        private System.Windows.Forms.Button buttonHeapsort;
         private System.Windows.Forms.Button buttonShaker;
-        private System.Windows.Forms.Button buttonTimsort;
         private System.Windows.Forms.Panel panelDraw;
         private System.Windows.Forms.Button buttonClear;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.Button buttonQuick;
+        private System.Windows.Forms.Button buttonSelection;
+        private System.Windows.Forms.Button buttonHeapsort;
+        private System.Windows.Forms.Button buttonTimsort;
     }
 }
 

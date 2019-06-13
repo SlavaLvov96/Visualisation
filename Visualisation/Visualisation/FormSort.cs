@@ -22,7 +22,7 @@ namespace Visualisation
         private const int SELECTIONSORT = 2;
         private const int HEAPSORT = 3;
         private const int INSERTSORT = 4;
-        private const int SHELLSORT = 5;
+        private const int SHAKERSORT = 5;
         private const int TIMSORT = 6;
 
         private int sortType;
@@ -50,7 +50,7 @@ namespace Visualisation
             buttonSelection.Enabled = true;
             buttonHeapsort.Enabled = true;
             buttonInsert.Enabled = true;
-            buttonShell.Enabled = true;
+            buttonShaker.Enabled = true;
             buttonTimsort.Enabled = true;
 
             richTextBox.Text = "for i=0 to N-1 step 1\n" +
@@ -112,6 +112,92 @@ namespace Visualisation
             ChangeColorPredLine(0);
             return input;
         }
+
+        public int[] InsertionSort(int[] array)
+        {
+            int[] result = new int[array.Length];
+            for (int i = 0; i < array.Length; i++)
+            {
+                int j = i;
+                
+                while (j > 0 && result[j - 1] > array[i])
+                {
+                    for (int index = 0; index < colors.Length; index++)
+                    {
+                        if (colors[index] == Color.Orange)
+                        {
+                            colors[index] = Color.Red;
+                        }
+                    }
+                    //SetOrangeColor(i, j - 1);
+                    result[j] = result[j - 1];
+                    SwapRectangles(j, j - 1);
+                    colors[i] = Color.Orange;
+                    colors[j - 1] = Color.Orange;
+                    Thread.Sleep(300);
+                    //SetRedColor(i, j - 1);
+                    DrawAllRectangles(numbers, rectangles, colors);
+                    colors[i] = Color.Red;
+                    colors[j - 1] = Color.Red;
+                    j--;
+                }
+                result[j] = array[i];
+            }
+            return result;
+        }
+
+        private int[] ShakerSort(int[] myint)
+        {
+            int beg, end;
+            int count = 0;
+            for (int i = 0; i < myint.Length / 2; i++)
+            {
+                beg = 0;
+                end = myint.Length - 1;
+                do
+                {
+                    //SetOrangeColor(beg, beg + 1);
+                    count += 2;
+                    if (myint[beg] > myint[beg + 1])
+                    {
+                        Swap(myint, beg, beg + 1);
+                        SwapRectangles(beg, beg + 1);
+                    }
+                    colors[beg] = Color.Orange;
+                    colors[beg + 1] = Color.Orange;
+                    Thread.Sleep(400);
+                    SetRedColor(beg, beg + 1);
+                    colors[beg] = Color.Red;
+                    colors[beg + 1] = Color.Red;
+                    beg++;
+                    //SetOrangeColor(end, end - 1);
+                    if (myint[end - 1] > myint[end])
+                    {
+                        Swap(myint, end - 1, end);
+                        SwapRectangles(end - 1, end);
+                    }
+                    colors[end] = Color.Orange;
+                    colors[end - 1] = Color.Orange;
+                    Thread.Sleep(400);
+                    //SetRedColor(end, end - 1);
+                    colors[end] = Color.Red;
+                    colors[end - 1] = Color.Red;
+                    end--;
+                }
+                while (beg <= end);
+            }
+            return myint;
+        }
+        private void Swap(int[] myint, int i, int j)
+        {
+            int glass;
+            //Rectangle glass = new Rectangle();
+            glass = myint[i];
+            myint[i] = myint[j];
+            myint[j] = glass;
+            Thread.Sleep(300);
+            SwapRectangles(i, j);
+        }
         // Быстрая сортировка
         private void buttonQuick_Click(object sender, EventArgs e)
         {
@@ -120,7 +206,7 @@ namespace Visualisation
             buttonSelection.Enabled = true;
             buttonHeapsort.Enabled = true;
             buttonInsert.Enabled = true;
-            buttonShell.Enabled = true;
+            buttonShaker.Enabled = true;
             buttonTimsort.Enabled = true;
         }
 
@@ -132,7 +218,7 @@ namespace Visualisation
             buttonSelection.Enabled = false;
             buttonHeapsort.Enabled = true;
             buttonInsert.Enabled = true;
-            buttonShell.Enabled = true;
+            buttonShaker.Enabled = true;
             buttonTimsort.Enabled = true;
         }
 
@@ -144,7 +230,7 @@ namespace Visualisation
             buttonSelection.Enabled = true;
             buttonHeapsort.Enabled = false;
             buttonInsert.Enabled = true;
-            buttonShell.Enabled = true;
+            buttonShaker.Enabled = true;
             buttonTimsort.Enabled = true;
         }
 
@@ -156,19 +242,19 @@ namespace Visualisation
             buttonSelection.Enabled = true;
             buttonHeapsort.Enabled = true;
             buttonInsert.Enabled = false;
-            buttonShell.Enabled = true;
+            buttonShaker.Enabled = true;
             buttonTimsort.Enabled = true;
         }
 
         // Сортировка Шелла
-        private void buttonShell_Click(object sender, EventArgs e)
+        private void buttonShaker_Click(object sender, EventArgs e)
         {
             buttonBubble.Enabled = true;
             buttonQuick.Enabled = true;
             buttonSelection.Enabled = true;
             buttonHeapsort.Enabled = true;
             buttonInsert.Enabled = true;
-            buttonShell.Enabled = false;
+            buttonShaker.Enabled = false;
             buttonTimsort.Enabled = true;
         }
 
@@ -180,7 +266,7 @@ namespace Visualisation
             buttonSelection.Enabled = true;
             buttonHeapsort.Enabled = true;
             buttonInsert.Enabled = true;
-            buttonShell.Enabled = true;
+            buttonShaker.Enabled = true;
             buttonTimsort.Enabled = false;
         }
 
@@ -196,11 +282,9 @@ namespace Visualisation
         private int[] GetNumbersFromTextBox()
         {
             string inputNum = textBoxInText.Text;
-
+            
             if (inputNum.Equals(""))
-            {
-                //Random random = new Random();
-                //int randomNumber = random.Next(0, 100);
+            {              
                 inputNum = "6 4 7 2 8 7 9 5 6 8 1";
                 textBoxInText.Text = inputNum;
             }
@@ -404,12 +488,12 @@ namespace Visualisation
                     case BUBBLESORT:
                         numbers = BubbleSort(numbers);
                         break;
-                    /*case INSERTION_SORT:
+                    case INSERTSORT:
                         numbers = InsertionSort(numbers);
                         break;
-                    case SHAKE_SORT:
+                    case SHAKERSORT:
                         numbers = ShakerSort(numbers);
-                        break;*/
+                        break;
                 }
 
                 dispUI.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
@@ -442,8 +526,8 @@ namespace Visualisation
             if (buttonInsert.Enabled == false)
                 sortType = INSERTSORT;
 
-            if (buttonShell.Enabled == false)
-                sortType = SHELLSORT;
+            if (buttonShaker.Enabled == false)
+                sortType = SHAKERSORT;
 
             if (buttonTimsort.Enabled == false)
                 sortType = TIMSORT;

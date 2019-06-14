@@ -47,6 +47,20 @@ namespace Visualisation
             PointF point;
             public int R = 20; //радиус окружности вершины
 
+            public Pen GetRedPen()
+            {
+                redPen = new Pen(Color.Red);
+                redPen.Width = 2;
+                return redPen;
+            }
+
+            public Pen GetGreenPen()
+            {
+                greenPen = new Pen(Color.Green);
+                greenPen.Width = 2;
+                return greenPen;
+            }
+
             // инициализация объектов рисования
             public DrawGraph(int width, int height)
             {
@@ -84,9 +98,9 @@ namespace Visualisation
             }
 
             //функция отрисовки окружности 
-            public void drawSelectedVertex(int x, int y)
+            public void drawSelectedVertex(Vertex vertex, Pen pen)
             {
-                gr.DrawEllipse(redPen, (x - R), (y - R), 2 * R, 2 * R);
+                gr.DrawEllipse(pen, (vertex.X - R), (vertex.Y - R), 2 * R, 2 * R);
             }
 
             //функция отрисовки Ребер
@@ -163,7 +177,7 @@ namespace Visualisation
                 }
             }
         }
-    
+    /*
         //кнопка - выбрать вершину
         private void selectButton_Click_1(object sender, EventArgs e)
         {
@@ -218,22 +232,9 @@ namespace Visualisation
         //кнопка - удалить граф
         private void deleteALLButton_Click_1(object sender, EventArgs e)
         {
-            selectButton.Enabled = true;
-            drawVertexButton.Enabled = true;
-            drawEdgeButton.Enabled = true;
-            deleteButton.Enabled = true;
-            const string message = "Вы действительно хотите полностью удалить граф?";
-            const string caption = "Удаление";
-            var MBSave = MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (MBSave == DialogResult.Yes)
-            {
-                V.Clear();
-                E.Clear();
-                G.clearSheet();
-                sheet.Image = G.GetBitmap();
-            }
-        }
 
+        }
+        */
         //кнопка - матрица смежности
         private void buttonAdj_Click_1(object sender, EventArgs e)
         {
@@ -248,9 +249,10 @@ namespace Visualisation
 
         private void sheet_MouseClick(object sender, MouseEventArgs e)
             {
+            /*
                 //нажата кнопка "выбрать вершину", ищем степень вершины
                 if (selectButton.Enabled == false)
-                {
+                {*/
                     for (int i = 0; i < V.Count; i++)
                     {
                         if (Math.Pow((V[i].X - e.X), 2) + Math.Pow((V[i].Y - e.Y), 2) <= G.R * G.R)
@@ -264,7 +266,7 @@ namespace Visualisation
                             }
                             if (selected1 == -1)
                             {
-                                G.drawSelectedVertex(V[i].X, V[i].Y);
+                                G.drawSelectedVertex(V[i], G.GetRedPen());
                                 selected1 = i;
                                 sheet.Image = G.GetBitmap();
                                 createAdjAndOut();
@@ -276,7 +278,7 @@ namespace Visualisation
                                 break;
                             }
                         }
-                    }
+                    }/*
                 }
                 //нажата кнопка "рисовать вершину"
                 if (drawVertexButton.Enabled == false)
@@ -296,14 +298,14 @@ namespace Visualisation
                             {
                                 if (selected1 == -1)
                                 {
-                                    G.drawSelectedVertex(V[i].X, V[i].Y);
+                                    G.drawSelectedVertex(V[i], G.GetRedPen());
                                     selected1 = i;
                                     sheet.Image = G.GetBitmap();
                                     break;
                                 }
                                 if (selected2 == -1)
                                 {
-                                    G.drawSelectedVertex(V[i].X, V[i].Y);
+                                    G.drawSelectedVertex(V[i], G.GetRedPen());
                                     selected2 = i;
                                     E.Add(new Edge(selected1, selected2));
                                     G.drawEdge(V[selected1], V[selected2], E[E.Count - 1], E.Count - 1);
@@ -391,7 +393,7 @@ namespace Visualisation
                         G.drawALLGraph(V, E);
                         sheet.Image = G.GetBitmap();
                     }
-                }
+                }*/
             }
 
             //создание матрицы смежности и вывод в листбокс
@@ -441,7 +443,7 @@ namespace Visualisation
             private void cycleButton_Click_1(object sender, EventArgs e)
             {
                 listBox2.Items.Clear();
-            /*
+            
                 //1-white 2-black
                 int[] color = new int[V.Count];
                 for (int i = 0; i < V.Count; i++)
@@ -452,12 +454,12 @@ namespace Visualisation
                     cycle.Add(i + 1);
                     DFScycle(i, i, E, color, -1, cycle);
                 }
-                */
-
+                
+                /*
                 for (int i = 0; i < V.Count; i++)
                 {
                     
-                }
+                }*/
             }
 
             //поиск элементарных цепей
@@ -466,40 +468,64 @@ namespace Visualisation
                 listBox2.Items.Clear();
                 //1-white 2-black
                 int[] color = new int[V.Count];
-                for (int i = 0; i < V.Count - 1; i++)
-                    for (int j = i + 1; j < V.Count; j++)
-                    {
-                        for (int k = 0; k < V.Count; k++)
-                            color[k] = 1;
-                        DFSchain(i, j, E, color, (i + 1).ToString());
-                    }
-            }
+            //for (int i = 0; i < V.Count - 1; i++)
+            //    for (int j = i + 1; j < V.Count; j++)
+            //    {
+            //        for (int k = 0; k < V.Count; k++)
+            //            color[k] = 1;
+            //        DFSchain(i, j, E, color, (i + 1).ToString());
+            //    }
+            //DFSchain(0, 4, E, color, (1).ToString());
+            for (int i = 0; i < 1; i++)
+                for (int j = V.Count-1; j < V.Count; j++)
+                {
+                    for (int k = 0; k < V.Count; k++)
+                        color[k] = 1;
+                    DFSchain(i, j, E, color, (i + 1).ToString());
+                }
+        }
 
             //обход в глубину. поиск элементарных цепей. (1-white 2-black)
             private void DFSchain(int u, int endV, List<Edge> E, int[] color, string s)
             {
-                Thread.Sleep(50);
-                //вершину не следует перекрашивать, если u == endV (возможно в нее есть несколько путей)
-                if (u != endV)
-                    color[u] = 2;
-                else
-                {
-                    listBox2.Items.Add(s);
-                    return;
-                }
+           
+            //вершину не следует перекрашивать, если u == endV (возможно в нее есть несколько путей)
+            if (u != endV)
+            {
+                color[u] = 2;
+            }
+            else
+            {
+                listBox2.Items.Add(s);
+                return;
+            }
                 for (int w = 0; w < E.Count; w++)
                 {
-                    if (color[E[w].To] == 1 && E[w].From == u)
+                Thread.Sleep(10);
+                if (color[E[w].To] == 1 && E[w].From == u)
                     {
                         DFSchain(E[w].To, endV, E, color, s + "-" + (E[w].To + 1).ToString());
                         color[E[w].To] = 1;
-                    }
+                    G.drawALLGraph(V, E);
+                    G.drawSelectedVertex(V[(E[w].To)], G.GetGreenPen());
+                    sheet.Image = G.GetBitmap();
+                    Thread.Sleep(10);
+                }
                     else if (color[E[w].From] == 1 && E[w].To == u)
                     {
                         DFSchain(E[w].From, endV, E, color, s + "-" + (E[w].From + 1).ToString());
                         color[E[w].From] = 1;
-                    }
+                    G.drawALLGraph(V, E);
+                    G.drawSelectedVertex(V[(E[w].From)], G.GetGreenPen());
+                    sheet.Image = G.GetBitmap();
+                    Thread.Sleep(10);
                 }
+
+                
+                //listBox2.Items.Add(s);
+                //return;
+            }
+                
             }
 
             //поиск элементарных циклов
@@ -563,6 +589,11 @@ namespace Visualisation
 
         public void Wave(int start, int finish)
         {           
+
+        }
+
+        public void DFSsearch(int start, int finish)
+        {
 
         }
 

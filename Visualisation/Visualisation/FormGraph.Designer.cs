@@ -40,6 +40,7 @@
             this.comboBoxNum = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.richTextBox = new System.Windows.Forms.RichTextBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -47,14 +48,8 @@
             this.chainButton = new System.Windows.Forms.Button();
             this.buttonInc = new System.Windows.Forms.Button();
             this.buttonAdj = new System.Windows.Forms.Button();
-            this.deleteALLButton = new System.Windows.Forms.Button();
-            this.deleteButton = new System.Windows.Forms.Button();
-            this.drawEdgeButton = new System.Windows.Forms.Button();
-            this.drawVertexButton = new System.Windows.Forms.Button();
-            this.selectButton = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.richTextBox = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.sheet)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox7.SuspendLayout();
@@ -69,7 +64,7 @@
             // 
             this.buttonPrev.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonPrev.Image = ((System.Drawing.Image)(resources.GetObject("buttonPrev.Image")));
-            this.buttonPrev.Location = new System.Drawing.Point(6, 28);
+            this.buttonPrev.Location = new System.Drawing.Point(6, 10);
             this.buttonPrev.Name = "buttonPrev";
             this.buttonPrev.Size = new System.Drawing.Size(50, 50);
             this.buttonPrev.TabIndex = 7;
@@ -80,7 +75,7 @@
             // 
             this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
-            this.button2.Location = new System.Drawing.Point(62, 28);
+            this.button2.Location = new System.Drawing.Point(62, 10);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(50, 50);
             this.button2.TabIndex = 8;
@@ -91,7 +86,7 @@
             // 
             this.buttonNext.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonNext.Image = ((System.Drawing.Image)(resources.GetObject("buttonNext.Image")));
-            this.buttonNext.Location = new System.Drawing.Point(118, 28);
+            this.buttonNext.Location = new System.Drawing.Point(118, 10);
             this.buttonNext.Name = "buttonNext";
             this.buttonNext.Size = new System.Drawing.Size(50, 50);
             this.buttonNext.TabIndex = 9;
@@ -104,7 +99,7 @@
             this.sheet.Location = new System.Drawing.Point(3, 16);
             this.sheet.Margin = new System.Windows.Forms.Padding(2);
             this.sheet.Name = "sheet";
-            this.sheet.Size = new System.Drawing.Size(578, 315);
+            this.sheet.Size = new System.Drawing.Size(743, 424);
             this.sheet.TabIndex = 11;
             this.sheet.TabStop = false;
             this.sheet.MouseClick += new System.Windows.Forms.MouseEventHandler(this.sheet_MouseClick);
@@ -135,7 +130,7 @@
             "Эйлеров цикл"});
             this.comboBoxGraph.Location = new System.Drawing.Point(3, 16);
             this.comboBoxGraph.Name = "comboBoxGraph";
-            this.comboBoxGraph.Size = new System.Drawing.Size(147, 21);
+            this.comboBoxGraph.Size = new System.Drawing.Size(185, 21);
             this.comboBoxGraph.TabIndex = 15;
             this.comboBoxGraph.Text = "Виды графов:";
             this.comboBoxGraph.SelectedIndexChanged += new System.EventHandler(this.comboBoxGraph_SelectedIndexChanged);
@@ -146,9 +141,9 @@
             this.groupBox1.Controls.Add(this.groupBox6);
             this.groupBox1.Controls.Add(this.groupBox5);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.groupBox1.Location = new System.Drawing.Point(737, 0);
+            this.groupBox1.Location = new System.Drawing.Point(939, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(261, 447);
+            this.groupBox1.Size = new System.Drawing.Size(261, 604);
             this.groupBox1.TabIndex = 16;
             this.groupBox1.TabStop = false;
             // 
@@ -156,8 +151,8 @@
             // 
             this.groupBox7.Controls.Add(this.comboBoxNum);
             this.groupBox7.Controls.Add(this.button1);
-            this.groupBox7.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox7.Location = new System.Drawing.Point(3, 312);
+            this.groupBox7.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox7.Location = new System.Drawing.Point(3, 353);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(255, 51);
             this.groupBox7.TabIndex = 13;
@@ -196,9 +191,19 @@
             this.groupBox6.Location = new System.Drawing.Point(3, 16);
             this.groupBox6.MaximumSize = new System.Drawing.Size(257, 600);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(255, 299);
+            this.groupBox6.Size = new System.Drawing.Size(255, 337);
             this.groupBox6.TabIndex = 12;
             this.groupBox6.TabStop = false;
+            // 
+            // richTextBox
+            // 
+            this.richTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBox.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.richTextBox.Location = new System.Drawing.Point(3, 16);
+            this.richTextBox.Name = "richTextBox";
+            this.richTextBox.Size = new System.Drawing.Size(249, 318);
+            this.richTextBox.TabIndex = 14;
+            this.richTextBox.Text = "";
             // 
             // groupBox5
             // 
@@ -206,9 +211,9 @@
             this.groupBox5.Controls.Add(this.buttonPrev);
             this.groupBox5.Controls.Add(this.button2);
             this.groupBox5.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox5.Location = new System.Drawing.Point(3, 363);
+            this.groupBox5.Location = new System.Drawing.Point(3, 536);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(255, 81);
+            this.groupBox5.Size = new System.Drawing.Size(255, 65);
             this.groupBox5.TabIndex = 11;
             this.groupBox5.TabStop = false;
             // 
@@ -216,9 +221,9 @@
             // 
             this.listBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.listBox2.FormattingEnabled = true;
-            this.listBox2.Location = new System.Drawing.Point(3, 28);
+            this.listBox2.Location = new System.Drawing.Point(3, 32);
             this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(578, 82);
+            this.listBox2.Size = new System.Drawing.Size(742, 134);
             this.listBox2.TabIndex = 0;
             // 
             // groupBox2
@@ -227,24 +232,19 @@
             this.groupBox2.Controls.Add(this.chainButton);
             this.groupBox2.Controls.Add(this.buttonInc);
             this.groupBox2.Controls.Add(this.buttonAdj);
-            this.groupBox2.Controls.Add(this.deleteALLButton);
-            this.groupBox2.Controls.Add(this.deleteButton);
-            this.groupBox2.Controls.Add(this.drawEdgeButton);
-            this.groupBox2.Controls.Add(this.drawVertexButton);
-            this.groupBox2.Controls.Add(this.selectButton);
             this.groupBox2.Controls.Add(this.comboBoxGraph);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupBox2.Location = new System.Drawing.Point(0, 0);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(153, 447);
+            this.groupBox2.Size = new System.Drawing.Size(191, 604);
             this.groupBox2.TabIndex = 17;
             this.groupBox2.TabStop = false;
             // 
             // cycleButton
             // 
-            this.cycleButton.Location = new System.Drawing.Point(81, 371);
+            this.cycleButton.Location = new System.Drawing.Point(98, 520);
             this.cycleButton.Name = "cycleButton";
-            this.cycleButton.Size = new System.Drawing.Size(69, 69);
+            this.cycleButton.Size = new System.Drawing.Size(86, 79);
             this.cycleButton.TabIndex = 24;
             this.cycleButton.Text = "поиск элементарных циклов";
             this.cycleButton.UseVisualStyleBackColor = true;
@@ -252,9 +252,9 @@
             // 
             // chainButton
             // 
-            this.chainButton.Location = new System.Drawing.Point(6, 371);
+            this.chainButton.Location = new System.Drawing.Point(6, 520);
             this.chainButton.Name = "chainButton";
-            this.chainButton.Size = new System.Drawing.Size(69, 69);
+            this.chainButton.Size = new System.Drawing.Size(86, 79);
             this.chainButton.TabIndex = 23;
             this.chainButton.Text = "поиск элементарных цепей";
             this.chainButton.UseVisualStyleBackColor = true;
@@ -262,9 +262,9 @@
             // 
             // buttonInc
             // 
-            this.buttonInc.Location = new System.Drawing.Point(81, 298);
+            this.buttonInc.Location = new System.Drawing.Point(98, 435);
             this.buttonInc.Name = "buttonInc";
-            this.buttonInc.Size = new System.Drawing.Size(69, 69);
+            this.buttonInc.Size = new System.Drawing.Size(86, 79);
             this.buttonInc.TabIndex = 22;
             this.buttonInc.Text = "матрица инцидентности";
             this.buttonInc.UseVisualStyleBackColor = true;
@@ -272,101 +272,40 @@
             // 
             // buttonAdj
             // 
-            this.buttonAdj.Location = new System.Drawing.Point(6, 298);
+            this.buttonAdj.Location = new System.Drawing.Point(6, 435);
             this.buttonAdj.Name = "buttonAdj";
-            this.buttonAdj.Size = new System.Drawing.Size(69, 69);
+            this.buttonAdj.Size = new System.Drawing.Size(86, 79);
             this.buttonAdj.TabIndex = 21;
             this.buttonAdj.Text = "матрица смежности";
             this.buttonAdj.UseVisualStyleBackColor = true;
             this.buttonAdj.Click += new System.EventHandler(this.buttonAdj_Click_1);
-            // 
-            // deleteALLButton
-            // 
-            this.deleteALLButton.Location = new System.Drawing.Point(6, 247);
-            this.deleteALLButton.Name = "deleteALLButton";
-            this.deleteALLButton.Size = new System.Drawing.Size(141, 45);
-            this.deleteALLButton.TabIndex = 20;
-            this.deleteALLButton.Text = "Отчистить";
-            this.deleteALLButton.UseVisualStyleBackColor = true;
-            this.deleteALLButton.Click += new System.EventHandler(this.deleteALLButton_Click_1);
-            // 
-            // deleteButton
-            // 
-            this.deleteButton.Location = new System.Drawing.Point(6, 196);
-            this.deleteButton.Name = "deleteButton";
-            this.deleteButton.Size = new System.Drawing.Size(141, 45);
-            this.deleteButton.TabIndex = 19;
-            this.deleteButton.Text = "Удалить";
-            this.deleteButton.UseVisualStyleBackColor = true;
-            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click_1);
-            // 
-            // drawEdgeButton
-            // 
-            this.drawEdgeButton.Location = new System.Drawing.Point(6, 145);
-            this.drawEdgeButton.Name = "drawEdgeButton";
-            this.drawEdgeButton.Size = new System.Drawing.Size(141, 45);
-            this.drawEdgeButton.TabIndex = 18;
-            this.drawEdgeButton.Text = "Связь";
-            this.drawEdgeButton.UseVisualStyleBackColor = true;
-            this.drawEdgeButton.Click += new System.EventHandler(this.drawEdgeButton_Click_1);
-            // 
-            // drawVertexButton
-            // 
-            this.drawVertexButton.Location = new System.Drawing.Point(6, 94);
-            this.drawVertexButton.Name = "drawVertexButton";
-            this.drawVertexButton.Size = new System.Drawing.Size(141, 45);
-            this.drawVertexButton.TabIndex = 17;
-            this.drawVertexButton.Text = "Вершина";
-            this.drawVertexButton.UseVisualStyleBackColor = true;
-            this.drawVertexButton.Click += new System.EventHandler(this.drawVertexButton_Click_1);
-            // 
-            // selectButton
-            // 
-            this.selectButton.Location = new System.Drawing.Point(6, 43);
-            this.selectButton.Name = "selectButton";
-            this.selectButton.Size = new System.Drawing.Size(141, 45);
-            this.selectButton.TabIndex = 16;
-            this.selectButton.Text = "Выделение";
-            this.selectButton.UseVisualStyleBackColor = true;
-            this.selectButton.Click += new System.EventHandler(this.selectButton_Click_1);
             // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.listBox2);
             this.groupBox3.Controls.Add(this.label2);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox3.Location = new System.Drawing.Point(153, 334);
+            this.groupBox3.Location = new System.Drawing.Point(191, 435);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(584, 113);
+            this.groupBox3.Size = new System.Drawing.Size(748, 169);
             this.groupBox3.TabIndex = 18;
             this.groupBox3.TabStop = false;
             // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.sheet);
-            this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox4.Location = new System.Drawing.Point(153, 0);
+            this.groupBox4.Location = new System.Drawing.Point(190, 0);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(584, 334);
+            this.groupBox4.Size = new System.Drawing.Size(749, 443);
             this.groupBox4.TabIndex = 19;
             this.groupBox4.TabStop = false;
-            // 
-            // richTextBox
-            // 
-            this.richTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.richTextBox.Location = new System.Drawing.Point(3, 16);
-            this.richTextBox.Name = "richTextBox";
-            this.richTextBox.Size = new System.Drawing.Size(249, 280);
-            this.richTextBox.TabIndex = 14;
-            this.richTextBox.Text = "";
             // 
             // FormGraph
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Honeydew;
-            this.ClientSize = new System.Drawing.Size(998, 447);
+            this.ClientSize = new System.Drawing.Size(1200, 604);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -409,11 +348,6 @@
         private System.Windows.Forms.Button chainButton;
         private System.Windows.Forms.Button buttonInc;
         private System.Windows.Forms.Button buttonAdj;
-        private System.Windows.Forms.Button deleteALLButton;
-        private System.Windows.Forms.Button deleteButton;
-        private System.Windows.Forms.Button drawEdgeButton;
-        private System.Windows.Forms.Button drawVertexButton;
-        private System.Windows.Forms.Button selectButton;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ComboBox comboBoxNum;
         private System.Windows.Forms.RichTextBox richTextBox;

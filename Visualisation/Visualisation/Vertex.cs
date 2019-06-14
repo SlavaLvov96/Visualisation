@@ -18,7 +18,6 @@ namespace Visualisation
         {
             X = x;
             Y = y;
-           
         }
     }
 }

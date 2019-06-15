@@ -439,7 +439,8 @@ namespace Visualisation
                     listBox2.Items.Clear();
             }
 
-            //поиск элементарных циклов
+        /*
+        //поиск элементарных циклов
             private void cycleButton_Click_1(object sender, EventArgs e)
             {
                 listBox2.Items.Clear();
@@ -454,44 +455,42 @@ namespace Visualisation
                     cycle.Add(i + 1);
                     DFScycle(i, i, E, color, -1, cycle);
                 }
-                
-                /*
-                for (int i = 0; i < V.Count; i++)
-                {
-                    
-                }*/
             }
+    */
 
-            //поиск элементарных цепей
-            private void chainButton_Click(object sender, EventArgs e)
-            {
-                listBox2.Items.Clear();
-                //1-white 2-black
-                int[] color = new int[V.Count];
-            //for (int i = 0; i < V.Count - 1; i++)
-            //    for (int j = i + 1; j < V.Count; j++)
-            //    {
-            //        for (int k = 0; k < V.Count; k++)
-            //            color[k] = 1;
-            //        DFSchain(i, j, E, color, (i + 1).ToString());
-            //    }
-            //DFSchain(0, 4, E, color, (1).ToString());
-            for (int i = 0; i < 1; i++)
-                for (int j = V.Count-1; j < V.Count; j++)
-                {
-                    for (int k = 0; k < V.Count; k++)
-                        color[k] = 1;
-                    DFSchain(i, j, E, color, (i + 1).ToString());
+        /*
+          //поиск элементарных цепей
+                private void chainButton_Click(object sender, EventArgs e)
+                    {
+                        listBox2.Items.Clear();
+                        //1-white 2-black
+                        int[] color = new int[V.Count];
+                    //for (int i = 0; i < V.Count - 1; i++)
+                    //    for (int j = i + 1; j < V.Count; j++)
+                    //    {
+                    //        for (int k = 0; k < V.Count; k++)
+                    //            color[k] = 1;
+                    //        DFSchain(i, j, E, color, (i + 1).ToString());
+                    //    }
+                    //DFSchain(0, 4, E, color, (1).ToString());
+                    for (int i = 0; i < 1; i++)
+                        for (int j = V.Count-1; j < V.Count; j++)
+                        {
+                            for (int k = 0; k < V.Count; k++)
+                                color[k] = 1;
+                            DFSchain(i, j, E, color, (i + 1).ToString());
+                        }
                 }
-        }
+        */
 
-            //обход в глубину. поиск элементарных цепей. (1-white 2-black)
-            private void DFSchain(int u, int endV, List<Edge> E, int[] color, string s)
-            {
-           
+
+        //обход в глубину. поиск элементарных цепей. (1-white 2-black)
+        private void DFSchain(int u, int endV, List<Edge> E, int[] color, string s)
+        {
             //вершину не следует перекрашивать, если u == endV (возможно в нее есть несколько путей)
             if (u != endV)
             {
+                //listBox2.Items.Add(s);
                 color[u] = 2;
             }
             else
@@ -501,33 +500,36 @@ namespace Visualisation
             }
                 for (int w = 0; w < E.Count; w++)
                 {
-                Thread.Sleep(10);
+                Thread.Sleep(100);
                 if (color[E[w].To] == 1 && E[w].From == u)
-                    {
-                        DFSchain(E[w].To, endV, E, color, s + "-" + (E[w].To + 1).ToString());
+                {
+                    G.clearSheet();
+                    G.drawALLGraph(V, E);
+                    G.drawSelectedVertex(V[E[w].From], G.GetRedPen());
+                    sheet.Image = G.GetBitmap();
+                    Thread.Sleep(500);
+                    DFSchain(E[w].To, endV, E, color, s + "-" + (E[w].To + 1).ToString());
                         color[E[w].To] = 1;
+                    }
+                        else if (color[E[w].From] == 1 && E[w].To == u)
+                        {
+                    G.clearSheet();
                     G.drawALLGraph(V, E);
-                    G.drawSelectedVertex(V[(E[w].To)], G.GetGreenPen());
+                    G.drawSelectedVertex(V[E[w].From], G.GetRedPen());
                     sheet.Image = G.GetBitmap();
-                    Thread.Sleep(10);
-                }
-                    else if (color[E[w].From] == 1 && E[w].To == u)
-                    {
-                        DFSchain(E[w].From, endV, E, color, s + "-" + (E[w].From + 1).ToString());
-                        color[E[w].From] = 1;
-                    G.drawALLGraph(V, E);
-                    G.drawSelectedVertex(V[(E[w].From)], G.GetGreenPen());
-                    sheet.Image = G.GetBitmap();
-                    Thread.Sleep(10);
-                }
+                    Thread.Sleep(500);
+                    DFSchain(E[w].From, endV, E, color, s + "-" + (E[w].From + 1).ToString());
+                            color[E[w].From] = 1;
+                        }
 
-                
-                //listBox2.Items.Add(s);
-                //return;
-            }
-                
-            }
+                    /*
+                    listBox2.Items.Add(s);
+                    return;*/
+                }
+            return;
 
+        }
+        /*
             //поиск элементарных циклов
             //обход в глубину. поиск элементарных циклов. (1-white 2-black)
             //Вершину, для которой ищем цикл, перекрашивать в черный не будем. Поэтому, для избежания неправильной
@@ -585,17 +587,7 @@ namespace Visualisation
                         color[E[w].From] = 1;
                     }
                 }
-            }
-
-        public void Wave(int start, int finish)
-        {           
-
-        }
-
-        public void DFSsearch(int start, int finish)
-        {
-
-        }
+            }*/
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -773,6 +765,10 @@ namespace Visualisation
                         };
                         break;
                 }
+                for (int i = 0; i < V.Count-1; i++)
+                {
+                    comboBoxStart.Items.Add(i + 1);
+                }
                 G.drawALLGraph(V, E);
             }
             
@@ -781,61 +777,37 @@ namespace Visualisation
         private void comboBoxGraph_SelectedIndexChanged(object sender, EventArgs e)
         {
             /*
-             *  Крускала
                 Дейкстры-Примы
                 Поиск в глубину
                 Поиск в ширину
-                Минимальное остомное дерево
-                Фундаментальные остовы циклов
-                Кратчайшие пути
-                Эйлеров цикл
              */
             switch (comboBoxGraph.Text)
             {
-                case "Крускала":
-                    {
-                        richTextBox.Text = "for i=0 to N-1 step 1\n" +
-                 "      for j=i+1 to N-1 step 1\n" +
-                 "      if A[j]<A[i] then\n" +
-                 "          swap A[i],A[j]\n";
-                    };
-                    break;
                 case "Дейкстры-Примы":
                     {
-
+                        richTextBox.Text =
+                            "for i=0 to N-1 step 1\n" +
+                            "      for j=i+1 to N-1 step 1\n" +
+                            "      if A[j]<A[i] then\n" +
+                            "          swap A[i],A[j]\n";
                     };
                     break;
                 case "Поиск в глубину":
                     {
-
+                        richTextBox.Text =
+                          "for i=0 to N-1 step 1\n" +
+                          "      for j=i+1 to N-1 step 1\n" +
+                          "      if A[j]<A[i] then\n" +
+                          "          swap A[i],A[j]\n";
                     };
                     break;
                 case "Поиск в ширину":
                     {
-                        richTextBox.Text = "for i=0 to N-1 step 1\n" +
-                "      for j=i+1 to N-1 step 1\n" +
-                "      if A[j]<A[i] then\n" +
-                "          swap A[i],A[j]\n";
-                    };
-                    break;
-                case "Минимальное остомное дерево":
-                    {
-
-                    };
-                    break;
-                case "Фундаментальные остовы циклов":
-                    {
-
-                    };
-                    break;
-                case "Кратчайшие пути":
-                    {
-
-                    };
-                    break;
-                case "Эйлеров цикл":
-                    {
-
+                        richTextBox.Text = 
+                          "for i=0 to N-1 step 1\n" +
+                          "      for j=i+1 to N-1 step 1\n" +
+                          "      if A[j]<A[i] then\n" +
+                          "          swap A[i],A[j]\n";
                     };
                     break;
             }
@@ -909,7 +881,69 @@ namespace Visualisation
 
         private void button2_Click(object sender, EventArgs e)
         {
+            listBox2.Items.Clear();
+            switch (comboBoxGraph.Text)
+            {
+                case "Дейкстры-Примы":
+                    {
 
+                    };
+                    break;
+                case "Поиск в глубину":
+                    {
+                        
+                        //1-white 2-black
+                        int[] color = new int[V.Count];
+                        //for (int i = 0; i < V.Count - 1; i++)
+                        //    for (int j = i + 1; j < V.Count; j++)
+                        //    {
+                        //        for (int k = 0; k < V.Count; k++)
+                        //            color[k] = 1;
+                        //        DFSchain(i, j, E, color, (i + 1).ToString());
+                        //    }
+                        //DFSchain(0, 4, E, color, (1).ToString());
+                       for (int i = Convert.ToInt32(comboBoxStart.Text.ToString())-1; i < Convert.ToInt32(comboBoxStart.Text.ToString()); i++)
+                            for (int j = Convert.ToInt32(comboBoxFinish.Text.ToString())-1; j < Convert.ToInt32(comboBoxFinish.Text.ToString()); j++)
+                            {
+                                for (int k = 0; k < V.Count; k++)
+                                    color[k] = 1;
+                                DFSchain(i, j, E, color, (i + 1).ToString());
+                            }
+                    }
+                    break;
+                case "Поиск в ширину":
+                    {
+
+                    };
+                    break;
+            }
+        }
+
+        private void buttonClear_Click(object sender, EventArgs e)
+        {
+            V.Clear();
+            E.Clear();
+            G.clearSheet();
+            G.drawALLGraph(V, E);
+            sheet.Image = G.GetBitmap();
+            richTextBox.Clear();
+            listBox2.Items.Clear();
+        }
+
+        private void buttonAddVertex_Click(object sender, EventArgs e)
+        {
+           // for (int i = 0; i < (int)textBoxVertexNum.Text.ToString())
+        }
+
+        private void comboBoxStart_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            comboBoxFinish.Text = "";
+            comboBoxFinish.Items.Clear();
+            for (int i = Convert.ToInt32(comboBoxStart.SelectedItem.ToString()); i < V.Count; i++)
+            {
+                comboBoxFinish.Items.Add(i + 1);
+            }
+            
         }
     }
 }

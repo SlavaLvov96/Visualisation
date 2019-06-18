@@ -510,17 +510,17 @@ namespace Visualisation
                     Thread.Sleep(500);
                     DFSchain(E[w].To, endV, E, color, s + "-" + (E[w].To + 1).ToString());
                         color[E[w].To] = 1;
-                    }
-                        else if (color[E[w].From] == 1 && E[w].To == u)
-                        {
+                }
+                else if (color[E[w].From] == 1 && E[w].To == u)
+                {
                     G.clearSheet();
                     G.drawALLGraph(V, E);
                     G.drawSelectedVertex(V[E[w].From], G.GetRedPen());
                     sheet.Image = G.GetBitmap();
                     Thread.Sleep(500);
                     DFSchain(E[w].From, endV, E, color, s + "-" + (E[w].From + 1).ToString());
-                            color[E[w].From] = 1;
-                        }
+                    color[E[w].From] = 1;
+                }
 
                     /*
                     listBox2.Items.Add(s);

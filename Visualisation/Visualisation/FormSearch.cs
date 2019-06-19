@@ -167,7 +167,7 @@ namespace Visualisation
         {
             if ((tb_search_value.Text==null)||(Tree.binFind(Convert.ToInt32(tb_search_value.Text)) == false))
             {
-                rtb_result.AppendText("Вершина " + tb_search_value.Text.ToString() + " отсутствует.\n");
+                MessageBox.Show("Вершина " + tb_search_value.Text.ToString() + " отсутствует.\n");
                 return;
             }
 
@@ -207,7 +207,7 @@ namespace Visualisation
         {
             if ((tb_search_value.Text == null) || (Tree.binFind(Convert.ToInt32(tb_search_value.Text)) == false))
             {
-                rtb_result.AppendText("Вершина " + tb_search_value.Text.ToString() + " отсутствует.\n");
+                MessageBox.Show("Вершина " + tb_search_value.Text.ToString() + " отсутствует.\n");
                 return;
             }
 
@@ -391,13 +391,13 @@ namespace Visualisation
 
             rtb_result.AppendText("Поиск в АВЛ дереве.\n");
 
-            rtb_pseudocode.Text = "Node search(x : Node, k : T):\n" +
-            "   if x == null or k == x.key\n" +
-            "      return x\n" +
-            "   if k < x.key\n" +
-            "      return search(x.left, k)\n" +
-            "   else\n" +
-            "                return search(x.right, k)";
+            rtb_pseudocode.Text = "Поиск в АВЛ-дереве(x : Node, k : T):\n" +
+            "   если x == null или k == x.key\n" +
+            "      вернуть x\n" +
+            "   если k < x.key\n" +
+            "      вернуть Поиск в АВЛ-дереве(x.left, k)\n" +
+            "   иначе\n" +
+            "                return Поиск в АВЛ-дереве(x.right, k)";
             ClearTree();
             //avlTreeSearch();
         }
@@ -412,13 +412,13 @@ namespace Visualisation
             digital_menu.Enabled = true;
 
             rtb_result.AppendText("Поиск в бинарном дереве.\n");
-            rtb_pseudocode.Text = "Node search(x : Node, k : T):\n" +
-            "   if x == null or k == x.key\n" +
-            "      return x\n" +
-            "   if k < x.key\n" +
-            "      return search(x.left, k)\n" +
-            "   else\n" +
-            "                return search(x.right, k)";
+            rtb_pseudocode.Text = "Поиск в бинарном дереве(x : Node, k : T):\n" +
+            "   если x == null или k == x.key\n" +
+            "      вернуть x\n" +
+            "   если k < x.key\n" +
+            "      вернуть Поиск в бинарном дереве(x.left, k)\n" +
+            "   иначе\n" +
+            "                вернуть Поиск в бинарном дереве(x.right, k)";
             ClearTree();
             //binaryTreeSearch();
         }
@@ -433,19 +433,19 @@ namespace Visualisation
             digital_menu.Enabled = true;
 
             rtb_result.AppendText("Интерполяционный поиск.\n");
-            rtb_pseudocode.Text = "int InterpolSearch(int A[], int key)\n " +
+            rtb_pseudocode.Text = "int Интерполяционный поиск(int A[], int key)\n " +
             "{\n    " +
             "   int mid, left = 0, right = N - 1\n     " +
-            "   while (A[left] <= key && A[right] >= key)\n" +
+            "   пока (A[left] <= key && A[right] >= key)\n" +
             "   {\n  " +
             "       mid = left + ((key - A[left]) * (right - left)) / (A[right] - A[left])\n" +
-            "       if (A[mid] < key) left = mid + 1\n" +
-            "       else if (A[mid] > key) right = mid - 1\n" +
-            "       else return mid\n" +
+            "       если (A[mid] < key) увеличить левый ключ\n" +
+            "       иначе если (A[mid] > key) уменьшить правый ключ\n" +
+            "       иначе вернуть середину\n" +
             "   }\n" +
-            "   if (A[left] == key) return left\n" +
-            "   else if A[right] == key return right\n"+
-            "   else return -1;\n}";
+            "   если (A[left] == key) вернуть левый ключ\n" +
+            "   иначе если A[right] == key вернуть правый ключ\n"+
+            "   иначе вернуть -1;\n}";
             ClearTree();
             numbers = GetNumbersI();
             RectanglesInit(numbers);
@@ -461,11 +461,11 @@ namespace Visualisation
             digital_menu.Enabled = true;
 
             rtb_result.AppendText("Линейный поиск.\n");
-            rtb_pseudocode.Text = "int LineSearch(int A[], int key)\n" +
+            rtb_pseudocode.Text = "int Линейный поиск(int A[], int key)\n" +
             "{\n    " +
-            "   for (i = 0; i < N; i++)\n       " +
-            "   if (A[i] == key) return i;\n    " +
-            "   return -1;\n" +
+            "   для (i = 0; i < N; i++)\n       " +
+            "   если (A[i] == key) вернуть i;\n    " +
+            "   вернуть -1;\n" +
             "}";
             ClearTree();
             numbers = GetNumbers();
@@ -482,14 +482,14 @@ namespace Visualisation
             digital_menu.Enabled = false;
 
             rtb_result.AppendText("Поиск в цифровом дереве.\n");
-            rtb_pseudocode.Text = "Item searchR(link h, Key v, int d)\n" +
+            rtb_pseudocode.Text = "Цифровой_поиск(link h, Key v, int d)\n" +
             "      {\n" +
-            "                if (h == 0) return nullItem;\n" +
-            "                if (v == h->item.key()) return h->item;\n" +
-            "                if (digit(v, d) == 0)\n" +
-            "                    return searchR(h->l, v, d + 1);\n" +
-            "                else\n" +
-            "                    return searchR(h->r, v, d + 1);\n" +
+            "                если (h == 0) вернуть nullItem;\n" +
+            "                если (v == h->item.key()) вернуть h->item;\n" +
+            "                если (digit(v, d) == 0)\n" +
+            "                    вернуть Цифровой_поиск(h->l, v, d + 1);\n" +
+            "                иначе\n" +
+            "                    вернуть Цифровой_поиск(h->r, v, d + 1);\n" +
             "            }";
             ClearTree();
         }

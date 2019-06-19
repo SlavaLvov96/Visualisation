@@ -23,7 +23,6 @@ namespace Visualisation
             int[,] IMatrix; // матрица инцидентности
 
             int selected1;  //выбранные вершины, для соединения линиями
-            int selected2;
             
             // инициализация Графа
             public FormGraph()
@@ -56,7 +55,7 @@ namespace Visualisation
 
             public Pen GetGreenPen()
             {
-                greenPen = new Pen(Color.Green);
+                greenPen = new Pen(Color.LightGreen);
                 greenPen.Width = 2;
                 return greenPen;
             }
@@ -103,6 +102,40 @@ namespace Visualisation
                 gr.DrawEllipse(pen, (vertex.X - R), (vertex.Y - R), 2 * R, 2 * R);
             }
 
+            //функция отрисовки окружности 
+            public void drawVertexCircle(Vertex vertex, String color)
+            {
+                if (color == "green")
+                gr.DrawEllipse(greenPen, (vertex.X - R), (vertex.Y - R), 2 * R, 2 * R);
+                else 
+                    if (color == "red")
+                    gr.DrawEllipse(redPen, (vertex.X - R), (vertex.Y - R), 2 * R, 2 * R);
+            }
+
+            //функция отрисовки окружности 
+            public void drawEdgeLine(Edge E,Vertex From, Vertex To, String color)
+            {
+                //отрисовка Ребра около одной Вершины
+                if (E.From == E.To)
+                {
+                    if (color == "green")
+                        gr.DrawArc(greenPen, (From.X - 2 * R), (From.Y - 2 * R), 2 * R, 2 * R, 90, 270);
+                    else
+                    if (color == "red")
+                        gr.DrawArc(redPen, (From.X - 2 * R), (From.Y - 2 * R), 2 * R, 2 * R, 90, 270);
+                }
+                //отрисовка Ребра между двумя Вершинами
+                else
+                {
+                    if (color == "green")
+                        gr.DrawLine(greenPen, From.X, From.Y, To.X, To.Y);
+                    else
+                    if (color == "red")
+                        gr.DrawLine(redPen, From.X, From.Y, To.X, To.Y);
+                }
+            }
+
+
             //функция отрисовки Ребер
             public void drawEdge(Vertex V1, Vertex V2, Edge E, int numberE)
             {
@@ -122,6 +155,30 @@ namespace Visualisation
                     gr.DrawString(((char)('a' + numberE) + " (" + E.Weight + ")").ToString(), fo, br, point);
                     drawVertex(V1.X, V1.Y, (E.From + 1).ToString());
                     drawVertex(V2.X, V2.Y, (E.To + 1).ToString());
+                }
+            }
+
+            //функция отрисовки Ребер
+            public void drawEdge1(Vertex V1, Vertex V2, Edge E, int numberE)
+            {
+                //отрисовка Ребра около одной Вершины
+                if (E.From == E.To)
+                {
+                    gr.DrawArc(greenPen, (V1.X - 2 * R), (V1.Y - 2 * R), 2 * R, 2 * R, 90, 270);
+                    point = new PointF(V1.X - (int)(2.75 * R), V1.Y - (int)(2.75 * R));
+                    gr.DrawString(((char)('a' + numberE) + " (" + E.Weight + ")").ToString(), fo, br, point);
+                    drawVertex(V1.X, V1.Y, (E.From + 1).ToString());
+                }
+                //отрисовка Ребра между двумя Вершинами
+                else
+                {
+                    gr.DrawLine(greenPen, V1.X, V1.Y, V2.X, V2.Y);
+                    point = new PointF((V1.X + V2.X) / 2, (V1.Y + V2.Y) / 2);
+                    gr.DrawString(((char)('a' + numberE) + " (" + E.Weight + ")").ToString(), fo, br, point);
+                    drawVertex(V1.X, V1.Y, (E.From + 1).ToString());
+                    drawVertex(V2.X, V2.Y, (E.To + 1).ToString());
+                    drawVertexCircle(V1, "green");
+                    drawVertexCircle(V2, "green");
                 }
             }
 
@@ -487,6 +544,9 @@ namespace Visualisation
         //обход в глубину. поиск элементарных цепей. (1-white 2-black)
         private void DFSchain(int u, int endV, List<Edge> E, int[] color, string s)
         {
+            G.clearSheet();
+            sheet.Image = G.GetBitmap();
+            G.drawALLGraph(V, E);
             //вершину не следует перекрашивать, если u == endV (возможно в нее есть несколько путей)
             if (u != endV)
             {
@@ -500,24 +560,18 @@ namespace Visualisation
             }
                 for (int w = 0; w < E.Count; w++)
                 {
-                Thread.Sleep(100);
+                //Thread.Sleep(100);
                 if (color[E[w].To] == 1 && E[w].From == u)
                 {
-                    G.clearSheet();
-                    G.drawALLGraph(V, E);
-                    G.drawSelectedVertex(V[E[w].From], G.GetRedPen());
-                    sheet.Image = G.GetBitmap();
-                    Thread.Sleep(500);
+                    G.drawVertexCircle(V[E[w].From], "red");
+                    //Thread.Sleep(2000);
                     DFSchain(E[w].To, endV, E, color, s + "-" + (E[w].To + 1).ToString());
                         color[E[w].To] = 1;
                     }
                         else if (color[E[w].From] == 1 && E[w].To == u)
                         {
-                    G.clearSheet();
-                    G.drawALLGraph(V, E);
-                    G.drawSelectedVertex(V[E[w].From], G.GetRedPen());
-                    sheet.Image = G.GetBitmap();
-                    Thread.Sleep(500);
+                    G.drawVertexCircle(V[E[w].From], "red");
+                    //Thread.Sleep(2000);
                     DFSchain(E[w].From, endV, E, color, s + "-" + (E[w].From + 1).ToString());
                             color[E[w].From] = 1;
                         }
@@ -783,6 +837,23 @@ namespace Visualisation
              */
             switch (comboBoxGraph.Text)
             {
+                case "Поиск в глубину":
+                    {
+                        richTextBox.Text =
+                          "for (v in V):\n" +
+                          "  new(v) = NOT_VISITED\n" +
+                          "for (v in V):\n" +
+                          "  if new(v) = NOT_VISITED\n" +
+                          "  then DFS(v)\n" +
+                          "\n" +
+                          "procedure DFS(v in V):\n" +
+                          "  v = VISITED\n" +
+                          "  for (w in Adj(v)):\n" +
+                          "    if new(w) = NOT_VISITED\n" +
+                          "    then DFS(w)\n" +
+                          "return\n";
+                    };
+                    break;
                 case "Дейкстры-Примы":
                     {
                         richTextBox.Text =
@@ -790,15 +861,6 @@ namespace Visualisation
                             "      for j=i+1 to N-1 step 1\n" +
                             "      if A[j]<A[i] then\n" +
                             "          swap A[i],A[j]\n";
-                    };
-                    break;
-                case "Поиск в глубину":
-                    {
-                        richTextBox.Text =
-                          "for i=0 to N-1 step 1\n" +
-                          "      for j=i+1 to N-1 step 1\n" +
-                          "      if A[j]<A[i] then\n" +
-                          "          swap A[i],A[j]\n";
                     };
                     break;
                 case "Поиск в ширину":
@@ -884,24 +946,12 @@ namespace Visualisation
             listBox2.Items.Clear();
             switch (comboBoxGraph.Text)
             {
-                case "Дейкстры-Примы":
-                    {
-
-                    };
-                    break;
                 case "Поиск в глубину":
                     {
                         
                         //1-white 2-black
                         int[] color = new int[V.Count];
-                        //for (int i = 0; i < V.Count - 1; i++)
-                        //    for (int j = i + 1; j < V.Count; j++)
-                        //    {
-                        //        for (int k = 0; k < V.Count; k++)
-                        //            color[k] = 1;
-                        //        DFSchain(i, j, E, color, (i + 1).ToString());
-                        //    }
-                        //DFSchain(0, 4, E, color, (1).ToString());
+                        
                        for (int i = Convert.ToInt32(comboBoxStart.Text.ToString())-1; i < Convert.ToInt32(comboBoxStart.Text.ToString()); i++)
                             for (int j = Convert.ToInt32(comboBoxFinish.Text.ToString())-1; j < Convert.ToInt32(comboBoxFinish.Text.ToString()); j++)
                             {
@@ -909,9 +959,15 @@ namespace Visualisation
                                     color[k] = 1;
                                 DFSchain(i, j, E, color, (i + 1).ToString());
                             }
+                        G.drawEdge1(V[0], V[4], E[4], 4);
                     }
                     break;
                 case "Поиск в ширину":
+                    {
+
+                    };
+                    break;
+                case "Дейкстры-Примы":
                     {
 
                     };
@@ -932,7 +988,7 @@ namespace Visualisation
 
         private void buttonAddVertex_Click(object sender, EventArgs e)
         {
-           // for (int i = 0; i < (int)textBoxVertexNum.Text.ToString())
+            // for (int i = 0; i < (int)textBoxVertexNum.Text.ToString()) sheet.Width, sheet.Height
         }
 
         private void comboBoxStart_SelectedIndexChanged(object sender, EventArgs e)
@@ -943,7 +999,14 @@ namespace Visualisation
             {
                 comboBoxFinish.Items.Add(i + 1);
             }
-            
+        }
+
+        private void buttonAddEdge_Click(object sender, EventArgs e)
+        {
+            G.clearSheet();
+            sheet.Image = G.GetBitmap();
+            E.Add(new Edge(Convert.ToInt32(textBoxFrom.Text.ToString())-1, Convert.ToInt32(textBoxTo.Text.ToString()) - 1, Convert.ToInt32(textBoxWeight.Text.ToString())));
+            G.drawALLGraph(V, E);
         }
     }
 }

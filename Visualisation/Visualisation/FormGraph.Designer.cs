@@ -38,6 +38,8 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.textBoxWeight = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.buttonAddEdge = new System.Windows.Forms.Button();
             this.buttonClear = new System.Windows.Forms.Button();
             this.textBoxTo = new System.Windows.Forms.TextBox();
@@ -54,17 +56,16 @@
             this.richTextBox = new System.Windows.Forms.RichTextBox();
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.buttonAdj = new System.Windows.Forms.Button();
-            this.buttonInc = new System.Windows.Forms.Button();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.comboBoxFinish = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.comboBoxStart = new System.Windows.Forms.ComboBox();
-            this.comboBoxFinish = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.buttonAdj = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.sheet)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox9.SuspendLayout();
@@ -72,10 +73,10 @@
             this.groupBox5.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox10.SuspendLayout();
             this.groupBox8.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            this.groupBox10.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonPrev
@@ -165,14 +166,16 @@
             this.groupBox9.Controls.Add(this.groupBox7);
             this.groupBox9.Controls.Add(this.groupBox5);
             this.groupBox9.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox9.Location = new System.Drawing.Point(3, 259);
+            this.groupBox9.Location = new System.Drawing.Point(3, 243);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(255, 274);
+            this.groupBox9.Size = new System.Drawing.Size(255, 290);
             this.groupBox9.TabIndex = 15;
             this.groupBox9.TabStop = false;
             // 
             // groupBox7
             // 
+            this.groupBox7.Controls.Add(this.textBoxWeight);
+            this.groupBox7.Controls.Add(this.label8);
             this.groupBox7.Controls.Add(this.buttonAddEdge);
             this.groupBox7.Controls.Add(this.buttonClear);
             this.groupBox7.Controls.Add(this.textBoxTo);
@@ -187,23 +190,40 @@
             this.groupBox7.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox7.Location = new System.Drawing.Point(3, 16);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(249, 195);
+            this.groupBox7.Size = new System.Drawing.Size(249, 214);
             this.groupBox7.TabIndex = 13;
             this.groupBox7.TabStop = false;
             // 
+            // textBoxWeight
+            // 
+            this.textBoxWeight.Location = new System.Drawing.Point(118, 142);
+            this.textBoxWeight.Name = "textBoxWeight";
+            this.textBoxWeight.Size = new System.Drawing.Size(125, 20);
+            this.textBoxWeight.TabIndex = 27;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(7, 145);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(78, 13);
+            this.label8.TabIndex = 26;
+            this.label8.Text = "Вес вершины:";
+            // 
             // buttonAddEdge
             // 
-            this.buttonAddEdge.Location = new System.Drawing.Point(3, 143);
+            this.buttonAddEdge.Location = new System.Drawing.Point(3, 165);
             this.buttonAddEdge.Name = "buttonAddEdge";
             this.buttonAddEdge.Size = new System.Drawing.Size(243, 23);
             this.buttonAddEdge.TabIndex = 25;
             this.buttonAddEdge.Text = "Создание ребра";
             this.buttonAddEdge.UseVisualStyleBackColor = true;
+            this.buttonAddEdge.Click += new System.EventHandler(this.buttonAddEdge_Click);
             // 
             // buttonClear
             // 
             this.buttonClear.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.buttonClear.Location = new System.Drawing.Point(3, 169);
+            this.buttonClear.Location = new System.Drawing.Point(3, 188);
             this.buttonClear.Name = "buttonClear";
             this.buttonClear.Size = new System.Drawing.Size(243, 23);
             this.buttonClear.TabIndex = 24;
@@ -304,7 +324,7 @@
             this.groupBox5.Controls.Add(this.buttonPrev);
             this.groupBox5.Controls.Add(this.buttonStartPause);
             this.groupBox5.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox5.Location = new System.Drawing.Point(3, 206);
+            this.groupBox5.Location = new System.Drawing.Point(3, 222);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(249, 65);
             this.groupBox5.TabIndex = 11;
@@ -352,14 +372,71 @@
             this.groupBox2.TabIndex = 17;
             this.groupBox2.TabStop = false;
             // 
+            // groupBox10
+            // 
+            this.groupBox10.Controls.Add(this.comboBoxFinish);
+            this.groupBox10.Controls.Add(this.label7);
+            this.groupBox10.Controls.Add(this.comboBoxStart);
+            this.groupBox10.Controls.Add(this.label5);
+            this.groupBox10.Controls.Add(this.label6);
+            this.groupBox10.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox10.Location = new System.Drawing.Point(3, 37);
+            this.groupBox10.Name = "groupBox10";
+            this.groupBox10.Size = new System.Drawing.Size(185, 92);
+            this.groupBox10.TabIndex = 24;
+            this.groupBox10.TabStop = false;
+            // 
+            // comboBoxFinish
+            // 
+            this.comboBoxFinish.FormattingEnabled = true;
+            this.comboBoxFinish.Location = new System.Drawing.Point(127, 66);
+            this.comboBoxFinish.Name = "comboBoxFinish";
+            this.comboBoxFinish.Size = new System.Drawing.Size(52, 21);
+            this.comboBoxFinish.TabIndex = 26;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(9, 16);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(172, 13);
+            this.label7.TabIndex = 28;
+            this.label7.Text = "Задание вершин для алгоритма:";
+            // 
+            // comboBoxStart
+            // 
+            this.comboBoxStart.FormattingEnabled = true;
+            this.comboBoxStart.Location = new System.Drawing.Point(127, 39);
+            this.comboBoxStart.Name = "comboBoxStart";
+            this.comboBoxStart.Size = new System.Drawing.Size(52, 21);
+            this.comboBoxStart.TabIndex = 25;
+            this.comboBoxStart.SelectedIndexChanged += new System.EventHandler(this.comboBoxStart_SelectedIndexChanged);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(9, 70);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(105, 13);
+            this.label5.TabIndex = 26;
+            this.label5.Text = "Конечная вершина:";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(9, 42);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(112, 13);
+            this.label6.TabIndex = 24;
+            this.label6.Text = "Начальная вершина:";
+            // 
             // groupBox8
             // 
             this.groupBox8.Controls.Add(this.buttonAdj);
-            this.groupBox8.Controls.Add(this.buttonInc);
             this.groupBox8.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox8.Location = new System.Drawing.Point(3, 449);
+            this.groupBox8.Location = new System.Drawing.Point(3, 474);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(185, 84);
+            this.groupBox8.Size = new System.Drawing.Size(185, 59);
             this.groupBox8.TabIndex = 23;
             this.groupBox8.TabStop = false;
             // 
@@ -368,22 +445,11 @@
             this.buttonAdj.Dock = System.Windows.Forms.DockStyle.Top;
             this.buttonAdj.Location = new System.Drawing.Point(3, 16);
             this.buttonAdj.Name = "buttonAdj";
-            this.buttonAdj.Size = new System.Drawing.Size(179, 28);
+            this.buttonAdj.Size = new System.Drawing.Size(179, 37);
             this.buttonAdj.TabIndex = 21;
             this.buttonAdj.Text = "матрица смежности";
             this.buttonAdj.UseVisualStyleBackColor = true;
             this.buttonAdj.Click += new System.EventHandler(this.buttonAdj_Click_1);
-            // 
-            // buttonInc
-            // 
-            this.buttonInc.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.buttonInc.Location = new System.Drawing.Point(3, 50);
-            this.buttonInc.Name = "buttonInc";
-            this.buttonInc.Size = new System.Drawing.Size(179, 31);
-            this.buttonInc.TabIndex = 22;
-            this.buttonInc.Text = "матрица инцидентности";
-            this.buttonInc.UseVisualStyleBackColor = true;
-            this.buttonInc.Click += new System.EventHandler(this.buttonInc_Click_1);
             // 
             // groupBox3
             // 
@@ -406,64 +472,6 @@
             this.groupBox4.TabIndex = 19;
             this.groupBox4.TabStop = false;
             // 
-            // groupBox10
-            // 
-            this.groupBox10.Controls.Add(this.comboBoxFinish);
-            this.groupBox10.Controls.Add(this.label7);
-            this.groupBox10.Controls.Add(this.comboBoxStart);
-            this.groupBox10.Controls.Add(this.label5);
-            this.groupBox10.Controls.Add(this.label6);
-            this.groupBox10.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox10.Location = new System.Drawing.Point(3, 37);
-            this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Size = new System.Drawing.Size(185, 92);
-            this.groupBox10.TabIndex = 24;
-            this.groupBox10.TabStop = false;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(9, 70);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(105, 13);
-            this.label5.TabIndex = 26;
-            this.label5.Text = "Конечная вершина:";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(9, 42);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(112, 13);
-            this.label6.TabIndex = 24;
-            this.label6.Text = "Начальная вершина:";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(9, 16);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(172, 13);
-            this.label7.TabIndex = 28;
-            this.label7.Text = "Задание вершин для алгоритма:";
-            // 
-            // comboBoxStart
-            // 
-            this.comboBoxStart.FormattingEnabled = true;
-            this.comboBoxStart.Location = new System.Drawing.Point(127, 39);
-            this.comboBoxStart.Name = "comboBoxStart";
-            this.comboBoxStart.Size = new System.Drawing.Size(52, 21);
-            this.comboBoxStart.TabIndex = 25;
-            this.comboBoxStart.SelectedIndexChanged += new System.EventHandler(this.comboBoxStart_SelectedIndexChanged);
-            // 
-            // comboBoxFinish
-            // 
-            this.comboBoxFinish.FormattingEnabled = true;
-            this.comboBoxFinish.Location = new System.Drawing.Point(127, 66);
-            this.comboBoxFinish.Name = "comboBoxFinish";
-            this.comboBoxFinish.Size = new System.Drawing.Size(52, 21);
-            this.comboBoxFinish.TabIndex = 26;
-            // 
             // FormGraph
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -478,7 +486,7 @@
             this.MinimumSize = new System.Drawing.Size(1010, 485);
             this.Name = "FormGraph";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FormGraph";
+            this.Text = "Аниматор алгоритмов на графах";
             ((System.ComponentModel.ISupportInitialize)(this.sheet)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox9.ResumeLayout(false);
@@ -487,12 +495,12 @@
             this.groupBox5.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
+            this.groupBox10.ResumeLayout(false);
+            this.groupBox10.PerformLayout();
             this.groupBox8.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
-            this.groupBox10.ResumeLayout(false);
-            this.groupBox10.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -513,7 +521,6 @@
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.ListBox listBox2;
-        private System.Windows.Forms.Button buttonInc;
         private System.Windows.Forms.Button buttonAdj;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ComboBox comboBoxNum;
@@ -535,5 +542,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox comboBoxStart;
         private System.Windows.Forms.ComboBox comboBoxFinish;
+        private System.Windows.Forms.TextBox textBoxWeight;
+        private System.Windows.Forms.Label label8;
     }
 }

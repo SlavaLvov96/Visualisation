@@ -16,6 +16,7 @@ namespace Visualisation
         public partial class FormGraph : Form
         {
             DrawGraph G;    // инициализация Графа
+            public Graphics graphics;
             List<Vertex> V; // множество Вершин
             List<Edge> E;   // множество Ребер
 
@@ -23,9 +24,17 @@ namespace Visualisation
             int[,] IMatrix; // матрица инцидентности
 
             int selected1;  //выбранные вершины, для соединения линиями
-            
-            // инициализация Графа
-            public FormGraph()
+            int selected2;
+            private Pen[] colorsVertex;
+            private Pen[] colorsEdge;
+
+        public void updateSheet()
+        {
+            sheet.Update();
+        }
+
+        // инициализация Графа
+        public FormGraph()
             {
                 InitializeComponent();
                 V = new List<Vertex>();
@@ -33,6 +42,8 @@ namespace Visualisation
                 E = new List<Edge>();
                 sheet.Image = G.GetBitmap();
             }
+
+
         // класс отрисовки графа в PictureBox
         class DrawGraph
         {
@@ -46,16 +57,23 @@ namespace Visualisation
             PointF point;
             public int R = 20; //радиус окружности вершины
 
+            public Pen GetBlackPen()
+            {
+                blackPen = new Pen(Color.Black);
+                blackPen.Width = 2;
+                return blackPen;
+            }
+
             public Pen GetRedPen()
             {
                 redPen = new Pen(Color.Red);
-                redPen.Width = 2;
+                redPen.Width = 5;
                 return redPen;
             }
 
             public Pen GetGreenPen()
             {
-                greenPen = new Pen(Color.LightGreen);
+                greenPen = new Pen(Color.Green);
                 greenPen.Width = 2;
                 return greenPen;
             }
@@ -69,7 +87,7 @@ namespace Visualisation
                 blackPen = new Pen(Color.Black);
                 blackPen.Width = 2;
                 redPen = new Pen(Color.Red);
-                redPen.Width = 2;
+                redPen.Width = 5;
                 greenPen = new Pen(Color.Green);
                 greenPen.Width = 2;
                 fo = new Font("Arial", 15);
@@ -80,18 +98,27 @@ namespace Visualisation
             {
                 return bitmap;
             }
-
             //отчистка области рисования
             public void clearSheet()
             {
                 gr.Clear(Color.White);
             }
-
+            /*
+            // обновляем изображение дерева
+            void RefreshGraph()
+            {
+                
+                gr.Clear(sheet.BackColor); // очищаем картинку
+                Tree.DrawTree(pictGraphics, 14, pb_animation.Width, pb_animation.Height,
+                NodesColor, LeavesColor, NodesFont); // показываем дерево
+                pb_animation.Invalidate(); // инициируем отрисовку на картинке
+            }
+            */
             //функция отрисовки Вершин
-            public void drawVertex(int x, int y, string number)
+            public void drawVertex(int x, int y, string number, Pen penColor)
             {
                 gr.FillEllipse(Brushes.White, (x - R), (y - R), 2 * R, 2 * R);
-                gr.DrawEllipse(blackPen, (x - R), (y - R), 2 * R, 2 * R);
+                gr.DrawEllipse(penColor, (x - R), (y - R), 2 * R, 2 * R);
                 point = new PointF(x - 9, y - 9);
                 gr.DrawString(number, fo, br, point);
             }
@@ -102,101 +129,45 @@ namespace Visualisation
                 gr.DrawEllipse(pen, (vertex.X - R), (vertex.Y - R), 2 * R, 2 * R);
             }
 
-            //функция отрисовки окружности 
-            public void drawVertexCircle(Vertex vertex, String color)
-            {
-                if (color == "green")
-                gr.DrawEllipse(greenPen, (vertex.X - R), (vertex.Y - R), 2 * R, 2 * R);
-                else 
-                    if (color == "red")
-                    gr.DrawEllipse(redPen, (vertex.X - R), (vertex.Y - R), 2 * R, 2 * R);
-            }
-
-            //функция отрисовки окружности 
-            public void drawEdgeLine(Edge E,Vertex From, Vertex To, String color)
-            {
-                //отрисовка Ребра около одной Вершины
-                if (E.From == E.To)
-                {
-                    if (color == "green")
-                        gr.DrawArc(greenPen, (From.X - 2 * R), (From.Y - 2 * R), 2 * R, 2 * R, 90, 270);
-                    else
-                    if (color == "red")
-                        gr.DrawArc(redPen, (From.X - 2 * R), (From.Y - 2 * R), 2 * R, 2 * R, 90, 270);
-                }
-                //отрисовка Ребра между двумя Вершинами
-                else
-                {
-                    if (color == "green")
-                        gr.DrawLine(greenPen, From.X, From.Y, To.X, To.Y);
-                    else
-                    if (color == "red")
-                        gr.DrawLine(redPen, From.X, From.Y, To.X, To.Y);
-                }
-            }
-
-
             //функция отрисовки Ребер
-            public void drawEdge(Vertex V1, Vertex V2, Edge E, int numberE)
+            public void drawEdge(int ver1, int ver2, int edge, Vertex[] V, Edge[] E, int numberE, Pen[] colorsVertex, Pen[] colorsEdge)
             {
                 //отрисовка Ребра около одной Вершины
-                if (E.From == E.To)
+                if (E[edge].From == E[edge].To)
                 {
-                    gr.DrawArc(blackPen, (V1.X - 2 * R), (V1.Y - 2 * R), 2 * R, 2 * R, 90, 270);
-                    point = new PointF(V1.X - (int)(2.75 * R), V1.Y - (int)(2.75 * R));
-                    gr.DrawString(((char)('a' + numberE) + " (" + E.Weight + ")").ToString(), fo, br, point);
-                    drawVertex(V1.X, V1.Y, (E.From + 1).ToString());
+                    gr.DrawArc(colorsEdge[edge], (V[ver1].X - 2 * R), (V[ver1].Y - 2 * R), 2 * R, 2 * R, 90, 270);
+                    point = new PointF(V[ver1].X - (int)(2.75 * R), V[ver1].Y - (int)(2.75 * R));
+                    gr.DrawString(((char)('a' + numberE) + " (" + E[edge].Weight + ")").ToString(), fo, br, point);
+                    drawVertex(V[ver1].X, V[ver1].Y, (E[edge].From + 1).ToString(), colorsVertex[ver1]);
                 }
                 //отрисовка Ребра между двумя Вершинами
                 else
                 {
-                    gr.DrawLine(blackPen, V1.X, V1.Y, V2.X, V2.Y);
-                    point = new PointF((V1.X + V2.X) / 2, (V1.Y + V2.Y) / 2);
-                    gr.DrawString(((char)('a' + numberE) + " (" + E.Weight + ")").ToString(), fo, br, point);
-                    drawVertex(V1.X, V1.Y, (E.From + 1).ToString());
-                    drawVertex(V2.X, V2.Y, (E.To + 1).ToString());
-                }
-            }
-
-            //функция отрисовки Ребер
-            public void drawEdge1(Vertex V1, Vertex V2, Edge E, int numberE)
-            {
-                //отрисовка Ребра около одной Вершины
-                if (E.From == E.To)
-                {
-                    gr.DrawArc(greenPen, (V1.X - 2 * R), (V1.Y - 2 * R), 2 * R, 2 * R, 90, 270);
-                    point = new PointF(V1.X - (int)(2.75 * R), V1.Y - (int)(2.75 * R));
-                    gr.DrawString(((char)('a' + numberE) + " (" + E.Weight + ")").ToString(), fo, br, point);
-                    drawVertex(V1.X, V1.Y, (E.From + 1).ToString());
-                }
-                //отрисовка Ребра между двумя Вершинами
-                else
-                {
-                    gr.DrawLine(greenPen, V1.X, V1.Y, V2.X, V2.Y);
-                    point = new PointF((V1.X + V2.X) / 2, (V1.Y + V2.Y) / 2);
-                    gr.DrawString(((char)('a' + numberE) + " (" + E.Weight + ")").ToString(), fo, br, point);
-                    drawVertex(V1.X, V1.Y, (E.From + 1).ToString());
-                    drawVertex(V2.X, V2.Y, (E.To + 1).ToString());
-                    drawVertexCircle(V1, "green");
-                    drawVertexCircle(V2, "green");
+                    gr.DrawLine(colorsEdge[edge], V[ver1].X, V[ver1].Y, V[ver2].X, V[ver2].Y);
+                    point = new PointF((V[ver1].X + V[ver2].X) / 2, (V[ver1].Y + V[ver2].Y) / 2);
+                    gr.DrawString(((char)('a' + numberE) + " (" + E[edge].Weight + ")").ToString(), fo, br, point);
+                    drawVertex(V[ver1].X, V[ver1].Y, (E[edge].From + 1).ToString(), colorsVertex[ver1]);
+                    drawVertex(V[ver2].X, V[ver2].Y, (E[edge].To + 1).ToString(), colorsVertex[ver2]);
                 }
             }
 
             //перерисовка всего Графа
-            public void drawALLGraph(List<Vertex> V, List<Edge> E)
+            public void drawALLGraph(List<Vertex> V, List<Edge> E, Pen[] colorsVertex, Pen[] colorsEdge)
             {
+                clearSheet();
+                
                 //рисуем ребра
                 for (int i = 0; i < E.Count; i++)
                 {
                     if (E[i].From == E[i].To)
                     {
-                        gr.DrawArc(blackPen, (V[E[i].From].X - 2 * R), (V[E[i].From].Y - 2 * R), 2 * R, 2 * R, 90, 270);
+                        gr.DrawArc(colorsEdge[i], (V[E[i].From].X - 2 * R), (V[E[i].From].Y - 2 * R), 2 * R, 2 * R, 90, 270);
                         point = new PointF(V[E[i].From].X - (int)(2.75 * R), V[E[i].From].Y - (int)(2.75 * R));
                         gr.DrawString(((char)('a' + i) + " (" + E[i].Weight + ")").ToString(), fo, br, point);
                     }
                     else
                     {
-                        gr.DrawLine(blackPen, V[E[i].From].X, V[E[i].From].Y, V[E[i].To].X, V[E[i].To].Y);
+                        gr.DrawLine(colorsEdge[i], V[E[i].From].X, V[E[i].From].Y, V[E[i].To].X, V[E[i].To].Y);
                         point = new PointF((V[E[i].From].X + V[E[i].To].X) / 2, (V[E[i].From].Y + V[E[i].To].Y) / 2);
                         gr.DrawString(((char)('a' + i) + " (" + E[i].Weight + ")").ToString(), fo, br, point);
                     }
@@ -204,7 +175,7 @@ namespace Visualisation
                 //рисуем вершины
                 for (int i = 0; i < V.Count; i++)
                 {
-                    drawVertex(V[i].X, V[i].Y, (i + 1).ToString());
+                    drawVertex(V[i].X, V[i].Y, (i + 1).ToString(), colorsVertex[i]);
                 }
             }
 
@@ -318,7 +289,7 @@ namespace Visualisation
                             {
                                 selected1 = -1;
                                 G.clearSheet();
-                                G.drawALLGraph(V, E);
+                                G.drawALLGraph(V, E, colorsVertex, colorsEdge);
                                 sheet.Image = G.GetBitmap();
                             }
                             if (selected1 == -1)
@@ -542,39 +513,62 @@ namespace Visualisation
 
 
         //обход в глубину. поиск элементарных цепей. (1-white 2-black)
-        private void DFSchain(int u, int endV, List<Edge> E, int[] color, string s)
+        private void DFSchain(int u, int endV, List<Edge> E, int[] color, string s, Pen[] colorsVertex, Pen[] colorsEdge)
         {
-            G.clearSheet();
-            sheet.Image = G.GetBitmap();
-            G.drawALLGraph(V, E);
             //вершину не следует перекрашивать, если u == endV (возможно в нее есть несколько путей)
             if (u != endV)
             {
-                //listBox2.Items.Add(s);
+                colorsVertex[u] = G.GetRedPen();
                 color[u] = 2;
             }
             else
             {
                 listBox2.Items.Add(s);
+                colorsVertex[u] = G.GetBlackPen();
+                G.drawALLGraph(V, E, colorsVertex, colorsEdge);
+                sheet.Image = G.GetBitmap();
+                sheet.Update();
                 return;
             }
                 for (int w = 0; w < E.Count; w++)
                 {
-                //Thread.Sleep(100);
+                Thread.Sleep(300);
                 if (color[E[w].To] == 1 && E[w].From == u)
                 {
-                    G.drawVertexCircle(V[E[w].From], "red");
-                    //Thread.Sleep(2000);
-                    DFSchain(E[w].To, endV, E, color, s + "-" + (E[w].To + 1).ToString());
+                    G.clearSheet();
+                    colorsVertex[E[w].To] = G.GetRedPen();
+                    colorsEdge[w] = G.GetRedPen();
+                    G.drawALLGraph(V, E, colorsVertex, colorsEdge);
+                    sheet.Image = G.GetBitmap();
+                    sheet.Update();
+                    
+                    Thread.Sleep(500);
+                    DFSchain(E[w].To, endV, E, color, s + "-" + (E[w].To + 1).ToString(), colorsVertex, colorsEdge);
                         color[E[w].To] = 1;
-                    }
-                        else if (color[E[w].From] == 1 && E[w].To == u)
-                        {
-                    G.drawVertexCircle(V[E[w].From], "red");
-                    //Thread.Sleep(2000);
-                    DFSchain(E[w].From, endV, E, color, s + "-" + (E[w].From + 1).ToString());
-                            color[E[w].From] = 1;
-                        }
+                    colorsVertex[E[w].To] = G.GetBlackPen();
+                        colorsEdge[w] = G.GetBlackPen();
+                    G.drawALLGraph(V, E, colorsVertex, colorsEdge);
+                    sheet.Image = G.GetBitmap();
+                    sheet.Update();
+                }
+                else if (color[E[w].From] == 1 && E[w].To == u)
+                {
+                    G.clearSheet();
+                    colorsVertex[E[w].From] = G.GetRedPen();
+                    colorsEdge[w] = G.GetRedPen();
+                    G.drawALLGraph(V, E, colorsVertex, colorsEdge);
+                    sheet.Image = G.GetBitmap();
+                    sheet.Update();
+                    Thread.Sleep(500);
+                    DFSchain(E[w].From, endV, E, color, s + "-" + (E[w].From + 1).ToString(), colorsVertex, colorsEdge);
+                    color[E[w].From] = 1;
+                    G.clearSheet();
+                    colorsVertex[E[w].From] = G.GetBlackPen();
+                    colorsEdge[w] = G.GetBlackPen();
+                    G.drawALLGraph(V, E, colorsVertex, colorsEdge);
+                    sheet.Image = G.GetBitmap();
+                    sheet.Update();
+                }
 
                     /*
                     listBox2.Items.Add(s);
@@ -823,7 +817,19 @@ namespace Visualisation
                 {
                     comboBoxStart.Items.Add(i + 1);
                 }
-                G.drawALLGraph(V, E);
+
+                colorsVertex = new Pen[V.Count];
+                for (int i = 0; i < V.Count; i++)
+                {
+                    colorsVertex[i] = G.GetBlackPen();
+                }
+                colorsEdge = new Pen[E.Count];
+                for (int i = 0; i < E.Count; i++)
+                {
+                    colorsEdge[i] = G.GetBlackPen();
+                }
+
+                G.drawALLGraph(V, E, colorsVertex, colorsEdge);
             }
             
         }
@@ -837,23 +843,6 @@ namespace Visualisation
              */
             switch (comboBoxGraph.Text)
             {
-                case "Поиск в глубину":
-                    {
-                        richTextBox.Text =
-                          "for (v in V):\n" +
-                          "  new(v) = NOT_VISITED\n" +
-                          "for (v in V):\n" +
-                          "  if new(v) = NOT_VISITED\n" +
-                          "  then DFS(v)\n" +
-                          "\n" +
-                          "procedure DFS(v in V):\n" +
-                          "  v = VISITED\n" +
-                          "  for (w in Adj(v)):\n" +
-                          "    if new(w) = NOT_VISITED\n" +
-                          "    then DFS(w)\n" +
-                          "return\n";
-                    };
-                    break;
                 case "Дейкстры-Примы":
                     {
                         richTextBox.Text =
@@ -861,6 +850,15 @@ namespace Visualisation
                             "      for j=i+1 to N-1 step 1\n" +
                             "      if A[j]<A[i] then\n" +
                             "          swap A[i],A[j]\n";
+                    };
+                    break;
+                case "Поиск в глубину":
+                    {
+                        richTextBox.Text =
+                          "for i=0 to N-1 step 1\n" +
+                          "      for j=i+1 to N-1 step 1\n" +
+                          "      if A[j]<A[i] then\n" +
+                          "          swap A[i],A[j]\n";
                     };
                     break;
                 case "Поиск в ширину":
@@ -946,28 +944,34 @@ namespace Visualisation
             listBox2.Items.Clear();
             switch (comboBoxGraph.Text)
             {
+                case "Дейкстры-Примы":
+                    {
+
+                    };
+                    break;
                 case "Поиск в глубину":
                     {
                         
                         //1-white 2-black
                         int[] color = new int[V.Count];
-                        
+                        //for (int i = 0; i < V.Count - 1; i++)
+                        //    for (int j = i + 1; j < V.Count; j++)
+                        //    {
+                        //        for (int k = 0; k < V.Count; k++)
+                        //            color[k] = 1;
+                        //        DFSchain(i, j, E, color, (i + 1).ToString());
+                        //    }
+                        //DFSchain(0, 4, E, color, (1).ToString());
                        for (int i = Convert.ToInt32(comboBoxStart.Text.ToString())-1; i < Convert.ToInt32(comboBoxStart.Text.ToString()); i++)
                             for (int j = Convert.ToInt32(comboBoxFinish.Text.ToString())-1; j < Convert.ToInt32(comboBoxFinish.Text.ToString()); j++)
                             {
                                 for (int k = 0; k < V.Count; k++)
                                     color[k] = 1;
-                                DFSchain(i, j, E, color, (i + 1).ToString());
+                                DFSchain(i, j, E, color, (i + 1).ToString(), colorsVertex, colorsEdge);
                             }
-                        G.drawEdge1(V[0], V[4], E[4], 4);
                     }
                     break;
                 case "Поиск в ширину":
-                    {
-
-                    };
-                    break;
-                case "Дейкстры-Примы":
                     {
 
                     };
@@ -980,7 +984,7 @@ namespace Visualisation
             V.Clear();
             E.Clear();
             G.clearSheet();
-            G.drawALLGraph(V, E);
+            G.drawALLGraph(V, E, colorsVertex, colorsEdge);
             sheet.Image = G.GetBitmap();
             richTextBox.Clear();
             listBox2.Items.Clear();
@@ -988,7 +992,7 @@ namespace Visualisation
 
         private void buttonAddVertex_Click(object sender, EventArgs e)
         {
-            // for (int i = 0; i < (int)textBoxVertexNum.Text.ToString()) sheet.Width, sheet.Height
+           // for (int i = 0; i < (int)textBoxVertexNum.Text.ToString())
         }
 
         private void comboBoxStart_SelectedIndexChanged(object sender, EventArgs e)
@@ -999,14 +1003,7 @@ namespace Visualisation
             {
                 comboBoxFinish.Items.Add(i + 1);
             }
-        }
-
-        private void buttonAddEdge_Click(object sender, EventArgs e)
-        {
-            G.clearSheet();
-            sheet.Image = G.GetBitmap();
-            E.Add(new Edge(Convert.ToInt32(textBoxFrom.Text.ToString())-1, Convert.ToInt32(textBoxTo.Text.ToString()) - 1, Convert.ToInt32(textBoxWeight.Text.ToString())));
-            G.drawALLGraph(V, E);
+            
         }
     }
 }

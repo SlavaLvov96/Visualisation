@@ -53,8 +53,8 @@ namespace Visualisation
             buttonShaker.Enabled = true;
             buttonTimsort.Enabled = true;
 
-            richTextBox.Text = "for i=0 to N-1 step 1\n" +
-                "      for j=i+1 to N-1 step 1\n" +
+            richTextBox.Text = "for i=0 to size step 1\n" +
+                "      for j=i+1 to size step 1\n" +
                 "      if A[j]<A[i] then\n" +
                 "          swap A[i],A[j]\n";
 
@@ -95,7 +95,6 @@ namespace Visualisation
                         input[i] = temp;
                         ChangeColorPredLine(2);
                         ChangeColorLine(3);
-                        
                         Thread.Sleep(30);
                         SwapRectangles(i, j);
                         colors[i] = Color.Orange;
@@ -108,19 +107,30 @@ namespace Visualisation
                     //SetRedColor(i, j);
                 }
                 ChangeColorPredLine(1);
-                SetGrayColor(i);
+                //SetGrayColor(i);
                 colors[i] = Color.Gray;
             }
-            ChangeColorPredLine(0);
+            ChangeColorPredLine(0); for (int index = 0; index < colors.Length; index++)
+            {
+                if (colors[index] == Color.Orange)
+                {
+                    colors[index] = Color.Red;
+                }
+            }
+            DrawAllRectangles(numbers, rectangles, colors);
             return input;
         }
 
         public int[] InsertionSort(int[] array)
         {
             int[] result = new int[array.Length];
+            ChangeColorLine(0);
             for (int i = 0; i < array.Length; i++)
             {
-                int j = i;               
+                int j = i;
+                ChangeColorPredLine(0);
+                ChangeColorLine(2);
+                ChangeColorLine(3);
                 while (j > 0 && result[j - 1] > array[i])
                 {
                     for (int index = 0; index < colors.Length; index++)
@@ -130,18 +140,39 @@ namespace Visualisation
                             colors[index] = Color.Red;
                         }
                     }
+                    ChangeColorPredLine(2);
+                    ChangeColorPredLine(3);
+                    ChangeColorLine(5);
                     result[j] = result[j - 1];
+                    ChangeColorPredLine(5);
+                    ChangeColorLine(6);
                     SwapRectangles(j, j - 1);
+                    
                     colors[i] = Color.Orange;
                     colors[j - 1] = Color.Orange;
-                    Thread.Sleep(300);
-                    DrawAllRectangles(numbers, rectangles, colors);
+                    
+                    DrawAllRectangles(result, rectangles, colors);
                     colors[i] = Color.Red;
                     colors[j - 1] = Color.Red;
+                    ChangeColorPredLine(6);
+                    Thread.Sleep(400);
+                    ChangeColorLine(7);
                     j--;
                 }
-                result[j] = array[i];
+                ChangeColorPredLine(7);
+                ChangeColorLine(9);
+                result[j] = array[i];      
+               
+                ChangeColorPredLine(9);
             }
+            for (int index = 0; index < colors.Length; index++)
+            {
+                if (colors[index] == Color.Orange)
+                {
+                    colors[index] = Color.Red;
+                }
+            }
+            DrawAllRectangles(result, rectangles, colors);
             return result;
         }
 
@@ -156,16 +187,18 @@ namespace Visualisation
                 do
                 {
                     //SetOrangeColor(beg, beg + 1);
+                    colors[beg] = Color.Orange;
+                    colors[beg+1] = Color.Orange;
                     count += 2;
                     if (myint[beg] > myint[beg + 1])
                     {
                         Swap(myint, beg, beg + 1);
-                        SwapRectangles(beg, beg + 1);
+                        //SwapRectangles(beg, beg + 1);
                     }
                     colors[beg] = Color.Orange;
                     colors[beg + 1] = Color.Orange;
                     Thread.Sleep(400);
-                    SetRedColor(beg, beg + 1);
+                   // SetRedColor(beg, beg + 1);
                     colors[beg] = Color.Red;
                     colors[beg + 1] = Color.Red;
                     beg++;
@@ -173,7 +206,7 @@ namespace Visualisation
                     if (myint[end - 1] > myint[end])
                     {
                         Swap(myint, end - 1, end);
-                        SwapRectangles(end - 1, end);
+                        //SwapRectangles(end - 1, end);
                     }
                     colors[end] = Color.Orange;
                     colors[end - 1] = Color.Orange;
@@ -244,20 +277,20 @@ namespace Visualisation
             buttonShaker.Enabled = true;
             buttonTimsort.Enabled = true;
 
-            richTextBox.Text = "for i==0 to N step 1\n" +
+            richTextBox.Text = "for i=0 to N step 1\n" +
                 "begin\n" + 
                 "      while j>0 AND \n" + 
                 "      result[j-1]>array[i]\n" +
                 "      begin\n" +
-                "          result[j] == result[j-1]\n" +
+                "          result[j] = result[j-1]\n" +
                 "          Swap [j],[j - 1]\n" +
                 "          j--\n" +
                 "      end\n" +
-                "      result[j] == array[i]\n" + 
+                "      result[j] = array[i]\n" + 
                 "end";
         }
 
-        // Сортировка Шелла
+        // Сортировка Шейкерная
         private void buttonShaker_Click(object sender, EventArgs e)
         {
             buttonBubble.Enabled = true;
@@ -267,6 +300,20 @@ namespace Visualisation
             buttonInsert.Enabled = true;
             buttonShaker.Enabled = false;
             buttonTimsort.Enabled = true;
+
+            richTextBox.Text = "for i=0 to size/2 step 1\n" +
+                "begin\n" +
+                "   start=0 \n" +
+                "   finish=size-1\n" +
+                "   do\n" +
+                "      start++\n" +
+                "      if (A[finish-1]>A[finish])\n" +
+                "      begin\n" +
+                "         Swap A[finish-1],A[finish]\n" +
+                "      end\n" +
+                "      finish--\n" +
+                "   while (start <= finish)\n" +
+                "end";
         }
 
         // TimSort

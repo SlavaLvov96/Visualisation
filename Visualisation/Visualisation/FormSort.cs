@@ -151,7 +151,7 @@ namespace Visualisation
                     colors[i] = Color.Orange;
                     colors[j - 1] = Color.Orange;
                     
-                    DrawAllRectangles(numbers, rectangles, colors);
+                    DrawAllRectangles(result, rectangles, colors);
                     colors[i] = Color.Red;
                     colors[j - 1] = Color.Red;
                     ChangeColorPredLine(6);
@@ -172,7 +172,7 @@ namespace Visualisation
                     colors[index] = Color.Red;
                 }
             }
-            DrawAllRectangles(numbers, rectangles, colors);
+            DrawAllRectangles(result, rectangles, colors);
             return result;
         }
 

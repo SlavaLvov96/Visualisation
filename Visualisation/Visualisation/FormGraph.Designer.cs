@@ -142,7 +142,8 @@
             this.comboBoxGraph.FormattingEnabled = true;
             this.comboBoxGraph.Items.AddRange(new object[] {
             "Поиск в глубину",
-            "Поиск в ширину"});
+            "Поиск в ширину",
+            "Дейкстры-Прима"});
             this.comboBoxGraph.Location = new System.Drawing.Point(3, 16);
             this.comboBoxGraph.Name = "comboBoxGraph";
             this.comboBoxGraph.Size = new System.Drawing.Size(185, 21);
@@ -253,7 +254,6 @@
             this.textBoxTo.Name = "textBoxTo";
             this.textBoxTo.Size = new System.Drawing.Size(125, 20);
             this.textBoxTo.TabIndex = 23;
-            this.textBoxTo.Text = "Номер вершины:";
             // 
             // label4
             // 
@@ -270,7 +270,6 @@
             this.textBoxFrom.Name = "textBoxFrom";
             this.textBoxFrom.Size = new System.Drawing.Size(125, 20);
             this.textBoxFrom.TabIndex = 21;
-            this.textBoxFrom.Text = "Номер вершины:";
             // 
             // label3
             // 
@@ -315,6 +314,7 @@
             this.comboBoxNum.Size = new System.Drawing.Size(125, 21);
             this.comboBoxNum.TabIndex = 16;
             this.comboBoxNum.Text = "Кол-во вершин:";
+            this.comboBoxNum.SelectedIndexChanged += new System.EventHandler(this.comboBoxNum_SelectedIndexChanged);
             // 
             // button1
             // 

@@ -27,7 +27,7 @@ namespace Visualisation
         private Pen[] colorsVertex; // массив цветов для всех Вершин
         private Pen[] colorsEdge;   // массив цветов для всех Ребер
 
-        int speed = 300;
+        int speed = 100;
         int iter = 0;
 
         public void updateSheet()
@@ -125,7 +125,10 @@ namespace Visualisation
                 {
                     gr.DrawArc(colorsEdge[edge], (V[ver1].X - 2 * R), (V[ver1].Y - 2 * R), 2 * R, 2 * R, 90, 270);
                     point = new PointF(V[ver1].X - (int)(2.75 * R), V[ver1].Y - (int)(2.75 * R));
-                    gr.DrawString(((char)('a' + numberE) + " (" + E[edge].Weight + ")").ToString(), fo, br, point);
+                    // рисование ребра с его весом
+                    // gr.DrawString(((char)('a' + numberE) + " (" + E[edge].Weight + ")").ToString(), fo, br, point);
+                    // рисование ребра без веса
+                    gr.DrawString(((char)('a' + numberE)).ToString(), fo, br, point);
                     drawVertex(V[ver1].X, V[ver1].Y, (E[edge].From + 1).ToString(), colorsVertex[ver1]);
                 }
                 //отрисовка Ребра между двумя Вершинами
@@ -133,7 +136,10 @@ namespace Visualisation
                 {
                     gr.DrawLine(colorsEdge[edge], V[ver1].X, V[ver1].Y, V[ver2].X, V[ver2].Y);
                     point = new PointF((V[ver1].X + V[ver2].X) / 2, (V[ver1].Y + V[ver2].Y) / 2);
-                    gr.DrawString(((char)('a' + numberE) + " (" + E[edge].Weight + ")").ToString(), fo, br, point);
+                    // рисование ребра с его весом
+                    // gr.DrawString(((char)('a' + numberE) + " (" + E[edge].Weight + ")").ToString(), fo, br, point);
+                    // рисование ребра без веса
+                    gr.DrawString(((char)('a' + numberE)).ToString(), fo, br, point);
                     drawVertex(V[ver1].X, V[ver1].Y, (E[edge].From + 1).ToString(), colorsVertex[ver1]);
                     drawVertex(V[ver2].X, V[ver2].Y, (E[edge].To + 1).ToString(), colorsVertex[ver2]);
                 }
@@ -151,13 +157,19 @@ namespace Visualisation
                     {
                         gr.DrawArc(colorsEdge[i], (V[E[i].From].X - 2 * R), (V[E[i].From].Y - 2 * R), 2 * R, 2 * R, 90, 270);
                         point = new PointF(V[E[i].From].X - (int)(2.75 * R), V[E[i].From].Y - (int)(2.75 * R));
-                        gr.DrawString(((char)('a' + i) + " (" + E[i].Weight + ")").ToString(), fo, br, point);
+                        // рисование ребра с его весом
+                        // gr.DrawString(((char)('a' + i) + " (" + E[i].Weight + ")").ToString(), fo, br, point);
+                        // рисование ребра без веса
+                        gr.DrawString(((char)('a' + i)).ToString(), fo, br, point);
                     }
                     else
                     {
                         gr.DrawLine(colorsEdge[i], V[E[i].From].X, V[E[i].From].Y, V[E[i].To].X, V[E[i].To].Y);
                         point = new PointF((V[E[i].From].X + V[E[i].To].X) / 2, (V[E[i].From].Y + V[E[i].To].Y) / 2);
-                        gr.DrawString(((char)('a' + i) + " (" + E[i].Weight + ")").ToString(), fo, br, point);
+                        // рисование ребра с его весом
+                        // gr.DrawString(((char)('a' + i) + " (" + E[i].Weight + ")").ToString(), fo, br, point);
+                        // рисование ребра без веса
+                        gr.DrawString(((char)('a' + i)).ToString(), fo, br, point);
                     }
                 }
                 //рисуем вершины
@@ -323,7 +335,7 @@ namespace Visualisation
                     G.drawALLGraph(V, E, colorsVertex, colorsEdge);
                     sheet.Image = G.GetBitmap();
                     sheet.Update();
-                    Thread.Sleep(1000);
+                    Thread.Sleep(500);
                 }
             }
             for (int i = 0; i < E.Count; i++) // перекрашиваем все пройденные ребра в зеленый
@@ -389,7 +401,7 @@ namespace Visualisation
             {*/
             switch (comboBoxGraph.Text)
             {
-                case "Дейкстры-Примы":
+                case "Дейкстры-Прима":
                     {
                         int[] color = new int[V.Count];
                         for (int i = 0; i < V.Count; i++)
@@ -858,7 +870,7 @@ namespace Visualisation
         {
             switch (comboBoxGraph.Text)
             {
-                case "Дейкстры-Примы":
+                case "Дейкстры-Прима":
                     {
                         richTextBox.Text =
                           "for (v in V):\n" +
@@ -1010,6 +1022,12 @@ namespace Visualisation
         {
             G = new DrawGraph(sheet.Width, sheet.Height);
             sheet.Image = G.GetBitmap();
+        }
+
+        private void comboBoxNum_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            comboBoxStart.Items.Clear();
+            comboBoxFinish.Items.Clear();
         }
     }
 }

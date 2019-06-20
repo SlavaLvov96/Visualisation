@@ -120,7 +120,7 @@
             this.sheet.Location = new System.Drawing.Point(3, 16);
             this.sheet.Margin = new System.Windows.Forms.Padding(2);
             this.sheet.Name = "sheet";
-            this.sheet.Size = new System.Drawing.Size(599, 348);
+            this.sheet.Size = new System.Drawing.Size(599, 381);
             this.sheet.TabIndex = 11;
             this.sheet.TabStop = false;
             this.sheet.MouseClick += new System.Windows.Forms.MouseEventHandler(this.sheet_MouseClick);
@@ -157,7 +157,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Right;
             this.groupBox1.Location = new System.Drawing.Point(796, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(261, 536);
+            this.groupBox1.Size = new System.Drawing.Size(261, 569);
             this.groupBox1.TabIndex = 16;
             this.groupBox1.TabStop = false;
             // 
@@ -166,7 +166,7 @@
             this.groupBox9.Controls.Add(this.groupBox7);
             this.groupBox9.Controls.Add(this.groupBox5);
             this.groupBox9.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox9.Location = new System.Drawing.Point(3, 243);
+            this.groupBox9.Location = new System.Drawing.Point(3, 276);
             this.groupBox9.Name = "groupBox9";
             this.groupBox9.Size = new System.Drawing.Size(255, 290);
             this.groupBox9.TabIndex = 15;
@@ -344,7 +344,7 @@
             this.groupBox6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox6.Location = new System.Drawing.Point(3, 16);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(255, 517);
+            this.groupBox6.Size = new System.Drawing.Size(255, 550);
             this.groupBox6.TabIndex = 12;
             this.groupBox6.TabStop = false;
             // 
@@ -354,7 +354,7 @@
             this.richTextBox.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.richTextBox.Location = new System.Drawing.Point(3, 16);
             this.richTextBox.Name = "richTextBox";
-            this.richTextBox.Size = new System.Drawing.Size(249, 498);
+            this.richTextBox.Size = new System.Drawing.Size(249, 531);
             this.richTextBox.TabIndex = 14;
             this.richTextBox.Text = "";
             // 
@@ -376,7 +376,7 @@
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupBox2.Location = new System.Drawing.Point(0, 0);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(191, 536);
+            this.groupBox2.Size = new System.Drawing.Size(191, 569);
             this.groupBox2.TabIndex = 17;
             this.groupBox2.TabStop = false;
             // 
@@ -443,7 +443,7 @@
             this.groupBox8.Controls.Add(this.comboBox2);
             this.groupBox8.Controls.Add(this.buttonAdj);
             this.groupBox8.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox8.Location = new System.Drawing.Point(3, 447);
+            this.groupBox8.Location = new System.Drawing.Point(3, 480);
             this.groupBox8.Name = "groupBox8";
             this.groupBox8.Size = new System.Drawing.Size(185, 86);
             this.groupBox8.TabIndex = 23;
@@ -479,7 +479,7 @@
             this.groupBox3.Controls.Add(this.listBox2);
             this.groupBox3.Controls.Add(this.label2);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox3.Location = new System.Drawing.Point(191, 367);
+            this.groupBox3.Location = new System.Drawing.Point(191, 400);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(605, 169);
             this.groupBox3.TabIndex = 18;
@@ -491,7 +491,7 @@
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox4.Location = new System.Drawing.Point(191, 0);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(605, 367);
+            this.groupBox4.Size = new System.Drawing.Size(605, 400);
             this.groupBox4.TabIndex = 19;
             this.groupBox4.TabStop = false;
             // 
@@ -500,7 +500,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1057, 536);
+            this.ClientSize = new System.Drawing.Size(1057, 569);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -510,6 +510,8 @@
             this.Name = "FormGraph";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Аниматор алгоритмов на графах";
+            this.MaximizedBoundsChanged += new System.EventHandler(this.FormGraph_MaximizedBoundsChanged);
+            this.MaximumSizeChanged += new System.EventHandler(this.FormGraph_MaximumSizeChanged);
             ((System.ComponentModel.ISupportInitialize)(this.sheet)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox9.ResumeLayout(false);

@@ -513,15 +513,15 @@ namespace Visualisation
                 {
                     case "5":
                         {
-                            V.Add(new Vertex(70, 50));//0
+                            V.Add(new Vertex((int)(sheet.Width * 0.11), (int)(sheet.Height * 0.14)));//0
                             sheet.Image = G.GetBitmap();
-                            V.Add(new Vertex(70, 270));//1
+                            V.Add(new Vertex((int)(sheet.Width * 0.11), (int)(sheet.Height * 0.77)));//1
                             sheet.Image = G.GetBitmap();
-                            V.Add(new Vertex(500, 50));//2
+                            V.Add(new Vertex((int)(sheet.Width * 0.83), (int)(sheet.Height * 0.14)));//2
                             sheet.Image = G.GetBitmap();
-                            V.Add(new Vertex(500, 270));//3
+                            V.Add(new Vertex((int)(sheet.Width * 0.83), (int)(sheet.Height * 0.77)));//3
                             sheet.Image = G.GetBitmap();
-                            V.Add(new Vertex(285, 160));//4
+                            V.Add(new Vertex((int)(sheet.Width * 0.475), (int)(sheet.Height * 0.45)));//4
                             sheet.Image = G.GetBitmap();
 
                             E.Add(new Edge(0, 1, 5));
@@ -998,6 +998,18 @@ namespace Visualisation
                     };
                     break;
             }
+        }
+
+        private void FormGraph_MaximumSizeChanged(object sender, EventArgs e)
+        {
+            G = new DrawGraph(sheet.Width, sheet.Height);
+            sheet.Image = G.GetBitmap();
+        }
+
+        private void FormGraph_MaximizedBoundsChanged(object sender, EventArgs e)
+        {
+            G = new DrawGraph(sheet.Width, sheet.Height);
+            sheet.Image = G.GetBitmap();
         }
     }
 }

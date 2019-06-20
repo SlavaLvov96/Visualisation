@@ -67,8 +67,6 @@
             this.buttonAdj = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.textBoxIter = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.sheet)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox9.SuspendLayout();
@@ -144,8 +142,7 @@
             this.comboBoxGraph.FormattingEnabled = true;
             this.comboBoxGraph.Items.AddRange(new object[] {
             "Поиск в глубину",
-            "Поиск в ширину",
-            "Дейкстры-Примы"});
+            "Поиск в ширину"});
             this.comboBoxGraph.Location = new System.Drawing.Point(3, 16);
             this.comboBoxGraph.Name = "comboBoxGraph";
             this.comboBoxGraph.Size = new System.Drawing.Size(185, 21);
@@ -443,14 +440,12 @@
             // 
             // groupBox8
             // 
-            this.groupBox8.Controls.Add(this.textBoxIter);
-            this.groupBox8.Controls.Add(this.label9);
             this.groupBox8.Controls.Add(this.comboBox2);
             this.groupBox8.Controls.Add(this.buttonAdj);
             this.groupBox8.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox8.Location = new System.Drawing.Point(3, 424);
+            this.groupBox8.Location = new System.Drawing.Point(3, 447);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(185, 109);
+            this.groupBox8.Size = new System.Drawing.Size(185, 86);
             this.groupBox8.TabIndex = 23;
             this.groupBox8.TabStop = false;
             // 
@@ -461,7 +456,7 @@
             "1",
             "2",
             "3"});
-            this.comboBox2.Location = new System.Drawing.Point(3, 42);
+            this.comboBox2.Location = new System.Drawing.Point(6, 19);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(179, 21);
             this.comboBox2.TabIndex = 26;
@@ -471,7 +466,7 @@
             // buttonAdj
             // 
             this.buttonAdj.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.buttonAdj.Location = new System.Drawing.Point(3, 69);
+            this.buttonAdj.Location = new System.Drawing.Point(3, 46);
             this.buttonAdj.Name = "buttonAdj";
             this.buttonAdj.Size = new System.Drawing.Size(179, 37);
             this.buttonAdj.TabIndex = 21;
@@ -500,22 +495,6 @@
             this.groupBox4.TabIndex = 19;
             this.groupBox4.TabStop = false;
             // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(2, 18);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(119, 13);
-            this.label9.TabIndex = 27;
-            this.label9.Text = "Количество итераций:";
-            // 
-            // textBoxIter
-            // 
-            this.textBoxIter.Location = new System.Drawing.Point(127, 15);
-            this.textBoxIter.Name = "textBoxIter";
-            this.textBoxIter.Size = new System.Drawing.Size(55, 20);
-            this.textBoxIter.TabIndex = 28;
-            // 
             // FormGraph
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -542,7 +521,6 @@
             this.groupBox10.ResumeLayout(false);
             this.groupBox10.PerformLayout();
             this.groupBox8.ResumeLayout(false);
-            this.groupBox8.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
@@ -590,7 +568,5 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.TextBox textBoxIter;
-        private System.Windows.Forms.Label label9;
     }
 }

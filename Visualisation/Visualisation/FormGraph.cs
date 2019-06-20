@@ -287,26 +287,46 @@ namespace Visualisation
         }
 
         // обход в ширину
-        private void BFSwave(int u, List<Edge> E, int[] color, string s, Pen[] colorsVertex, Pen[] colorsEdge)
+        private int BFSwave(int u, List<Edge> E, int[] queue, int count, int[] colorWave, string s, Pen[] colorsVertex, Pen[] colorsEdge)
         {
-            color[u] = 2; // знак, что текущая вершина была посещена
             colorsVertex[u] = G.GetGreenPen();
+            colorWave[u] = 2;
+
+            ChangeColorLine(7);
+            ChangeColorPredLine(7);
+            ChangeColorLine(8);
+            ChangeColorPredLine(8);
+            ChangeColorLine(9);
+            ChangeColorPredLine(9);
 
             for (int w = 0; w < E.Count; w++) // просматриваем все ребра
             {
-                if (color[E[w].To] == 1 && E[w].From == u) // если имеется не посещенная вершина связанная с текущей ребром E[w]
+                ChangeColorLine(10);
+                ChangeColorPredLine(10);
+                ChangeColorLine(11);
+                ChangeColorPredLine(11);
+                if (E[w].From == u && colorWave[E[w].To] == 1) // если имеется не посещенная вершина связанная с текущей ребром E[w]
                 {
-                    color[E[w].To] = 2;
+                    ChangeColorLine(12);
+                    ChangeColorPredLine(12);
+                    ChangeColorLine(13);
+                    ChangeColorPredLine(13);
+                    ChangeColorLine(14);
+                    ChangeColorPredLine(14);
+                    colorWave[E[w].To] = 2;
+                    count = count + 1;
+                    queue[count] = E[w].To;
                     G.clearSheet(); // отчистка области рисования
                     colorsVertex[E[w].To] = G.GetRedPen(); // закрашивание в красный вершину, в которую идем
                     colorsEdge[w] = G.GetRedPen();  // закрашивание в красный  текущего рассматриваемого ребра
+                    iter++;
                     G.drawALLGraph(V, E, colorsVertex, colorsEdge);
                     sheet.Image = G.GetBitmap();
                     sheet.Update();
                     Thread.Sleep(1000);
                 }
             }
-            for (int i = 0; i < E.Count; i++) // просматриваем все ребра
+            for (int i = 0; i < E.Count; i++) // перекрашиваем все пройденные ребра в зеленый
             {
                 if (colorsEdge[i].Color == Color.Red)
                     colorsEdge[i] = G.GetGreenPen();
@@ -315,11 +335,10 @@ namespace Visualisation
             G.drawALLGraph(V, E, colorsVertex, colorsEdge);
             sheet.Image = G.GetBitmap();
             sheet.Update();
+            ChangeColorLine(15);
+            ChangeColorPredLine(15);
             Thread.Sleep(1000);
-            for (int i = 0; i < V.Count; i++)
-            {
-                color[i] = 1;
-            }
+            return count;
         }
 
         // Алгоритм Дейкстры - Прима
@@ -356,6 +375,93 @@ namespace Visualisation
 
         // Кнопки 
 
+
+        // кнопка запуска работы алгоритмов
+        private void button2_Click(object sender, EventArgs e)
+        {
+            listBox2.Items.Clear();
+            /*if (stop == true)
+            {
+                stop = false;
+                Thread.ResetAbort();
+            } 
+            else
+            {*/
+            switch (comboBoxGraph.Text)
+            {
+                case "Дейкстры-Примы":
+                    {
+                        int[] color = new int[V.Count];
+                        for (int i = 0; i < V.Count; i++)
+                        {
+                            color[i] = 1;
+                        }
+                        for (int i = 0; i < V.Count; i++)
+                            DPminTree(i, E, color, (i + 1).ToString(), colorsVertex, colorsEdge);
+                    };
+                    break;
+                case "Поиск в глубину":
+                    {
+
+                        //массив, отвечающий за то были ли вхождения в вершину
+                        int[] color = new int[V.Count];
+                        for (int i = Convert.ToInt32(comboBoxStart.Text.ToString()) - 1; i < Convert.ToInt32(comboBoxStart.Text.ToString()); i++)
+                            for (int j = Convert.ToInt32(comboBoxFinish.Text.ToString()) - 1; j < Convert.ToInt32(comboBoxFinish.Text.ToString()); j++)
+                            {
+                                for (int k = 0; k < V.Count; k++)
+                                {
+                                    ChangeColorLine(0);
+                                    ChangeColorPredLine(0);
+                                    ChangeColorLine(1);
+                                    ChangeColorPredLine(1);
+                                    color[k] = 1;
+                                }
+                                ChangeColorLine(2);
+                                ChangeColorPredLine(2);
+                                iter = 0;
+                                DFSchain(i, j, E, color, (i + 1).ToString(), colorsVertex, colorsEdge);
+                            }
+                    }
+                    break;
+                case "Поиск в ширину":
+                    {
+                        iter = 0;
+                        int[] queue = new int[V.Count];
+                        queue[0] = Convert.ToInt32(comboBoxStart.Text.ToString()) - 1;
+                        int count = 0;
+                        int[] colorWave = new int[V.Count];
+                        for (int i = 0; i < V.Count; i++)
+                        {
+                            ChangeColorLine(0);
+                            ChangeColorPredLine(0);
+                            ChangeColorLine(1);
+                            ChangeColorPredLine(1);
+                            colorWave[i] = 1;
+                        }
+                        for (int i = 0; i < V.Count; i++)
+                        {
+                            ChangeColorLine(2);
+                            ChangeColorPredLine(2);
+                            ChangeColorLine(3);
+                            ChangeColorPredLine(3);
+                            ChangeColorLine(4);
+                            ChangeColorPredLine(4);
+                            ChangeColorLine(6);
+                            ChangeColorPredLine(6);
+                            count = BFSwave(queue[i], E, queue, count, colorWave, (i + 1).ToString(), colorsVertex, colorsEdge);
+                        }
+                        for (int i = 0; i < V.Count; i++)
+                            colorsVertex[i] = G.GetBlackPen();
+                        for (int i = 0; i < E.Count; i++)
+                            colorsEdge[i] = G.GetBlackPen();
+                        G.drawALLGraph(V, E, colorsVertex, colorsEdge);
+                    };
+                    break;
+            }
+            //textBoxIter.Text = iter.ToString();
+            /*stop = true;
+            }*/
+        }
 
         //кнопка - матрица смежности
         private void buttonAdj_Click_1(object sender, EventArgs e)
@@ -743,74 +849,6 @@ namespace Visualisation
             G.drawALLGraph(V, E, colorsVertex, colorsEdge);
         }
 
-        // кнопка запуска работы алгоритмов
-        private void button2_Click(object sender, EventArgs e)
-        {
-            listBox2.Items.Clear();
-            /*if (stop == true)
-            {
-                stop = false;
-                Thread.ResetAbort();
-            } 
-            else
-            {*/
-            switch (comboBoxGraph.Text)
-            {
-                case "Дейкстры-Примы":
-                    {
-                        int[] color = new int[V.Count];
-                        for (int i = 0; i < V.Count; i++)
-                        {
-                            color[i] = 1;
-                        }
-                        for (int i = 0; i < V.Count; i++)
-                            DPminTree(i, E, color, (i + 1).ToString(), colorsVertex, colorsEdge);
-                    };
-                    break;
-                case "Поиск в глубину":
-                    {
-
-                        //массив, отвечающий за то были ли вхождения в вершину
-                        int[] color = new int[V.Count];
-                        for (int i = Convert.ToInt32(comboBoxStart.Text.ToString()) - 1; i < Convert.ToInt32(comboBoxStart.Text.ToString()); i++)
-                            for (int j = Convert.ToInt32(comboBoxFinish.Text.ToString()) - 1; j < Convert.ToInt32(comboBoxFinish.Text.ToString()); j++)
-                            {
-                                for (int k = 0; k < V.Count; k++)
-                                {
-                                    ChangeColorLine(0);
-                                    ChangeColorPredLine(0);
-                                    ChangeColorLine(1);
-                                    ChangeColorPredLine(1);
-                                    color[k] = 1;
-                                }
-                                ChangeColorLine(2);
-                                ChangeColorPredLine(2);
-                                iter = 0;
-                                DFSchain(i, j, E, color, (i + 1).ToString(), colorsVertex, colorsEdge);
-                                textBoxIter.Text = iter.ToString();
-                            }
-                    }
-                    break;
-                case "Поиск в ширину":
-                    {
-                        int[] color = new int[V.Count];
-                        for (int i = 0; i < V.Count; i++)
-                        {
-                            color[i] = 1;
-                        }
-                        for (int i = 0; i < V.Count; i++)
-                            BFSwave(i, E, color, (i + 1).ToString(), colorsVertex, colorsEdge);
-                        for (int i = 0; i < V.Count; i++)
-                            colorsVertex[i] = G.GetBlackPen();
-                        for (int i = 0; i < E.Count; i++)
-                            colorsEdge[i] = G.GetBlackPen();
-                    };
-                    break;
-            }
-            /*stop = true;
-            }*/
-        }
-
 
         // Псевдокод
 
@@ -837,7 +875,7 @@ namespace Visualisation
                           "    for (w in Adj(v)):\n" +
                           "      if new(w) = NOT_VISITED\n" +
                           "        Q <= w\n" +
-                          "       new(w) = VISITED\n" +
+                          "        new(w) = VISITED\n" +
                           "return\n";
                     };
                     break;
@@ -873,7 +911,7 @@ namespace Visualisation
                           "    for (w in Adj(v)):\n" +
                           "      if new(w) = NOT_VISITED\n" +
                           "        Q <= w\n" +
-                          "       new(w) = VISITED\n" +
+                          "        new(w) = VISITED\n" +
                           "return\n";
                     };
                     break;
